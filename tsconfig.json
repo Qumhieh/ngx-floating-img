@@ -16,6 +16,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-floating-img": [
+        "dist/ngx-floating-img"
+      ],
+      "ngx-floating-img/*": [
+        "dist/ngx-floating-img/*"
+      ]
+    }
   }
 }
