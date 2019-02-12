@@ -1,1 +1,13 @@
-test
+<div class="fi-ele-container" [style.padding-bottom.%]="imageRatio">
+    <div class="fi-ele-wrapper">
+        <figure #imgFigure (click)="showFullImg()"> 
+            <div class="fi-img-container" [ngClass]="{'show-full-img': showFullImgTrigger}">
+                <div #imgWrapper class="fi-img-wrapper">
+                    <div #imgInnerWrapper>
+                        <ng-content></ng-content>
+                    </div>
+                </div>
+            </div>
+        </figure>
+    </div>
+</div>

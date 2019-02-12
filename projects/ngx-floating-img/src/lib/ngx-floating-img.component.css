@@ -1,0 +1,65 @@
+/* main container */
+.fi-ele-container {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background: #f0f0f0;
+}
+
+/* wrapper */
+.fi-ele-wrapper {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;    
+}
+
+/* figure and image */
+figure {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0px;
+    line-height: 0px; 
+}
+
+
+figure::ng-deep img {
+    width: 100%;
+    height: auto;
+    
+}
+
+figure .fi-img-container {
+    /* background: #cd3232; */
+}
+
+figure .fi-img-container > div {
+    /* background: #ccc; */
+}
+
+figure .fi-img-container.show-full-img {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    z-index: 99999;
+}
+
+figure .fi-img-container.show-full-img > div {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    right: 10px;
+    bottom: 10px;
+}
+
+figure .fi-img-container.show-full-img > div > div {
+    transition: all 0.2s ease-out;
+}
+
+
+

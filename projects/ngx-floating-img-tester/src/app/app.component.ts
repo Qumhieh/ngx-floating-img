@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewChecked, DoCheck } from '@angular/core';
 
 @Component({
   selector: 'fit-root',

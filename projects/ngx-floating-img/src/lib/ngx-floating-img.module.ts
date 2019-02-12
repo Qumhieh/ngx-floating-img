@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { NgxFloatingImgComponent } from './ngx-floating-img.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
     NgxFloatingImgComponent
   ],
-  imports: [ ],
+  imports: [ 
+    BrowserModule
+  ],
   exports: [
     NgxFloatingImgComponent
   ]
