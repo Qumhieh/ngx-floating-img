@@ -10,7 +10,7 @@ import { NgxFloatingImgModule } from 'projects/ngx-floating-img/src/public_api';
   ],
   imports: [
     BrowserModule,
-    NgxFloatingImgModule
+    NgxFloatingImgModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, EventEmitter, Output, Inject } from '@angular/core';
 
 import { NgxFloatingImgService } from './ngx-floating-img.service';
+import { NGXFloatingImgOptions, NGX_FLOATING_IMG_OPTIONS } from './ngx-floating-img.module';
 
 @Component({
   selector: 'fi-ngx-floating-img',
@@ -16,14 +17,14 @@ export class NgxFloatingImgComponent implements OnInit {
   @Input('imgSrc') imgSrc: string;
   @Input('imgWidth') imgWidth: number;
   @Input('imgHeight') imgHeight: number;
-  @Input('showLoading') showLoading: boolean = true;
-  @Input('imgAnimationType') imgAnimationType: string = 'ease-out';
-  @Input('imgAnimationSpeed') imgAnimationSpeed: number = 250;
-  @Input('overlayColor') overlayColor: string = 'transparent';
-  @Input('overlayAnimationSpeed') overlayAnimationSpeed: number = 0;
-  @Input('overlayDismiss') overlayDismiss: boolean = true;
-  @Input('thumbBgColor') thumbBgColor: string = '#f0f0f0';
-  @Input('vpPadding') vpPadding: number = 20;
+  @Input('showLoading') showLoading: boolean;
+  @Input('imgAnimationType') imgAnimationType: string;
+  @Input('imgAnimationSpeed') imgAnimationSpeed: number;
+  @Input('overlayColor') overlayColor: string;
+  @Input('overlayAnimationSpeed') overlayAnimationSpeed: number;
+  @Input('overlayDismiss') overlayDismiss: boolean;
+  @Input('thumbBgColor') thumbBgColor: string;
+  @Input('vpPadding') vpPadding: number;
   // TODO: @Input('thumbLazyLoad') thumbLazyLoad: boolean = true;
   // TODO: @Input('navigation') navigation: boolean = false;
 
@@ -39,8 +40,13 @@ export class NgxFloatingImgComponent implements OnInit {
 
   constructor(
     private _renderer: Renderer2,
-    private _ngxFloatingImgService : NgxFloatingImgService
-  ) { }
+    private _ngxFloatingImgService: NgxFloatingImgService,
+    @Inject(NGX_FLOATING_IMG_OPTIONS) private _ngxFloatingImgOptions: NGXFloatingImgOptions
+  ) { 
+
+    console.log('===>>> ' + this.imgAnimationType);
+
+  }
 
   ngOnInit() {
     // validate inputs
