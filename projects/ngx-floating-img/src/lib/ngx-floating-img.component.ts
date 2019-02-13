@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, EventEmitter, Output, Inject } from '@angular/core';
 
 import { NgxFloatingImgService } from './ngx-floating-img.service';
-import { NGXFloatingImgOptions, NGX_FLOATING_IMG_OPTIONS } from './ngx-floating-img.module';
+import { NGX_FLOATING_IMG_OPTIONS_TOKEN } from './ngx-floating-img';
+import { NGXFloatingImgOptions } from './model/ngx-floating-img-options';
 
 @Component({
   selector: 'fi-ngx-floating-img',
@@ -41,12 +42,8 @@ export class NgxFloatingImgComponent implements OnInit {
   constructor(
     private _renderer: Renderer2,
     private _ngxFloatingImgService: NgxFloatingImgService,
-    @Inject(NGX_FLOATING_IMG_OPTIONS) private _ngxFloatingImgOptions: NGXFloatingImgOptions
-  ) { 
-
-    console.log('===>>> ' + this.imgAnimationType);
-
-  }
+    @Inject(NGX_FLOATING_IMG_OPTIONS_TOKEN) private _ngxFloatingImgOptions: NGXFloatingImgOptions
+  ) { }
 
   ngOnInit() {
     // validate inputs

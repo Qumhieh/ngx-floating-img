@@ -10,7 +10,9 @@ import { NgxFloatingImgModule } from 'projects/ngx-floating-img/src/public_api';
   ],
   imports: [
     BrowserModule,
-    NgxFloatingImgModule.forRoot()
+    NgxFloatingImgModule.forRoot({
+      imgAnimationSpeed: 300
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
