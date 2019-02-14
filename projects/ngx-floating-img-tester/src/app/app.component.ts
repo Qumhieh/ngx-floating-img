@@ -7,4 +7,12 @@ import { Component, AfterViewChecked, DoCheck } from '@angular/core';
 })
 export class AppComponent {
   title = 'ngx-floating-img-tester';
+
+  public testColor = '#555';
+
+  constructor() {
+    setTimeout(() => {
+      this.testColor = '#cd3232';
+    }, 3000); 
+  }
 }

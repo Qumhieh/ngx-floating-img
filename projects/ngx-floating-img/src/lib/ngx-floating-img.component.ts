@@ -1,18 +1,25 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, EventEmitter, Output, Inject } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, EventEmitter, Output, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 
 import { NgxFloatingImgService } from './ngx-floating-img.service';
-import { NGX_FLOATING_IMG_OPTIONS_TOKEN } from './ngx-floating-img';
-import { NGXFloatingImgOptions } from './model/ngx-floating-img-options';
 
 @Component({
   selector: 'fi-ngx-floating-img',
   templateUrl: './ngx-floating-img.component.html',
   styleUrls: ['./ngx-floating-img.component.css']
 })
-export class NgxFloatingImgComponent implements OnInit {
+export class NgxFloatingImgComponent implements OnInit, OnChanges {
   
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+  }
+
   public showFullImgTrigger: boolean = false;
+  public showFullImgInProgress: boolean = false;
+
   public imageRatio: number;
+  public imgWrapperStyle: object = {};
+  public imgInnerWrapperStyle: object = {};
+  public overlayStyle: object = {};
 
   @Input('id') id: string;
   @Input('imgSrc') imgSrc: string;
@@ -22,7 +29,7 @@ export class NgxFloatingImgComponent implements OnInit {
   @Input('imgAnimationType') imgAnimationType: string;
   @Input('imgAnimationSpeed') imgAnimationSpeed: number;
   @Input('overlayColor') overlayColor: string;
-  @Input('overlayAnimationSpeed') overlayAnimationSpeed: number;
+  @Input('overlayAnimation') overlayAnimation: boolean;
   @Input('overlayDismiss') overlayDismiss: boolean;
   @Input('thumbBgColor') thumbBgColor: string;
   @Input('vpPadding') vpPadding: number;
@@ -41,33 +48,48 @@ export class NgxFloatingImgComponent implements OnInit {
 
   constructor(
     private _renderer: Renderer2,
-    private _ngxFloatingImgService: NgxFloatingImgService,
-    @Inject(NGX_FLOATING_IMG_OPTIONS_TOKEN) private _ngxFloatingImgOptions: NGXFloatingImgOptions
+    private _ngxFloatingImgService: NgxFloatingImgService
   ) { }
 
   ngOnInit() {
     // validate inputs
-    this._ngxFloatingImgService.validateInputs();
+    if (this._ngxFloatingImgService.validateInputs()) {
+      // set component default values
+      this._ngxFloatingImgService.setComponentDefaultValues(this);
+      // set default component style
+      this.setComponentStyle();
+    }
+  }
+
+  private setComponentStyle (): void {
     // set image ratio
     this.imageRatio = this._ngxFloatingImgService.getImgRatio(this.imgWidth, this.imgHeight);
+    // set image wrapper padding
+    this.imgWrapperStyle = this._ngxFloatingImgService.getVpPadding(this.vpPadding);
+    // set inner image wrapper animation
+    this.imgInnerWrapperStyle = this._ngxFloatingImgService.getImgTransition(this.imgAnimationSpeed, this.imgAnimationType);
+    // set overlay animation
+    this.overlayStyle = this._ngxFloatingImgService.getOverlayTransition(this.overlayAnimation, this.imgAnimationSpeed);
   }
 
 
 
 
-
-
   public showFullImg(): void {
+
+
+
+
+
     if (!this.showFullImgTrigger) {
       window.requestAnimationFrame(() => {
-        this.showFullImgTrigger = true;   
+        this.showFullImgTrigger = true;  
+        this.showFullImgInProgress = true; 
           this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'position', 'relative');
           this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'width', '500px');
           this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'left', this.imgFigure.nativeElement.getBoundingClientRect().left - 10 + 'px');
           this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'top', this.imgFigure.nativeElement.getBoundingClientRect().top - 10 + 'px');
-          console.log(this.imgWrapper.nativeElement.width);
           window.requestAnimationFrame(() => {
-            console.log(this.imgWrapper.nativeElement.width);
             this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'position', 'relative');
             this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'width', '500px');
             this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'left', '50%');
@@ -77,7 +99,7 @@ export class NgxFloatingImgComponent implements OnInit {
         });
      
     } else {
-      
+      this.showFullImgInProgress = false;
       this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'position', 'relative');
     this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'width', '500px');
     this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'left', this.imgFigure.nativeElement.getBoundingClientRect().left - 10 + 'px');
@@ -89,7 +111,8 @@ export class NgxFloatingImgComponent implements OnInit {
       this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'left', 'auto');
     this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'top', 'auto');
     this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'transform', 'translate(0,0) scale(1,1)');
-    }, 200)
+    
+    }, 250);
 
     }
     

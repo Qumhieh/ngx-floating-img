@@ -7,7 +7,7 @@ export interface NGXFloatingImgOptions {
     imgAnimationType?: string,
     imgAnimationSpeed?: number,
     overlayColor?: string,
-    overlayAnimationSpeed?: number,
+    overlayAnimation?: boolean,
     overlayDismiss?: boolean,
     thumbBgColor?: string,
     vpPadding?: number
