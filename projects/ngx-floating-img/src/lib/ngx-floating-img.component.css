@@ -43,5 +43,9 @@ figure .fi-img-container.show-full-img .fi-img-wrapper {
     position: absolute;
 }
 
+figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper {
+    position: relative;
+}
+
 
 

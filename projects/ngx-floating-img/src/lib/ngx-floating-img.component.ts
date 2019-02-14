@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, EventEmitter, Output, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
 
 import { NgxFloatingImgService } from './ngx-floating-img.service';
 
@@ -15,6 +15,7 @@ export class NgxFloatingImgComponent implements OnInit, OnChanges {
 
   public showFullImgTrigger: boolean = false;
   public showFullImgInProgress: boolean = false;
+  public fullImageLoaded: boolean = false;
 
   public imageRatio: number;
   public imgWrapperStyle: object = {};
@@ -47,7 +48,6 @@ export class NgxFloatingImgComponent implements OnInit, OnChanges {
   @ViewChild('imgInnerWrapper') imgInnerWrapper: ElementRef;
 
   constructor(
-    private _renderer: Renderer2,
     private _ngxFloatingImgService: NgxFloatingImgService
   ) { }
 
@@ -72,51 +72,12 @@ export class NgxFloatingImgComponent implements OnInit, OnChanges {
     this.overlayStyle = this._ngxFloatingImgService.getOverlayTransition(this.overlayAnimation, this.imgAnimationSpeed);
   }
 
-
-
-
-  public showFullImg(): void {
-
-
-
-
-
+  public triggerImg(): void {
     if (!this.showFullImgTrigger) {
-      window.requestAnimationFrame(() => {
-        this.showFullImgTrigger = true;  
-        this.showFullImgInProgress = true; 
-          this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'position', 'relative');
-          this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'width', '500px');
-          this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'left', this.imgFigure.nativeElement.getBoundingClientRect().left - 10 + 'px');
-          this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'top', this.imgFigure.nativeElement.getBoundingClientRect().top - 10 + 'px');
-          window.requestAnimationFrame(() => {
-            this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'position', 'relative');
-            this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'width', '500px');
-            this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'left', '50%');
-            this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'top', '50%');
-            this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'transform', 'translate(-50%,-50%) scale(2.2,2.2)');
-          });
-        });
-     
+      this._ngxFloatingImgService.showFullImg(this);
     } else {
-      this.showFullImgInProgress = false;
-      this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'position', 'relative');
-    this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'width', '500px');
-    this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'left', this.imgFigure.nativeElement.getBoundingClientRect().left - 10 + 'px');
-    this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'top', this.imgFigure.nativeElement.getBoundingClientRect().top - 10 + 'px');
-    this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'transform', 'translate(0,0) scale(1,1)');
-    setTimeout(() => {
-      this.showFullImgTrigger = false
-      this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'position', 'static');
-      this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'left', 'auto');
-    this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'top', 'auto');
-    this._renderer.setStyle(this.imgInnerWrapper.nativeElement, 'transform', 'translate(0,0) scale(1,1)');
-    
-    }, 250);
-
+      this._ngxFloatingImgService.closeFullImg();
     }
-    
-    
   }
 
 }

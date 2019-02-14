@@ -1,10 +1,10 @@
 <div class="fi-ele-container" [style.padding-bottom.%]="imageRatio" [style.background-color]="thumbBgColor">
     <div class="fi-ele-wrapper">
-        <figure #imgFigure (click)="showFullImg()"> 
+        <figure #imgFigure (click)="triggerImg()"> 
             <div class="fi-img-container" [ngClass]="{'show-full-img': showFullImgTrigger}"  
                 [style.background-color]="showFullImgInProgress ? overlayColor : 'rgba(0,0,0,0)'" [ngStyle]="overlayStyle">
                 <div #imgWrapper class="fi-img-wrapper" [ngStyle]="imgWrapperStyle">
-                    <div #imgInnerWrapper [ngStyle]="imgInnerWrapperStyle">
+                    <div #imgInnerWrapper class="fi-img-inner-wrapper" [ngStyle]="imgInnerWrapperStyle">
                         <ng-content></ng-content>
                     </div>
                 </div>
