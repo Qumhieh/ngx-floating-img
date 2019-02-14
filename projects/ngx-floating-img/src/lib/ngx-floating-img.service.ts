@@ -69,6 +69,7 @@ export class NgxFloatingImgService {
 
   public showFullImg (ngxFI: NgxFloatingImgComponent): void {
     ngxFI.beforeShow.emit(ngxFI.id);
+    this.setFullImgSrc(ngxFI);
     this._activeNGXFloatingImgComp = ngxFI;
     let imgFigureClientWidth = ngxFI.imgFigure.nativeElement.clientWidth;
     window.requestAnimationFrame(() => {
@@ -115,6 +116,17 @@ export class NgxFloatingImgService {
     this._renderer2.setStyle(nativeElement, '-webkit-transform', transform);
     this._renderer2.setStyle(nativeElement, '-moz-transform', transform);
     this._renderer2.setStyle(nativeElement, '-o-transform', transform);
+  }
+
+  private setFullImgSrc (ngxFIComponent: NgxFloatingImgComponent): void {
+    if (!ngxFIComponent.isFullImageLoaded) {
+      let onLoadlistenerFunc = this._renderer2.listen(ngxFIComponent.fullImgEle.nativeElement, 'load', () => {
+        ngxFIComponent.isFullImageLoaded = true;
+        ngxFIComponent.onFullImgLoad.emit(ngxFIComponent.id);
+        onLoadlistenerFunc();
+      });
+      this._renderer2.setProperty(ngxFIComponent.fullImgEle.nativeElement, 'src', ngxFIComponent.imgSrc);
+    }
   }
 
 }

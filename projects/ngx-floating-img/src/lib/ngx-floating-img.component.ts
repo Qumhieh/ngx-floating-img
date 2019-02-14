@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 
 import { NgxFloatingImgService } from './ngx-floating-img.service';
 
@@ -7,15 +7,11 @@ import { NgxFloatingImgService } from './ngx-floating-img.service';
   templateUrl: './ngx-floating-img.component.html',
   styleUrls: ['./ngx-floating-img.component.css']
 })
-export class NgxFloatingImgComponent implements OnInit, OnChanges {
-  
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-  }
+export class NgxFloatingImgComponent implements OnInit {
 
   public showFullImgTrigger: boolean = false;
   public showFullImgInProgress: boolean = false;
-  public fullImageLoaded: boolean = false;
+  public isFullImageLoaded: boolean = false;
 
   public imageRatio: number;
   public imgWrapperStyle: object = {};
@@ -46,6 +42,7 @@ export class NgxFloatingImgComponent implements OnInit, OnChanges {
   @ViewChild('imgFigure') imgFigure: ElementRef;
   @ViewChild('imgWrapper') imgWrapper: ElementRef;
   @ViewChild('imgInnerWrapper') imgInnerWrapper: ElementRef;
+  @ViewChild('fullImgEle') fullImgEle: ElementRef;
 
   constructor(
     private _ngxFloatingImgService: NgxFloatingImgService
@@ -70,6 +67,14 @@ export class NgxFloatingImgComponent implements OnInit, OnChanges {
     this.imgInnerWrapperStyle = this._ngxFloatingImgService.getImgTransition(this.imgAnimationSpeed, this.imgAnimationType);
     // set overlay animation
     this.overlayStyle = this._ngxFloatingImgService.getOverlayTransition(this.overlayAnimation, this.imgAnimationSpeed);
+  }
+
+  public showFullImg (): void {
+    
+  }
+
+  public closeFullImg (): void {
+
   }
 
   public triggerImg(): void {
