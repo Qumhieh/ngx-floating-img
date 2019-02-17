@@ -10,5 +10,6 @@ export interface NGXFloatingImgOptions {
     overlayAnimation?: boolean,
     overlayDismiss?: boolean,
     thumbBgColor?: string,
-    vpPadding?: number
+    vpPadding?: number,
+    showCloseButton?: boolean
 }

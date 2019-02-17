@@ -65,6 +65,7 @@ export class NgxFloatingImgService {
     if(ngxFI.showLoading == null) ngxFI.showLoading = this._ngxFloatingImgOptions.showLoading;
     if(ngxFI.thumbBgColor == null) ngxFI.thumbBgColor = this._ngxFloatingImgOptions.thumbBgColor;
     if(ngxFI.vpPadding == null) ngxFI.vpPadding = this._ngxFloatingImgOptions.vpPadding;
+    if(ngxFI.showCloseButton == null) ngxFI.showCloseButton = this._ngxFloatingImgOptions.showCloseButton;
   }
 
   public showFullImg (ngxFI: NgxFloatingImgComponent): void {
@@ -72,20 +73,28 @@ export class NgxFloatingImgService {
     this.setFullImgSrc(ngxFI);
     this._activeNGXFloatingImgComp = ngxFI;
     let imgFigureClientWidth = ngxFI.imgFigure.nativeElement.clientWidth;
+    let imgFigureClientHeight = ngxFI.imgFigure.nativeElement.clientHeight;
     window.requestAnimationFrame(() => {
       ngxFI.showFullImgTrigger = true;  
       ngxFI.showFullImgInProgress = true;
+      setTimeout(() => {
+        ngxFI.isImgActionsWrapperVisible = true;
+        ngxFI.afterShow.emit(ngxFI.id);
+      }, ngxFI.imgAnimationSpeed);
       this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'width', `${imgFigureClientWidth}px`);
       this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'left', ngxFI.imgFigure.nativeElement.getBoundingClientRect().left - ngxFI.vpPadding + 'px');
       this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'top', ngxFI.imgFigure.nativeElement.getBoundingClientRect().top - ngxFI.vpPadding + 'px');
       window.requestAnimationFrame(() => {
-        let thumbScale: number = this.calculateThumbScale(imgFigureClientWidth, ngxFI.imgWrapper.nativeElement.clientWidth, ngxFI.imgWidth);
-        let transform: string = `translate(-50%,-50%) scale(${thumbScale}, ${thumbScale})`;
+        let thumbScale: number = this.calculateThumbScale(imgFigureClientWidth, imgFigureClientHeight, ngxFI.imgWrapper.nativeElement.clientWidth,
+          ngxFI.imgWrapper.nativeElement.clientHeight, ngxFI.imgWidth, ngxFI.imgHeight);
+        let transform: string = `translate(-50%,-50%) scale(${thumbScale})`;
         this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'width', `${imgFigureClientWidth}px`);
         this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'left', '50%');
         this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'top', '50%');
         this.setElementTransform (ngxFI.imgInnerWrapper.nativeElement, transform);
-        ngxFI.afterShow.emit(ngxFI.id);
+        // set img actions wrapper style
+        this._renderer2.setStyle(ngxFI.imgActionsWrapper.nativeElement, 'width', `${imgFigureClientWidth * thumbScale}px`);
+        this._renderer2.setStyle(ngxFI.imgActionsWrapper.nativeElement, 'height', `${imgFigureClientHeight * thumbScale}px`);
       });
     });
   }
@@ -93,6 +102,7 @@ export class NgxFloatingImgService {
   public closeFullImg (): void {
     this._activeNGXFloatingImgComp.beforeClose.emit(this._activeNGXFloatingImgComp.id);
     this._activeNGXFloatingImgComp.showFullImgInProgress = false;
+    this._activeNGXFloatingImgComp.isImgActionsWrapperVisible = false;
     let imgFigureClientWidth = this._activeNGXFloatingImgComp.imgFigure.nativeElement.clientWidth;
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'width', `${imgFigureClientWidth}px`);
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'left', this._activeNGXFloatingImgComp.imgFigure.nativeElement.getBoundingClientRect().left - this._activeNGXFloatingImgComp.vpPadding + 'px');
@@ -107,8 +117,15 @@ export class NgxFloatingImgService {
     }, this._activeNGXFloatingImgComp.imgAnimationSpeed);
   }
 
-  private calculateThumbScale (thumbWidth: number, containerWidth: number, fullImgWidth: number): number {
-    return containerWidth <= fullImgWidth ? containerWidth / thumbWidth : fullImgWidth / thumbWidth;
+  private calculateThumbScale (thumbWidth: number, thumbHeight: number, containerWidth: number, containerHeight: number, 
+      fullImgWidth: number, fullImgHeight: number): number {
+    let widthScale = containerWidth / thumbWidth;
+    let heightScale = containerHeight / thumbHeight;
+    if (fullImgWidth > containerWidth && fullImgHeight > containerHeight) {
+      return widthScale * thumbHeight <= containerHeight ? widthScale : heightScale;
+    } else {
+      return fullImgWidth > fullImgHeight && (widthScale * thumbHeight <= containerHeight) ? widthScale : heightScale; 
+    } 
   }
 
   private setElementTransform (nativeElement, transform: string): void {

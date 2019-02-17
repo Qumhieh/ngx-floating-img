@@ -59,21 +59,34 @@ figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper.fi-img-full-loade
     display: block;
 }
 
-figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper .fi-img-top-bar {
+figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper .fi-img-top-bar {
     position: absolute;
     z-index: 20;
     top: 0px;
     left: 0px;
     width: 100%;
     text-align: right;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0));
-    background: -webkit-linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0));
-    background: -moz-linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0));
-    background: -o-linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0));
-    background: -ms-linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0));
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
+    background: -ms-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
 }
 
-figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper .fi-img-top-bar .fi-close-button {
+figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper {
+    display: none;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: 10;
+}
+
+figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper-visible {
+    display: block;
+}
+
+figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper .fi-img-top-bar .fi-close-button {
     padding: 0;
     background: transparent;
     border: none;
@@ -87,7 +100,7 @@ figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper .fi-img-top-bar .
     margin: 0px;
 }
 
-figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper .fi-img-bottom-bar {
+figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper .fi-img-bottom-bar {
     position: absolute;
     bottom: 0px;
     width: 100%;
@@ -96,12 +109,17 @@ figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper .fi-img-bottom-ba
     background-repeat: repeat;
     background-image: linear-gradient(90deg, transparent 0%, transparent 50%, #fff 50%, #fff 100%);
     animation: movebar 0.5s linear infinite;
-    background-size: 10px 10px;
+    background-size: 8px 8px;
+}
+
+figure .fi-img-container.show-full-img .fi-img-wrapper .fi-img-inner-wrapper .fi-img-bottom-bar,
+figure .fi-img-container.show-full-img .fi-img-wrapper .fi-img-inner-wrapper .fi-img-top-bar .fi-close-button  {
+    display: initial;
 }
 
 @keyframes movebar {
     from {background-position: 0 0;}
-    to {background-position: 10px 10px;}
+    to {background-position: 8px 8px;}
 }
 
 

@@ -12,6 +12,7 @@ export class NgxFloatingImgComponent implements OnInit {
   public showFullImgTrigger: boolean = false;
   public showFullImgInProgress: boolean = false;
   public isFullImageLoaded: boolean = false;
+  public isImgActionsWrapperVisible: boolean = false;
 
   public imageRatio: number;
   public imgWrapperStyle: object = {};
@@ -30,6 +31,7 @@ export class NgxFloatingImgComponent implements OnInit {
   @Input('overlayDismiss') overlayDismiss: boolean;
   @Input('thumbBgColor') thumbBgColor: string;
   @Input('vpPadding') vpPadding: number;
+  @Input('showCloseButton') showCloseButton: boolean;
   // TODO: @Input('thumbLazyLoad') thumbLazyLoad: boolean = true;
   // TODO: @Input('navigation') navigation: boolean = false;
 
@@ -43,6 +45,7 @@ export class NgxFloatingImgComponent implements OnInit {
   @ViewChild('imgWrapper') imgWrapper: ElementRef;
   @ViewChild('imgInnerWrapper') imgInnerWrapper: ElementRef;
   @ViewChild('fullImgEle') fullImgEle: ElementRef;
+  @ViewChild('imgActionsWrapper') imgActionsWrapper: ElementRef;
 
   constructor(
     private _ngxFloatingImgService: NgxFloatingImgService

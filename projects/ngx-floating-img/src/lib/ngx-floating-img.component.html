@@ -5,10 +5,14 @@
                 [style.background-color]="showFullImgInProgress ? overlayColor : 'rgba(0,0,0,0)'" [ngStyle]="overlayStyle">
                 <div #imgWrapper class="fi-img-wrapper" [ngStyle]="imgWrapperStyle">
                     <div #imgInnerWrapper class="fi-img-inner-wrapper" [ngClass]="{'fi-img-full-loaded': showFullImgTrigger}" [ngStyle]="imgInnerWrapperStyle">
-                        <div class="fi-img-top-bar"><button class="fi-close-button">&#x2715;</button></div>
-                        <div class="fi-img-bottom-bar"></div>
+                        <!-- <div *ngIf="showCloseButton" class="fi-img-top-bar"><button class="fi-close-button">&#x2715;</button></div>
+                        <div *ngIf="showLoading && !isFullImageLoaded" class="fi-img-bottom-bar"></div> -->
                         <ng-content></ng-content>
                         <img class="fi-img-full" #fullImgEle />
+                    </div>
+                    <div #imgActionsWrapper class="fi-img-actions-wrapper" [ngClass]="{'fi-img-actions-wrapper-visible': isImgActionsWrapperVisible}">
+                        <div *ngIf="showCloseButton" class="fi-img-top-bar"><button class="fi-close-button">&#x2715;</button></div>
+                        <div *ngIf="showLoading && !isFullImageLoaded" class="fi-img-bottom-bar"></div>
                     </div>
                 </div>
             </div>
