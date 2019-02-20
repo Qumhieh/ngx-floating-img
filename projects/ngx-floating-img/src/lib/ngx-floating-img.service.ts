@@ -1,23 +1,70 @@
-import { Injectable, Inject, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, Inject, Renderer2, RendererFactory2, Optional, NgZone } from '@angular/core';
+
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { NgxFloatingImgComponent } from './ngx-floating-img.component';
-import { NGX_FLOATING_IMG_OPTIONS_TOKEN } from './ngx-floating-img';
+import { NGX_FLOATING_IMG_OPTIONS_TOKEN, NGX_FI_WINDOW } from './ngx-floating-img';
 import { NGXFloatingImgOptions } from './model/ngx-floating-img-options';
 
 @Injectable()
 export class NgxFloatingImgService {
 
+  private _windowResizeDebounceTime: number = 200;
+  private _windowScrollDebounceTime: number = 50;
   private _activeNGXFloatingImgComp: NgxFloatingImgComponent;
   private _renderer2: Renderer2;
 
   constructor(
     @Inject(NGX_FLOATING_IMG_OPTIONS_TOKEN) private _ngxFloatingImgOptions: NGXFloatingImgOptions,
-    private _rend2Factory: RendererFactory2
+    @Optional() @Inject(NGX_FI_WINDOW) private _window: Window,
+    private _rend2Factory: RendererFactory2,
+    private _ngZone: NgZone
   ) {
     this._renderer2 = this._rend2Factory.createRenderer(null, null);
+
+    this.bindViewportResizeEvent ();
+    this.bindViewportScrollEvent ();
   }
 
-  public validateInputs (): boolean {
+  private bindViewportResizeEvent (): void {
+    if (this._window) {
+      this._ngZone.runOutsideAngular(() => {
+        fromEvent(this._window, 'resize').pipe(
+          debounceTime(this._windowResizeDebounceTime)
+        ).subscribe(() => {
+          this.setActiveImgInnerWrapperStyle();
+        });
+      });
+    }
+  }
+
+  private bindViewportScrollEvent (): void {
+    if (this._window) {
+      this._ngZone.runOutsideAngular(() => {
+        fromEvent(this._window, 'scroll').pipe(
+          debounceTime(this._windowScrollDebounceTime)
+        ).subscribe(() => {
+          if (this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger) {
+            this._ngZone.run(() => {
+              this.closeFullImg();
+            });
+          }
+        });
+      });
+    }
+  }
+
+  public validateInputs (ngxFI: NgxFloatingImgComponent): boolean {
+    if (ngxFI.imgWidth == null || ngxFI.imgHeight == null) {
+      if (ngxFI.imgWidth == null && ngxFI.imgHeight == null) {
+        throw 'image Width and height "imgWidth","imgHeight" are missing'; 
+      } else if (ngxFI.imgWidth == null) {
+        throw 'image Width "imgWidth" is missing'; 
+      } else {
+        throw 'image height "imgHeight" is missing'; 
+      }
+    } 
     return true;
   }
 
@@ -35,19 +82,7 @@ export class NgxFloatingImgService {
     };
   }
 
-  public getImgTransition (imgAnimationSpeed: number, imgAnimationType: string): object {
-    let transition = `all ${imgAnimationSpeed}ms ${imgAnimationType}`;
-    return {
-      transition: transition,
-      '-webkit-transition': transition,
-      '-moz-transition': transition,
-      '-o-transition': transition
-    };
-  }
-
-  public getOverlayTransition (overlayAnimation: boolean, animationSpeed: number): object {
-    if (!overlayAnimation) return null;
-    let transition = `background-color ${animationSpeed}ms linear`;
+  public getCSSTransitionObj (transition: string): object {
     return {
       transition: transition,
       '-webkit-transition': transition,
@@ -72,48 +107,69 @@ export class NgxFloatingImgService {
     ngxFI.beforeShow.emit(ngxFI.id);
     this.setFullImgSrc(ngxFI);
     this._activeNGXFloatingImgComp = ngxFI;
-    let imgFigureClientWidth = ngxFI.imgFigure.nativeElement.clientWidth;
-    let imgFigureClientHeight = ngxFI.imgFigure.nativeElement.clientHeight;
-    window.requestAnimationFrame(() => {
+    this._window.requestAnimationFrame(() => {
       ngxFI.showFullImgTrigger = true;  
-      ngxFI.showFullImgInProgress = true;
+      ngxFI.isShowFullImgInProgress = true;
       setTimeout(() => {
         ngxFI.isImgActionsWrapperVisible = true;
-        ngxFI.afterShow.emit(ngxFI.id);
+        ngxFI.onShow.emit(ngxFI.id);
       }, ngxFI.imgAnimationSpeed);
-      this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'width', `${imgFigureClientWidth}px`);
+      this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'width', `${ngxFI.imgFigure.nativeElement.clientWidth}px`);
       this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'left', ngxFI.imgFigure.nativeElement.getBoundingClientRect().left - ngxFI.vpPadding + 'px');
       this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'top', ngxFI.imgFigure.nativeElement.getBoundingClientRect().top - ngxFI.vpPadding + 'px');
-      window.requestAnimationFrame(() => {
-        let thumbScale: number = this.calculateThumbScale(imgFigureClientWidth, imgFigureClientHeight, ngxFI.imgWrapper.nativeElement.clientWidth,
-          ngxFI.imgWrapper.nativeElement.clientHeight, ngxFI.imgWidth, ngxFI.imgHeight);
-        let transform: string = `translate(-50%,-50%) scale(${thumbScale})`;
-        this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'width', `${imgFigureClientWidth}px`);
-        this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'left', '50%');
-        this._renderer2.setStyle(ngxFI.imgInnerWrapper.nativeElement, 'top', '50%');
-        this.setElementTransform (ngxFI.imgInnerWrapper.nativeElement, transform);
-        // set img actions wrapper style
-        this._renderer2.setStyle(ngxFI.imgActionsWrapper.nativeElement, 'width', `${imgFigureClientWidth * thumbScale}px`);
-        this._renderer2.setStyle(ngxFI.imgActionsWrapper.nativeElement, 'height', `${imgFigureClientHeight * thumbScale}px`);
+      this._window.requestAnimationFrame(() => {
+        this.setActiveImgInnerWrapperStyle ()
       });
     });
   }
 
+  private setActiveImgInnerWrapperStyle (): void {
+    if (this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger) {
+      let imgFigureClientWidth = this._activeNGXFloatingImgComp.imgFigure.nativeElement.clientWidth;
+      let imgFigureClientHeight = this._activeNGXFloatingImgComp.imgFigure.nativeElement.clientHeight;
+      let thumbScale: number = this.calculateThumbScale(
+        imgFigureClientWidth, 
+        imgFigureClientHeight, 
+        this._activeNGXFloatingImgComp.imgWrapper.nativeElement.clientWidth,
+        this._activeNGXFloatingImgComp.imgWrapper.nativeElement.clientHeight, 
+        this._activeNGXFloatingImgComp.imgWidth, 
+        this._activeNGXFloatingImgComp.imgHeight);
+      let transform: string = `translate(-50%,-50%) scale(${thumbScale})`;
+      this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'width', `${imgFigureClientWidth}px`);
+      this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'left', '50%');
+      this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'top', '50%');
+      this.setElementTransform (this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, transform);
+      this.setActiveImgActionsWrapperStyle(thumbScale);
+    }
+  }
+
+  private setActiveImgActionsWrapperStyle (thumbScale: number): void {
+    // set img actions wrapper style
+    this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgActionsWrapper.nativeElement, 'width', `${this._activeNGXFloatingImgComp.imgFigure.nativeElement.clientWidth * thumbScale}px`);
+    this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgActionsWrapper.nativeElement, 'height', `${this._activeNGXFloatingImgComp.imgFigure.nativeElement.clientHeight * thumbScale}px`);
+  }
+
+  private _testTime = null;
+
   public closeFullImg (): void {
     this._activeNGXFloatingImgComp.beforeClose.emit(this._activeNGXFloatingImgComp.id);
-    this._activeNGXFloatingImgComp.showFullImgInProgress = false;
+    this._activeNGXFloatingImgComp.isShowFullImgInProgress = false;
     this._activeNGXFloatingImgComp.isImgActionsWrapperVisible = false;
     let imgFigureClientWidth = this._activeNGXFloatingImgComp.imgFigure.nativeElement.clientWidth;
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'width', `${imgFigureClientWidth}px`);
+    console.log(this._activeNGXFloatingImgComp.imgFigure.nativeElement.getBoundingClientRect().top);
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'left', this._activeNGXFloatingImgComp.imgFigure.nativeElement.getBoundingClientRect().left - this._activeNGXFloatingImgComp.vpPadding + 'px');
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'top', this._activeNGXFloatingImgComp.imgFigure.nativeElement.getBoundingClientRect().top - this._activeNGXFloatingImgComp.vpPadding + 'px');
     this.setElementTransform (this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'translate(0,0) scale(1,1)');
-    setTimeout(() => {
+    if (this._testTime) {
+      clearTimeout(this._testTime);
+    }
+    this._testTime = setTimeout(() => {
       this._activeNGXFloatingImgComp.showFullImgTrigger = false
       this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'left', 'auto');
       this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'top', 'auto');
       this.setElementTransform (this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'translate(0,0) scale(1,1)');
-      this._activeNGXFloatingImgComp.afterClose.emit(this._activeNGXFloatingImgComp.id);
+      this._activeNGXFloatingImgComp.onClose.emit(this._activeNGXFloatingImgComp.id);
     }, this._activeNGXFloatingImgComp.imgAnimationSpeed);
   }
 
@@ -136,13 +192,13 @@ export class NgxFloatingImgService {
   }
 
   private setFullImgSrc (ngxFIComponent: NgxFloatingImgComponent): void {
-    if (!ngxFIComponent.isFullImageLoaded) {
-      let onLoadlistenerFunc = this._renderer2.listen(ngxFIComponent.fullImgEle.nativeElement, 'load', () => {
+    if (ngxFIComponent.imgSrc && !ngxFIComponent.isFullImageLoaded) {
+      let onLoadlistenerFunc = this._renderer2.listen(ngxFIComponent.fullImg.nativeElement, 'load', () => {
         ngxFIComponent.isFullImageLoaded = true;
         ngxFIComponent.onFullImgLoad.emit(ngxFIComponent.id);
         onLoadlistenerFunc();
       });
-      this._renderer2.setProperty(ngxFIComponent.fullImgEle.nativeElement, 'src', ngxFIComponent.imgSrc);
+      this._renderer2.setProperty(ngxFIComponent.fullImg.nativeElement, 'src', ngxFIComponent.imgSrc);
     }
   }
 

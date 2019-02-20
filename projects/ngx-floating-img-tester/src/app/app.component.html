@@ -8,7 +8,7 @@
     <h1>TEST 2</h1>
     <h1>TEST 2</h1>
     <hr>
-    <fi-ngx-floating-img [imgWidth]="1164" [imgHeight]="545" [vpPadding]="10" [thumbBgColor]="testColor" [imgSrc]="'./assets/original/audi_large.jpg'">
+    <fi-ngx-floating-img [overlayDismiss]="false" [imgWidth]="500" [imgHeight]="234" [vpPadding]="10" [thumbBgColor]="testColor" (beforeShow)="test($event)">
         <img src="./assets/thumbs/audi_small.jpg">
     </fi-ngx-floating-img>
     <hr>
@@ -38,7 +38,7 @@
     <h1>TEST 2</h1>
     <h1>TEST 2</h1>
     <button>fwef</button>
-    <fi-ngx-floating-img [imgWidth]="1920" [imgHeight]="2877" [vpPadding]="0" [imgSrc]="'./assets/original/image2_large.jpeg'">
+    <fi-ngx-floating-img [overlayColor]="'#fff'" [overlayAnimation]="true" [imgWidth]="1920" [imgHeight]="2877" [vpPadding]="0" [imgSrc]="'./assets/original/image2_large.jpeg'">
         <img src="./assets/thumbs/image2_small.jpeg">
     </fi-ngx-floating-img>
 

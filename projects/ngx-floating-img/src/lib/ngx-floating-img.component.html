@@ -1,18 +1,17 @@
 <div class="fi-ele-container" [style.padding-bottom.%]="imageRatio" [style.background-color]="thumbBgColor">
     <div class="fi-ele-wrapper">
-        <figure #imgFigure (click)="triggerImg()"> 
+        <figure #imgFigure> 
             <div class="fi-img-container" [ngClass]="{'show-full-img': showFullImgTrigger}"  
-                [style.background-color]="showFullImgInProgress ? overlayColor : 'rgba(0,0,0,0)'" [ngStyle]="overlayStyle">
+                [style.background-color]="showFullImgInProgress ? overlayColor : 'rgba(0,0,0,0)'" [ngStyle]="overlayTransition"  (click)="closeFullImg($event)">
                 <div #imgWrapper class="fi-img-wrapper" [ngStyle]="imgWrapperStyle">
-                    <div #imgInnerWrapper class="fi-img-inner-wrapper" [ngClass]="{'fi-img-full-loaded': showFullImgTrigger}" [ngStyle]="imgInnerWrapperStyle">
-                        <!-- <div *ngIf="showCloseButton" class="fi-img-top-bar"><button class="fi-close-button">&#x2715;</button></div>
-                        <div *ngIf="showLoading && !isFullImageLoaded" class="fi-img-bottom-bar"></div> -->
+                    <div #imgInnerWrapper class="fi-img-inner-wrapper" [ngClass]="{'fi-img-fully-loaded': showFullImgTrigger}" [ngStyle]="imgInnerWrapperTransition" 
+                        (click)="showFullImg()">
                         <ng-content></ng-content>
-                        <img class="fi-img-full" #fullImgEle />
+                        <img *ngIf="imgSrc" class="fi-img-full" #fullImg />
                     </div>
                     <div #imgActionsWrapper class="fi-img-actions-wrapper" [ngClass]="{'fi-img-actions-wrapper-visible': isImgActionsWrapperVisible}">
                         <div *ngIf="showCloseButton" class="fi-img-top-bar"><button class="fi-close-button">&#x2715;</button></div>
-                        <div *ngIf="showLoading && !isFullImageLoaded" class="fi-img-bottom-bar"></div>
+                        <div *ngIf="imgSrc && showLoading && !isFullImageLoaded" class="fi-img-bottom-bar"></div>
                     </div>
                 </div>
             </div>

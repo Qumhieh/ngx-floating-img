@@ -10,15 +10,15 @@ import { NgxFloatingImgService } from './ngx-floating-img.service';
 export class NgxFloatingImgComponent implements OnInit {
 
   public showFullImgTrigger: boolean = false;
-  public showFullImgInProgress: boolean = false;
+  public isShowFullImgInProgress: boolean = false;
   public isFullImageLoaded: boolean = false;
   public isImgActionsWrapperVisible: boolean = false;
 
   public imageRatio: number;
   public imgWrapperStyle: object = {};
-  public imgInnerWrapperStyle: object = {};
-  public overlayStyle: object = {};
-
+  public imgInnerWrapperTransition: object = {};
+  public overlayTransition: object = {};
+  
   @Input('id') id: string;
   @Input('imgSrc') imgSrc: string;
   @Input('imgWidth') imgWidth: number;
@@ -36,15 +36,15 @@ export class NgxFloatingImgComponent implements OnInit {
   // TODO: @Input('navigation') navigation: boolean = false;
 
   @Output('beforeShow') beforeShow = new EventEmitter<string>();
-  @Output('afterShow') afterShow = new EventEmitter<string>();
+  @Output('afterShow') onShow = new EventEmitter<string>();
   @Output('onFullImgLoad') onFullImgLoad = new EventEmitter<string>();
   @Output('beforeClose') beforeClose = new EventEmitter<string>();
-  @Output('afterClose') afterClose = new EventEmitter<string>();
+  @Output('afterClose') onClose = new EventEmitter<string>();
 
   @ViewChild('imgFigure') imgFigure: ElementRef;
   @ViewChild('imgWrapper') imgWrapper: ElementRef;
   @ViewChild('imgInnerWrapper') imgInnerWrapper: ElementRef;
-  @ViewChild('fullImgEle') fullImgEle: ElementRef;
+  @ViewChild('fullImg') fullImg: ElementRef;
   @ViewChild('imgActionsWrapper') imgActionsWrapper: ElementRef;
 
   constructor(
@@ -53,7 +53,7 @@ export class NgxFloatingImgComponent implements OnInit {
 
   ngOnInit() {
     // validate inputs
-    if (this._ngxFloatingImgService.validateInputs()) {
+    if (this._ngxFloatingImgService.validateInputs(this)) {
       // set component default values
       this._ngxFloatingImgService.setComponentDefaultValues(this);
       // set default component style
@@ -66,25 +66,24 @@ export class NgxFloatingImgComponent implements OnInit {
     this.imageRatio = this._ngxFloatingImgService.getImgRatio(this.imgWidth, this.imgHeight);
     // set image wrapper padding
     this.imgWrapperStyle = this._ngxFloatingImgService.getVpPadding(this.vpPadding);
-    // set inner image wrapper animation
-    this.imgInnerWrapperStyle = this._ngxFloatingImgService.getImgTransition(this.imgAnimationSpeed, this.imgAnimationType);
+    // set image inner wrapper animation
+    this.imgInnerWrapperTransition = this._ngxFloatingImgService.getCSSTransitionObj(`all ${this.imgAnimationSpeed}ms ${this.imgAnimationType}`);
     // set overlay animation
-    this.overlayStyle = this._ngxFloatingImgService.getOverlayTransition(this.overlayAnimation, this.imgAnimationSpeed);
+    this.overlayTransition = this.overlayAnimation ? this._ngxFloatingImgService.getCSSTransitionObj(`background-color ${this.imgAnimationSpeed}ms ${this.imgAnimationType}`) : null;
   }
 
   public showFullImg (): void {
-    
-  }
-
-  public closeFullImg (): void {
-
-  }
-
-  public triggerImg(): void {
     if (!this.showFullImgTrigger) {
       this._ngxFloatingImgService.showFullImg(this);
-    } else {
-      this._ngxFloatingImgService.closeFullImg();
+    }
+  }
+
+  public closeFullImg (event): void {
+    if (this.showFullImgTrigger) {
+      let eleClass = event.target.classList[0];
+      if (eleClass == 'fi-close-button' || (this.overlayDismiss && (eleClass == 'fi-img-container' || eleClass == 'fi-img-wrapper'))) {
+        this._ngxFloatingImgService.closeFullImg();
+      }
     }
   }
 

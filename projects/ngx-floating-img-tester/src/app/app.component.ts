@@ -5,14 +5,18 @@ import { Component, AfterViewChecked, DoCheck } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements DoCheck{
   title = 'ngx-floating-img-tester';
 
   public testColor = '#555';
 
-  constructor() {
-    setTimeout(() => {
-      this.testColor = '#cd3232';
-    }, 3000); 
+  constructor() {}
+
+  ngDoCheck() {
+    console.log('channngggeeeeddd');
   }
+
+  test(event) {
+  }
+
 }

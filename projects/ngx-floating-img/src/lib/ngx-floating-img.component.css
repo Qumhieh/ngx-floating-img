@@ -19,7 +19,7 @@
 figure {
     position: relative;
     width: 100%;
-    height: auto;
+    height: 100%;
     margin: 0px;
     line-height: 0px; 
 }
@@ -27,9 +27,9 @@ figure {
 figure::ng-deep img {
     width: 100%;
     height: auto;
-    
 }
 
+/* floating image container */
 figure .fi-img-container.show-full-img {
     position: fixed;
     left: 0px;
@@ -39,10 +39,12 @@ figure .fi-img-container.show-full-img {
     z-index: 999999;
 }
 
+/* floating image wrapper */
 figure .fi-img-container.show-full-img .fi-img-wrapper {
     position: absolute;
 }
 
+/* floating image inner wrapper */
 figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper {
     position: relative;
 }
@@ -55,24 +57,11 @@ figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper img.fi-img-full {
     z-index: 10;
 }
 
-figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper.fi-img-full-loaded img.fi-img-full {
+figure .fi-img-container .fi-img-wrapper .fi-img-inner-wrapper.fi-img-fully-loaded img.fi-img-full {
     display: block;
 }
 
-figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper .fi-img-top-bar {
-    position: absolute;
-    z-index: 20;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    text-align: right;
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
-    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
-    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
-    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
-    background: -ms-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0));
-}
-
+/* floating image actions wrapper */
 figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper {
     display: none;
     left: 50%;
@@ -86,30 +75,46 @@ figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper-visible {
     display: block;
 }
 
+/* floating image actions wrapper top bar */
+figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper .fi-img-top-bar {
+    position: absolute;
+    z-index: 20;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    text-align: right;
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background: -webkit-linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background: -moz-linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background: -o-linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background: -ms-linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0));
+}
+
 figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper .fi-img-top-bar .fi-close-button {
     padding: 0;
     background: transparent;
     border: none;
-    width: 34px;
-    height: 34px;
+    width: 50px;
+    height: 50px;
     line-height: 0px;
-    font-size: 18px;
+    font-size: 28px;
     color: #fff;
     cursor: pointer;
     outline: none;
     margin: 0px;
 }
 
+/* floating image actions wrapper bottom bar */
 figure .fi-img-container .fi-img-wrapper .fi-img-actions-wrapper .fi-img-bottom-bar {
     position: absolute;
-    bottom: 0px;
+    bottom: -1px;
     width: 100%;
-    height: 2px;
+    height: 4px;
     z-index: 20;
     background-repeat: repeat;
     background-image: linear-gradient(90deg, transparent 0%, transparent 50%, #fff 50%, #fff 100%);
     animation: movebar 0.5s linear infinite;
-    background-size: 8px 8px;
+    background-size: 14px 14px;
 }
 
 figure .fi-img-container.show-full-img .fi-img-wrapper .fi-img-inner-wrapper .fi-img-bottom-bar,
@@ -117,9 +122,10 @@ figure .fi-img-container.show-full-img .fi-img-wrapper .fi-img-inner-wrapper .fi
     display: initial;
 }
 
+/* animation keyframes */
 @keyframes movebar {
     from {background-position: 0 0;}
-    to {background-position: 8px 8px;}
+    to {background-position: 14px 14px;}
 }
 
 
