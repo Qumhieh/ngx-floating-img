@@ -1,12 +1,10 @@
 import { Injectable, Inject, Renderer2, RendererFactory2, Optional, NgZone } from '@angular/core';
-
 import { fromEvent } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 
 import { NgxFloatingImgComponent } from './ngx-floating-img.component';
 import { NGX_FLOATING_IMG_OPTIONS_TOKEN, NGX_FI_WINDOW } from './ngx-floating-img';
 import { NGXFloatingImgOptions } from './model/ngx-floating-img-options';
-
 
 const ESC_KEY_CODE: number = 27;
 
@@ -130,7 +128,9 @@ export class NgxFloatingImgService {
     fullImgWidth: number, fullImgHeight: number): number {
     let widthScale = containerWidth / thumbWidth;
     let heightScale = containerHeight / thumbHeight;
-    if (fullImgWidth > containerWidth && fullImgHeight > containerHeight) {
+    if (fullImgWidth <= containerWidth && fullImgHeight <= containerHeight) {
+      return 1;
+    } else if (fullImgWidth > containerWidth && fullImgHeight > containerHeight) {
       return widthScale * thumbHeight <= containerHeight ? widthScale : heightScale;
     } else {
       return fullImgWidth > fullImgHeight && (widthScale * thumbHeight <= containerHeight) ? widthScale : heightScale; 
