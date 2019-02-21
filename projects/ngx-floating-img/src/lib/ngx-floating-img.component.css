@@ -29,6 +29,10 @@ figure::ng-deep img {
     height: auto;
 }
 
+figure::ng-deep img:NOT(.fi-img-full) {
+    cursor: zoom-in;
+}
+
 /* floating image container */
 figure .fi-img-container.show-full-img {
     position: fixed;
