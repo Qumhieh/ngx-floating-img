@@ -20,7 +20,7 @@ export class NgxFloatingImgService {
 
   constructor(
     @Inject(NGX_FLOATING_IMG_OPTIONS_TOKEN) private _ngxFloatingImgOptions: NGXFloatingImgOptions,
-    @Optional() @Inject(NGX_FI_WINDOW) private _window: Window,
+    @Optional() @Inject(NGX_FI_WINDOW) private _window: any,
     private _rend2Factory: RendererFactory2,
     private _ngZone: NgZone
   ) {
@@ -128,9 +128,9 @@ export class NgxFloatingImgService {
     fullImgWidth: number, fullImgHeight: number): number {
     let widthScale = containerWidth / thumbWidth;
     let heightScale = containerHeight / thumbHeight;
-    if (fullImgWidth <= containerWidth && fullImgHeight <= containerHeight) {
-      return 1;
-    } else if (fullImgWidth > containerWidth && fullImgHeight > containerHeight) {
+    if (fullImgWidth < containerWidth && fullImgHeight < containerHeight) {
+      return fullImgWidth > fullImgHeight ? fullImgWidth / thumbWidth : fullImgHeight / thumbHeight;
+    } else if (fullImgWidth >= containerWidth && fullImgHeight >= containerHeight) {
       return widthScale * thumbHeight <= containerHeight ? widthScale : heightScale;
     } else {
       return fullImgWidth > fullImgHeight && (widthScale * thumbHeight <= containerHeight) ? widthScale : heightScale; 

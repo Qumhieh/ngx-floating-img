@@ -13,10 +13,23 @@ export class AppComponent implements DoCheck{
   constructor() {}
 
   ngDoCheck() {
-    console.log('channngggeeeeddd');
+    // console.log('channngggeeeeddd');
   }
 
-  test(event) {
+  beforeShow(event) {
+    console.log('beforeShow' + event);
+  }
+  afterShow(event) {
+    console.log('afterShow' + event);
+  }
+  onFullImgLoad(event) {
+    console.log('onFullImgLoad' + event);
+  }
+  beforeClose(event) {
+    console.log('beforeClose' + event);
+  }
+  afterClose(event) {
+    console.log('afterClose' + event);
   }
 
 }

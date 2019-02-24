@@ -8,7 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start_tester": "ng serve ngx-floating-img-tester"
+    "start_tester": "ng serve ngx-floating-img-tester",
+    "build_lib": "ng build ngx-floating-img",
+    "pack_lib": "cd dist/ngx-floating-img && npm pack",
+    "package_lib": "npm run build_lib && npm run pack_lib"
   },
   "private": true,
   "dependencies": {

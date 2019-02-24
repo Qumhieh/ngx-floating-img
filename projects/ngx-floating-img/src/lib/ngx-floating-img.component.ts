@@ -32,8 +32,9 @@ export class NgxFloatingImgComponent implements OnInit {
   @Input('thumbBgColor') thumbBgColor: string;
   @Input('vpPadding') vpPadding: number;
   @Input('showCloseButton') showCloseButton: boolean;
-  // TODO: @Input('thumbLazyLoad') thumbLazyLoad: boolean = true;
-  // TODO: @Input('navigation') navigation: boolean = false;
+  // TODO: @Input('disableScroll') disableScroll: boolean;
+  // TODO: @Input('thumbLazyLoad') thumbLazyLoad: boolean;
+  // TODO: @Input('navigation') navigation: boolean;
 
   @Output('beforeShow') beforeShow = new EventEmitter<string>();
   @Output('afterShow') onShow = new EventEmitter<string>();
@@ -67,7 +68,9 @@ export class NgxFloatingImgComponent implements OnInit {
     // set image wrapper padding
     this.imgWrapperStyle = this._ngxFloatingImgService.getVpPadding(this.vpPadding);
     // set image inner wrapper animation
-    this.imgInnerWrapperTransition = this._ngxFloatingImgService.getCSSTransitionObj(`all ${this.imgAnimationSpeed}ms ${this.imgAnimationType}`);
+    if (this.imgAnimationSpeed) {
+      this.imgInnerWrapperTransition = this._ngxFloatingImgService.getCSSTransitionObj(`all ${this.imgAnimationSpeed}ms ${this.imgAnimationType}`);
+    }
     // set overlay animation
     this.overlayTransition = this.overlayAnimation ? this._ngxFloatingImgService.getCSSTransitionObj(`background-color ${this.imgAnimationSpeed}ms ${this.imgAnimationType}`) : null;
   }

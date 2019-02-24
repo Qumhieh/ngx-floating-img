@@ -8,11 +8,20 @@
     <h1>TEST 2</h1>
     <h1>TEST 2</h1>
     <hr>
-    <fi-ngx-floating-img [overlayDismiss]="false" [imgWidth]="500" [imgHeight]="234" [vpPadding]="10" [thumbBgColor]="testColor" (beforeShow)="test($event)">
-        <img src="./assets/thumbs/audi_small.jpg">
+    <fi-ngx-floating-img [id]="123" [imgWidth]="1920" [imgHeight]="900" [imgAnimationSpeed]="0" [imgAnimationType]="'ease-out'" 
+        [overlayColor]="'rgba(255,255,255,0.5)'" [overlayDismiss]="true" [thumbBgColor]="'#cd3232'" [vpPadding]="0"
+        [imgSrc]="'./assets/original/audi_large.jpg'" [showCloseButton]="false" (beforeShow)="beforeShow($event)" (afterShow)="afterShow($event)"
+        (onFullImgLoad)="onFullImgLoad($event)" (beforeClose)="beforeClose($event)" (afterClose)="afterClose($event)">
+        <img src="./assets/thumbs/audi_small.jpg" >
     </fi-ngx-floating-img>
     <hr>
     <h1>TEST 2</h1>
+    <fi-ngx-floating-img [id]="123" [imgWidth]="1920" [imgHeight]="900" [imgAnimationSpeed]="250" [imgAnimationType]="'ease-out'" 
+        [overlayColor]="'rgba(255,255,255,0.5)'" [overlayDismiss]="true" [thumbBgColor]="'#cd3232'" [vpPadding]="0"
+        [imgSrc]="'./assets/original/audi_large.jpg'" [showCloseButton]="false" (beforeShow)="beforeShow($event)" (afterShow)="afterShow($event)"
+        (onFullImgLoad)="onFullImgLoad($event)" (beforeClose)="beforeClose($event)" (afterClose)="afterClose($event)">
+        <img src="./assets/thumbs/audi_small.jpg" >
+    </fi-ngx-floating-img>
     <h1>TEST 2</h1>
     <h1>TEST 2</h1>
     <h1>TEST 2</h1>
@@ -38,7 +47,7 @@
     <h1>TEST 2</h1>
     <h1>TEST 2</h1>
     <button>fwef</button>
-    <fi-ngx-floating-img [overlayColor]="'#000'" [overlayAnimation]="true" [imgWidth]="1920" [imgHeight]="2877" [vpPadding]="0" [imgSrc]="'./assets/original/image2_large.jpeg'">
+    <fi-ngx-floating-img [overlayColor]="'#000'" [overlayAnimation]="true" [imgWidth]="1920" [imgHeight]="2877" [vpPadding]="0" [imgSrc]="'./assets/original/image2_largae.jpeg'">
         <img src="./assets/thumbs/image2_small.jpeg">
     </fi-ngx-floating-img>
 
