@@ -120,8 +120,9 @@ export class NgxFloatingImgService {
 
   private setCloseImgPhaseTwoStyle (): void {
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'left', 'auto');
-      this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'top', 'auto');
-      this.setElementTransform (this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'translate(0,0) scale(1,1)');
+    this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'top', 'auto');
+    this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'width', 'auto');
+    this.setElementTransform (this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'translate(0,0) scale(1,1)');
   }
 
   private calculateThumbScale (thumbWidth: number, thumbHeight: number, containerWidth: number, containerHeight: number, 
@@ -169,7 +170,8 @@ export class NgxFloatingImgService {
   }
 
   public getImgRatio (imgWidth: number, imgHeight: number): number {
-    return (imgHeight / imgWidth) * 100;
+    return Math.floor((imgHeight / imgWidth) * 1000) / 10;
+    //return (imgHeight / imgWidth) * 100;
   }
 
   public getVpPadding (vpPadding: number): object {

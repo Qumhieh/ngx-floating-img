@@ -1,54 +1,5 @@
-<div style="width: 500px;margin-left: 200px;">
-    <h1>TEST 1</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <hr>
-    <fi-ngx-floating-img [id]="123" [imgWidth]="1920" [imgHeight]="900" [imgAnimationSpeed]="0" [imgAnimationType]="'ease-out'" 
-        [overlayColor]="'rgba(255,255,255,0.5)'" [overlayDismiss]="true" [thumbBgColor]="'#cd3232'" [vpPadding]="0"
-        [imgSrc]="'./assets/original/audi_large.jpg'" [showCloseButton]="false" (beforeShow)="beforeShow($event)" (afterShow)="afterShow($event)"
-        (onFullImgLoad)="onFullImgLoad($event)" (beforeClose)="beforeClose($event)" (afterClose)="afterClose($event)">
-        <img src="./assets/thumbs/audi_small.jpg" >
-    </fi-ngx-floating-img>
-    <hr>
-    <h1>TEST 2</h1>
-    <fi-ngx-floating-img [id]="123" [imgWidth]="1920" [imgHeight]="900" [imgAnimationSpeed]="250" [imgAnimationType]="'ease-out'" 
-        [overlayColor]="'rgba(255,255,255,0.5)'" [overlayDismiss]="true" [thumbBgColor]="'#cd3232'" [vpPadding]="0"
-        [imgSrc]="'./assets/original/audi_large.jpg'" [showCloseButton]="false" (beforeShow)="beforeShow($event)" (afterShow)="afterShow($event)"
-        (onFullImgLoad)="onFullImgLoad($event)" (beforeClose)="beforeClose($event)" (afterClose)="afterClose($event)">
-        <img src="./assets/thumbs/audi_small.jpg" >
-    </fi-ngx-floating-img>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <div style="width: 200px;">
-        <fi-ngx-floating-img [imgWidth]="1950" [imgHeight]="1300" [vpPadding]="50" [imgSrc]="'./assets/original/image3_large.jpg'">
-            <img src="./assets/thumbs/image3_small.jpg">
-        </fi-ngx-floating-img>
-    </div>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <fi-ngx-floating-img [imgWidth]="2555" [imgHeight]="3194" [vpPadding]="50" [imgSrc]="'https://images.pexels.com/photos/1887629/pexels-photo-1887629.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'">
-        <img src="./assets/thumbs/image1_small.jpeg">
-    </fi-ngx-floating-img>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <h1>TEST 2</h1>
-    <button>fwef</button>
-    <fi-ngx-floating-img [overlayColor]="'#000'" [overlayAnimation]="true" [imgWidth]="1920" [imgHeight]="2877" [vpPadding]="0" [imgSrc]="'./assets/original/image2_largae.jpeg'">
-        <img src="./assets/thumbs/image2_small.jpeg">
-    </fi-ngx-floating-img>
-
+<div id="main-container">
+    <fit-header></fit-header>
+    <main><router-outlet></router-outlet></main>
+    <fit-footer></fit-footer>
 </div>
