@@ -1,0 +1,7 @@
+@function rem ($pixel, $context: $browser-context) {
+    @return #{$pixel / $context}rem;
+}
+
+@function em ($pixel, $context: $browser-context) {
+    @return #{$pixel / $context}em;
+}

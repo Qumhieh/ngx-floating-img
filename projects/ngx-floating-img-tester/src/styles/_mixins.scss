@@ -1,0 +1,101 @@
+@mixin border-radius ($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin box-shadow ($shadows) {
+    -webkit-box-shadow: $shadows;
+    -moz-box-shadow: $shadows;
+    box-shadow: $shadows;
+}
+
+@mixin transition ($transition...) {
+    transition: $transition;
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -o-transition: $transition;
+}
+
+@mixin transform ($transform...) {
+    transform: $transform;
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+}
+
+@mixin transform-origin ($transform...) {
+    transform-origin: $transform;
+    -webkit-transform-origin: $transform;
+    -moz-transform-origin: $transform;
+    -ms-transform-origin: $transform;
+}
+
+@mixin linear-gradient($top, $bottom){
+    background: $top;
+    background: -moz-linear-gradient(top,  $top 0%, $bottom 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom));
+    background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%);
+    background: -o-linear-gradient(top,  $top 0%,$bottom 100%);
+    background: -ms-linear-gradient(top,  $top 0%,$bottom 100%);
+    background: linear-gradient(to bottom,  $top 0%,$bottom 100%);
+}
+
+@mixin horizontal-linear-gradient($left, $right){
+    background: $left;
+    background: -moz-linear-gradient(to right,  $left 0%, $right 100%);
+    background: -webkit-linear-gradient(to right,  $left 0%,$right 100%);
+    background: -o-linear-gradient(to right,  $left 0%,$right 100%);
+    background: -ms-linear-gradient(to right,  $left 0%,$right 100%);
+    background: linear-gradient(to right,  $left 0%,$right 100%);
+}
+
+@mixin display-flex ($isImportant: null) {
+    display: flex $isImportant;
+    display: -webkit-flex $isImportant;
+    display: -moz-flex $isImportant;
+    display: -ms-flex $isImportant;    
+}
+
+@mixin flex ($flex...) {
+    flex: $flex;
+    -webkit-flex: $flex;
+    -moz-flex: $flex;
+    -ms-flex: $flex;
+}
+
+@mixin flex-direction ($direction) {
+    flex-direction: $direction;
+    -webkit-flex-direction: $direction;
+    -moz-flex-direction: $direction;
+    -ms-flex-direction: $direction;
+}
+
+@mixin flex-basis ($basis) {
+    flex-basis: $basis;
+    -webkit-flex-basis: $basis;
+    -moz-flex-basis: $basis;
+    -ms-flex-basis: $basis;
+}
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }  
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }  
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin animation($animation...) {
+    -webkit-animation: $animation;
+    -moz-animation: $animation;
+    -o-animation: $animation;
+    animation: $animation;      
+}
