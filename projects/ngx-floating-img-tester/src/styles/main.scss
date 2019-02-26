@@ -1,4 +1,4 @@
-@import "_imports";
+@import "imports";
 
 :root {
     font-family: Arial, Helvetica, sans-serif;
@@ -10,4 +10,45 @@ html, body {
     height: 100%;
     padding: 0px;
     margin: 0px;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.fit-main-wrapper {
+    margin: 0 auto;
+    width: $fit-main-wrapper-width-default;
+}
+
+@include small-vp {
+    .fit-main-wrapper {
+        width: $fit-main-wrapper-width-small;
+    }
+}
+
+@include medium-vp {
+    .fit-main-wrapper {
+        width: $fit-main-wrapper-width-medium;
+    }
+}
+
+@include large-vp {
+    .fit-main-wrapper {
+        width: $fit-main-wrapper-width-large;
+    }
+}
+
+@include x-large-vp {
+    .fit-main-wrapper {
+        width: $fit-main-wrapper-width-x-large;
+    }
+}
+
+@include xx-large-vp {
+    .fit-main-wrapper {
+        width: $fit-main-wrapper-width-xx-large;
+    }
 }
