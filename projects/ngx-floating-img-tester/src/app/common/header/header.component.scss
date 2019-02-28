@@ -1,0 +1,60 @@
+@import '../../../styles//imports';
+
+$top-container-height: 58px;
+$header-sections-margin: rem(50);
+$header-nav-tab-border: rem(3);
+
+header {
+
+    background: $theme-prim-color;
+    
+    .header-container {
+        overflow: hidden;
+        & > div {
+            display: inline-block;
+            &:not(:first-child) {
+                margin-left: $header-sections-margin;
+            }
+        }
+
+        #main-logo-container a {
+            color: #fff;
+            font-size: rem(20);
+            display: block;
+        }
+    
+        #main-nav-bar-container {
+            ul li {
+                position: relative;
+                display: inline-block;
+                &.active {
+                    span {
+                        top: 0px;
+                    }
+                }
+                a {
+                    font-size: rem(16);
+                    color: #fff;
+                    position: relative;
+                    display: block;
+                    text-transform: capitalize;
+                    padding: $main-padding;
+                    z-index: 1;
+                }
+                span {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 0;
+                    border-bottom: $header-nav-tab-border solid $theme-sec-color;
+                    top: $top-container-height;
+                    // @include linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.2), 60%, 100%);
+                    @include transition(top 0.15s linear);
+    
+                }
+            }
+        }
+
+    }
+
+}

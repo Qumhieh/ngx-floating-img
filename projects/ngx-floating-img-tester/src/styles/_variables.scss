@@ -1,14 +1,25 @@
+@import 'functions';
+
 $browser-context: 14;
 
-$fit-main-wrapper-width-small: 400px;
-$fit-main-wrapper-width-medium: 460px;
-$fit-main-wrapper-width-large: 580px;
-$fit-main-wrapper-width-x-large: 758px;
-$fit-main-wrapper-width-xx-large: 971px;
-$fit-main-wrapper-width-default: 1179px;
+$theme-prim-color: #00BCD4;
+$theme-prim-var-color: #0097A7;
+$theme-sec-color: #FFEB3B;
+$theme-sec-var-color: yellow;
+$theme-main-border-color: #ccc;
+$theme-main-font-color: #202020;
+
+$main-padding: rem(20);
+
+$fit-main-wrapper-width-mobile: 400px;
+$fit-main-wrapper-width-small: 460px;
+$fit-main-wrapper-width-medium: 580px;
+$fit-main-wrapper-width-large: 748px;
+$fit-main-wrapper-width-x-large: 972px;
+$fit-main-wrapper-width-default: 1180px;
 
 $small-viewport-breakpoint: 480px;
 $medium-viewport-breakpoint: 600px;
 $large-viewport-breakpoint: 768px;
-$x-large-viewport-breakpoint: 991px;
-$xx-large-viewport-breakpoint: 1199px;
+$x-large-viewport-breakpoint: 992px;
+$xx-large-viewport-breakpoint: 1200px;

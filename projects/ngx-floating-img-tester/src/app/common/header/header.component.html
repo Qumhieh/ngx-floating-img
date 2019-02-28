@@ -1,14 +1,14 @@
 <header>
-  <div fitMainWrapper>
-    <div id="main-logo-container"><a>ngx-floating-img</a></div>
-    <div id="main-nav-bar-container">
-      <nav>
-        <ul>
-          <li><a>home</a><span></span></li>
-          <li><a>examples</a><span></span></li>
-          <li><a>api</a><span></span></li>
-        </ul>
-      </nav>
+    <div class="header-container" fitMainWrapper>
+      <div id="main-logo-container"><a routerLink="/home">ngx-floating-img</a></div>
+      <div id="main-nav-bar-container">
+        <nav>
+          <ul>
+            <li routerLinkActive="active"><a routerLink="/home">home</a><span></span></li>
+            <li routerLinkActive="active"><a routerLink="/examples">examples</a><span></span></li>
+            <li routerLinkActive="active"><a routerLink="/api">API</a><span></span></li>
+          </ul>
+        </nav>
+      </div>
     </div>
-  </div>
 </header>

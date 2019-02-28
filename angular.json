@@ -59,7 +59,7 @@
             "tsConfig": "projects/ngx-floating-img-tester/tsconfig.app.json",
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/styles"
+                "src/styles/"
               ]
             },
             "assets": [

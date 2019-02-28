@@ -1,0 +1,56 @@
+@import '../../../styles//imports';
+
+header {
+    background: $theme-prim-color;
+    & > div {
+        overflow: hidden;
+        padding: $main-padding 0;
+        > div {
+            float: left;
+            height: 100%;
+        }
+    
+        .info-wrapper {
+            width: 40%;
+            h1 {
+                font-size: rem(24);
+                color: #fff;
+            }
+            p {
+                color: #fff;
+            }
+        }
+    
+        .installation-wrapper {
+            padding: $main-padding;
+            width: 60%;
+            background: rgba(#fff, 0.9);
+
+            ul li:not(:first-child) {
+                padding-top: $main-padding;
+            }            
+        }
+    }
+}
+
+#home-main-container {
+    #demo-section {
+        margin-right: #{-$main-padding};
+        &::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        
+        .img-wrapper {
+            padding-right: $main-padding;
+            width: 20%;
+            float: left;
+
+            & > div:not(:first-child) {
+                padding-top: $main-padding;
+            }
+        }
+    }
+}
+

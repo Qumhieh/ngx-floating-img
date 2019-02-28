@@ -31,14 +31,14 @@
     -ms-transform-origin: $transform;
 }
 
-@mixin linear-gradient($top, $bottom){
+@mixin linear-gradient($top, $bottom, $topPerc: 0%, $bottomPerc: 100%){
     background: $top;
-    background: -moz-linear-gradient(top,  $top 0%, $bottom 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom));
-    background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%);
-    background: -o-linear-gradient(top,  $top 0%,$bottom 100%);
-    background: -ms-linear-gradient(top,  $top 0%,$bottom 100%);
-    background: linear-gradient(to bottom,  $top 0%,$bottom 100%);
+    background: -moz-linear-gradient(top,  $top $topPerc, $bottom $bottomPerc);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop($topPerc,$top), color-stop($bottomPerc,$bottom));
+    background: -webkit-linear-gradient(top,  $top $topPerc,$bottom $bottomPerc);
+    background: -o-linear-gradient(top,  $top $topPerc,$bottom $bottomPerc);
+    background: -ms-linear-gradient(top,  $top $topPerc,$bottom $bottomPerc);
+    background: linear-gradient(to bottom,  $top $topPerc,$bottom $bottomPerc);
 }
 
 @mixin horizontal-linear-gradient($left, $right){
@@ -100,37 +100,37 @@
     animation: $animation;      
 }
 
-@mixin small-vp {
+@mixin mobile-vp {
     @media screen and (max-width: $small-viewport-breakpoint - 1px) {
         @content;
     }
 }
 
-@mixin medium-vp {
+@mixin small-vp {
     @media screen and (min-width: $small-viewport-breakpoint) and (max-width: $medium-viewport-breakpoint - 1px) {
         @content;
     }
 }
 
-@mixin large-vp {
+@mixin medium-vp {
     @media screen and (min-width: $medium-viewport-breakpoint ) and (max-width: $large-viewport-breakpoint - 1px) {
         @content;
     }
 }
 
-@mixin x-large-vp {
+@mixin large-vp {
     @media screen and (min-width: $large-viewport-breakpoint ) and (max-width: $x-large-viewport-breakpoint - 1px) {
         @content;
     }
 }
 
-@mixin xx-large-vp {
+@mixin x-large-vp {
     @media screen and (min-width: $x-large-viewport-breakpoint ) and (max-width: $xx-large-viewport-breakpoint - 1px) {
         @content;
     }
 }
 
-@mixin x-large-vp {
+@mixin xx-large-vp {
     @media screen and (min-width: $xx-large-viewport-breakpoint ) {
         @content;
     }

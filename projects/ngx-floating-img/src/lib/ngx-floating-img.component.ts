@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, EventEmitter, Output }
 import { NgxFloatingImgService } from './ngx-floating-img.service';
 
 @Component({
-  selector: 'fi-ngx-floating-img',
+  selector: 'ngx-floating-img',
   templateUrl: './ngx-floating-img.component.html',
   styleUrls: ['./ngx-floating-img.component.css']
 })

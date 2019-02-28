@@ -1,0 +1,15 @@
+@import '../../../../styles/imports';
+
+:host {
+    display: block;
+}
+
+section {
+    margin-top: $main-padding;    
+
+    div::after {
+        content: '';
+        clear: both;
+        display: block;
+    }
+}

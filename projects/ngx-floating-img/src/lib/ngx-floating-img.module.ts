@@ -5,7 +5,6 @@ import { NgxFloatingImgComponent } from './ngx-floating-img.component';
 import { NgxFloatingImgService } from './ngx-floating-img.service';
 import { NGX_FLOATING_IMG_OPTIONS_TOKEN, NGX_FLOATING_IMG_DEFAULT_OPTIONS, NGX_FI_WINDOW } from './ngx-floating-img';
 import { NGXFloatingImgOptions } from './model/ngx-floating-img-options';
-import { HeaderComponent } from './features/header/header.component';
 
 export function ngxFIWindowFactory () {
   return typeof window !== 'undefined' && window.document ? window : undefined;
@@ -13,8 +12,7 @@ export function ngxFIWindowFactory () {
 
 @NgModule({
   declarations: [
-    NgxFloatingImgComponent,
-    HeaderComponent
+    NgxFloatingImgComponent
   ],
   imports: [ 
     BrowserModule
@@ -26,7 +24,7 @@ export function ngxFIWindowFactory () {
 export class NgxFloatingImgModule {
 
   static forRoot(ngxFloatingImgOptions?: NGXFloatingImgOptions): ModuleWithProviders {
-     return {
+    return {
       ngModule: NgxFloatingImgModule,
       providers: [
         NgxFloatingImgService,
