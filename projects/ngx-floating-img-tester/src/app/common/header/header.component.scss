@@ -1,12 +1,16 @@
-@import '../../../styles//imports';
+@import '../../../styles/imports';
 
-$top-container-height: 58px;
 $header-sections-margin: rem(50);
 $header-nav-tab-border: rem(3);
 
 header {
-
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 1000;
     background: $theme-prim-color;
+    border-bottom: $header-border-height solid $theme-sec-color;
     
     .header-container {
         overflow: hidden;
@@ -18,7 +22,7 @@ header {
         }
 
         #main-logo-container a {
-            color: #fff;
+            color: $theme-sec-color;
             font-size: rem(20);
             display: block;
         }
@@ -28,28 +32,31 @@ header {
                 position: relative;
                 display: inline-block;
                 &.active {
+                    a {
+                        color: $theme-prim-color;
+                    }
                     span {
                         top: 0px;
                     }
                 }
                 a {
                     font-size: rem(16);
-                    color: #fff;
+                    color: $theme-sec-color;
                     position: relative;
                     display: block;
                     text-transform: capitalize;
                     padding: $main-padding;
                     z-index: 1;
+                    @include transition(color 0.1s linear);
                 }
                 span {
                     position: absolute;
                     width: 100%;
                     height: 100%;
                     z-index: 0;
-                    border-bottom: $header-nav-tab-border solid $theme-sec-color;
-                    top: $top-container-height;
-                    // @include linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.2), 60%, 100%);
-                    @include transition(top 0.15s linear);
+                    background: $theme-sec-color;
+                    top: $header-height;
+                    @include transition(top 0.1s linear);
     
                 }
             }

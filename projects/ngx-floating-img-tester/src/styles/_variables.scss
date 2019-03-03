@@ -2,14 +2,21 @@
 
 $browser-context: 14;
 
-$theme-prim-color: #00BCD4;
+$theme-prim-color: #ffde03;
 $theme-prim-var-color: #0097A7;
-$theme-sec-color: #FFEB3B;
-$theme-sec-var-color: yellow;
-$theme-main-border-color: #ccc;
-$theme-main-font-color: #202020;
+$theme-sec-color: #282725;
+$theme-sec-var-color: #707070;
+$theme-main-border-color: #ddd;
+$theme-main-font-color: #282725;
+$theme-sec-font-color: #707070;
 
+$main-small-padding: rem(10);
 $main-padding: rem(20);
+$main-large-padding: rem(40);
+$main-radius: rem(4);
+
+$header-height: 58px;
+$header-border-height: 5px;
 
 $fit-main-wrapper-width-mobile: 400px;
 $fit-main-wrapper-width-small: 460px;

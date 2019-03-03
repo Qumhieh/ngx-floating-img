@@ -33,10 +33,11 @@ h1,h2,h3,h4,h5,h6,p,pre {
 
 code {
     padding: rem(10);
-    background: #e9e9e9;
-    color: #333;
+    background: #e5e5e5;
+    color: #606060;
     display: block;
     margin-top: rem(10);
+    @include border-radius($main-radius);
 }
 
 * {
@@ -44,9 +45,13 @@ code {
 }
 
 .sub-title {
-    font-size: rem(18);
+    color: $theme-sec-font-color;
+    font-size: rem(20);
+    line-height: rem(20);
     text-transform: uppercase;
-    padding-bottom: $main-padding;
+    padding-bottom: $main-small-padding;
+    margin-bottom: $main-small-padding;
+    border-bottom: 1px solid $theme-main-border-color;
 }
 
 .fit-main-wrapper {

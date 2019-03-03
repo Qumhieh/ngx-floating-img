@@ -14,11 +14,12 @@
               </li>
               <li>
                 <p>Once installed import NgxFloatingImgModule in your app.module.ts</p>
-                <pre><code>imports: [ ... NgxFloatingImgModule.forRoot() ... ]</code></pre>
+                <pre><code>NgxFloatingImgModule.forRoot()</code></pre>
               </li>
               <li>
                 <p>Add it in your template file</p>
-                <code>&lt;ngx-floating-img [width]="$fullImgWidth" [height]="$fullImgHeight"&gt;&lt;ngx-floating-img&gt;</code>
+                <code>&lt;ngx-floating-img ...[ ]... &gt;
+                  &lt;ngx-floating-img&gt;</code>
               </li>
             </ul>
           </div>
@@ -91,14 +92,22 @@
           </ngx-floating-img>
         </div> 
       </div>
-
-      
-     
-      
-     
-      
-      
-     
-       
+      <div class="more-info-wrapper">
+        <p>This example show multiple options can be applied to ngx-floating-img component, <a routerLink="/examples">see all examples</a>
+        </p>        
+      </div>
     </fit-section>
+
+    <fit-section title="compatibility">
+      <p>Tested on Chrome, Firefox, Safari, IE10+, Edge</p>
+    </fit-section>
+
+    <fit-section title="bugs">
+      <p>You can report any bugs as Github issues</p>
+    </fit-section>
+
+    <fit-section title="license">
+      <p>The project is licensed under the MIT license.</p>
+    </fit-section>
+
 </div>

@@ -1,0 +1,12 @@
+@import '../../../styles/imports';
+
+footer {
+    margin-top: $main-large-padding;
+    background: $theme-sec-color;
+    color: $theme-sec-font-color;
+    p {
+        padding: $main-small-padding;
+        text-align: center;
+    }
+
+}
