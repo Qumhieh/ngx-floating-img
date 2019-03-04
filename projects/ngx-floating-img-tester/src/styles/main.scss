@@ -56,35 +56,36 @@ code {
 
 .fit-main-wrapper {
     margin: 0 auto;
-    width: $fit-main-wrapper-width-default;
+    width: 90%;
+    max-width: $max-main-wrapper-width;
 }
 
-@include mobile-vp {
-    .fit-main-wrapper {
-        width: $fit-main-wrapper-width-mobile;
-    }
-}
+// @include mobile-vp {
+//     .fit-main-wrapper {
+//         width: $fit-main-wrapper-width-mobile;
+//     }
+// }
 
-@include small-vp {
-    .fit-main-wrapper {
-        width: $fit-main-wrapper-width-small;
-    }
-}
+// @include small-vp {
+//     .fit-main-wrapper {
+//         width: $fit-main-wrapper-width-small;
+//     }
+// }
 
-@include medium-vp {
-    .fit-main-wrapper {
-        width: $fit-main-wrapper-width-medium;
-    }
-}
+// @include medium-vp {
+//     .fit-main-wrapper {
+//         width: $fit-main-wrapper-width-medium;
+//     }
+// }
 
-@include large-vp {
-    .fit-main-wrapper {
-        width: $fit-main-wrapper-width-large;
-    }
-}
+// @include large-vp {
+//     .fit-main-wrapper {
+//         width: $fit-main-wrapper-width-large;
+//     }
+// }
 
-@include x-large-vp {
-    .fit-main-wrapper {
-        width: $fit-main-wrapper-width-x-large;
-    }
-}
+// @include x-large-vp {
+//     .fit-main-wrapper {
+//         width: $fit-main-wrapper-width-x-large;
+//     }
+// }
