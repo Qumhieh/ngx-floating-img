@@ -1,4 +1,4 @@
-@import '../../../styles//imports';
+@import '../../../styles/imports';
 
 header {
     background: $theme-sec-color;
@@ -55,11 +55,16 @@ header {
             .sec-wrapper {
                 margin-right: -#{$main-small-padding};
             }
+
+            .sub-title {
+                margin-bottom: 0px;
+            }
         }
         
         .img-wrapper {
-            padding-right: $main-small-padding;
-            width: 16.6666%;
+            line-height: 0px;
+            padding: $main-small-padding $main-small-padding 0 0;
+            width: 20%;
             float: left;
 
             & > div:not(:first-child) {
@@ -78,3 +83,57 @@ header {
     }
 }
 
+@mixin header-respo {
+    header {
+        & > div {
+            > div {
+                float: none;
+                width: 100% !important;
+            }
+            .info-wrapper {
+                padding: 0 0 $main-large-padding 0;
+            }
+        }
+    }
+}
+
+@include small-desktop-vp {
+    #home-main-container {
+        #demo-section {
+            .img-wrapper {
+                &:first-child {
+                    display: none;
+                }
+                width: 25%;
+            }
+        }        
+    }
+}
+
+
+@include tablet-vp {
+    @include header-respo;
+    #home-main-container {
+        #demo-section {
+            .img-wrapper {
+                &:nth-child(-n + 2) {
+                    display: none;
+                }
+                width: 33.3333%;
+            }
+        }        
+    }
+}
+@include mobile-vp {
+    @include header-respo;
+    #home-main-container {
+        #demo-section {
+            .img-wrapper {
+                &:first-child {
+                    display: none;
+                }
+                width: 50%;
+            }
+        }        
+    }
+}

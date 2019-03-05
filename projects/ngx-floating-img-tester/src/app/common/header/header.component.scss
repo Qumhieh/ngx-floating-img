@@ -13,7 +13,10 @@ header {
     border-bottom: $header-border-height solid $theme-sec-color;
     
     .header-container {
+        height: $header-height;
+        position: relative;
         overflow: hidden;
+        background: transparent;
         & > div {
             display: inline-block;
             &:not(:first-child) {
@@ -21,10 +24,57 @@ header {
             }
         }
 
-        #main-logo-container a {
-            color: $theme-sec-color;
-            font-size: rem(20);
-            display: block;
+        &.mobile-menu-visible {
+            #menu-button {
+                svg {
+                    display: none;
+                }
+                span {
+                    display: initial;
+                }
+            }
+            #main-nav-bar-container {
+                nav {
+                    display: initial;
+                }
+            }
+        }
+
+        #menu-button {
+            display: none;
+            position: absolute;
+            right: 0px;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0px;
+            margin: 0px;
+            height: 100%;
+            width: auto;
+            margin-right: $main-padding;
+            svg {
+                height: 100%;
+                width: rem(34);
+                fill: $theme-sec-color;
+            }
+
+            span {
+                color: #fff;
+                display: none;
+                font-size: rem(30);
+                height: 100%;
+                line-height: $header-height;
+            }
+        }
+
+        #main-logo-container {
+            height: 100%;
+            a {
+                color: $theme-sec-color;
+                font-size: rem(20);
+                display: block;
+                line-height: $header-height;
+            }
         }
     
         #main-nav-bar-container {
@@ -33,7 +83,7 @@ header {
                 display: inline-block;
                 &.active {
                     a {
-                        color: $theme-prim-color;
+                        color: $theme-prim-color !important;
                     }
                     span {
                         top: 0px;
@@ -64,4 +114,32 @@ header {
 
     }
 
+}
+
+@include mobile-vp {
+    header {
+        #menu-button {
+            display: initial !important;
+        }
+        .header-container {
+            &.mobile-menu-visible {
+                background: $theme-sec-color;
+            }
+            #main-nav-bar-container {
+                margin-left: 0px;
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                z-index: 1;
+                nav {
+                    display: none;
+                    ul li { 
+                        a {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

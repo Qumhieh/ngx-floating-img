@@ -31,6 +31,10 @@ h1,h2,h3,h4,h5,h6,p,pre {
     font-weight: normal;
 }
 
+button {
+    cursor: pointer;
+}
+
 code {
     padding: rem(10);
     background: #e5e5e5;
@@ -58,34 +62,6 @@ code {
     margin: 0 auto;
     width: 90%;
     max-width: $max-main-wrapper-width;
+    min-width: $min-main-wrapper-width;
 }
 
-// @include mobile-vp {
-//     .fit-main-wrapper {
-//         width: $fit-main-wrapper-width-mobile;
-//     }
-// }
-
-// @include small-vp {
-//     .fit-main-wrapper {
-//         width: $fit-main-wrapper-width-small;
-//     }
-// }
-
-// @include medium-vp {
-//     .fit-main-wrapper {
-//         width: $fit-main-wrapper-width-medium;
-//     }
-// }
-
-// @include large-vp {
-//     .fit-main-wrapper {
-//         width: $fit-main-wrapper-width-large;
-//     }
-// }
-
-// @include x-large-vp {
-//     .fit-main-wrapper {
-//         width: $fit-main-wrapper-width-x-large;
-//     }
-// }

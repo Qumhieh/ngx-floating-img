@@ -21,15 +21,6 @@ $min-main-wrapper-width: 320px;
 $header-height: 58px;
 $header-border-height: 5px;
 
-$fit-main-wrapper-width-mobile: 400px;
-$fit-main-wrapper-width-small: 460px;
-$fit-main-wrapper-width-medium: 580px;
-$fit-main-wrapper-width-large: 748px;
-$fit-main-wrapper-width-x-large: 972px;
-$fit-main-wrapper-width-default: 1180px;
-
-$small-viewport-breakpoint: 480px;
-$medium-viewport-breakpoint: 600px;
-$large-viewport-breakpoint: 768px;
-$x-large-viewport-breakpoint: 992px;
-$xx-large-viewport-breakpoint: 1200px;
+$mobile-viewport-breakpoint: 600px;
+$tablet-viewport-breakpoint: 768px;
+$small-desktop-viewport-breakpoint: 980px;
