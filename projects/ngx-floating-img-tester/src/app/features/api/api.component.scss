@@ -1,0 +1,21 @@
+@import '../../../styles/imports';
+
+#api-main-container {
+
+    .main-title {
+        margin: $main-large-padding 0 $main-padding;
+    }
+
+    #installation-container {
+        .desc-wrapper ul {
+            li {
+                margin-bottom: $main-padding;
+                .sub-li {
+                    margin-top: $main-small-padding;
+                }
+            }
+        }
+    }
+
+
+}

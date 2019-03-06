@@ -1,3 +1,244 @@
-<p>
-  api works!
-</p>
+<div>
+    <div id="api-main-container" fitMainWrapper>
+        
+      <h1 class="main-title">NGX-FLOATING-IMG</h1>
+        
+      <fit-section id="installation-container" title="installation">
+        <div class="desc-wrapper">
+            <ul>
+              <li>
+                <p>Add ngxfloatingimg to your Angular project</p>
+                <code>npm install --save ngx-floating-img</code>
+              </li>
+              <li>
+                <p>Once installed import NgxFloatingImgModule.forRoot() in your app.module.ts</p>
+                <pre><code>NgxFloatingImgModule.forRoot()</code></pre>
+                <p class="sub-li">NgxFloatingImgModule.forChild() for lazy loaded modules</p>
+                <pre><code>NgxFloatingImgModule.forChild()</code></pre>
+              </li>
+              <li>
+                <p>Add ngx-floating-img in your template file</p>
+                <code>
+                  <div>&lt;ngx-floating-img ...options... &gt;</div>
+                  <div class="inner-ele">&lt;img src="thumbImgSrc"&gt;&lt;/img&gt;</div>
+                  <div>&lt;/ngx-floating-img&gt;</div>
+                </code>
+              </li>
+            </ul>
+        </div>
+      </fit-section>
+
+      <fit-section id="options-container" title="options">
+          <div class="desc-wrapper">
+              <table>
+                <thead>
+                  <td><label>option</label></td>
+                  <td><label>description</label></td>
+                  <td><label>type</label></td>
+                  <td><label>default</label></td>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>
+                        <p>id</p>
+                      </td>
+                      <td>
+                        <p>component id, can be used as return value in events handling</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>-</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>imgSrc</p>
+                      </td>
+                      <td>
+                        <p>full image src</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>-</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>imgWidth</p>
+                        <p>( Required )</p>
+                      </td>
+                      <td>
+                        <p>full image width in pixels, if full image not provided then thumb image width</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>-</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>imgHeight</p>
+                        <p>( Required )</p>
+                      </td>
+                      <td>
+                        <p>full image height in pixels, if full image not provided then thumb image height</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>-</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>imgAnimationType</p>
+                      </td>
+                      <td>
+                        <p>image animation on show and hide</p>
+                      </td>
+                      <td>
+                        <p>any valid css animation (linear, ease-in ...)</p>
+                      </td>
+                      <td>
+                        <p>ease-out</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>imgAnimationSpeed</p>
+                      </td>
+                      <td>
+                        <p>image animation speed on show and hide</p>
+                      </td>
+                      <td>
+                        <p>any number between 0 (for no animation) and 1000</p>
+                      </td>
+                      <td>
+                        <p>250</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>vpPadding</p>
+                      </td>
+                      <td>
+                        <p>viewport padding in pixels on show image</p>
+                      </td>
+                      <td>
+                        <p>number</p>
+                      </td>
+                      <td>
+                        <p>20</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>overlayColor</p>
+                      </td>
+                      <td>
+                        <p>image overlay background color</p>
+                      </td>
+                      <td>
+                        <p>color</p>
+                      </td>
+                      <td>
+                        <p>transparent</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>overlayAnimation</p>
+                      </td>
+                      <td>
+                        <p>enable / disable fade animation for image overlay</p>
+                      </td>
+                      <td>
+                        <p>boolean</p>
+                      </td>
+                      <td>
+                        <p>true</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>overlayDismiss</p>
+                      </td>
+                      <td>
+                        <p>enable / disable close image on overlay click</p>
+                      </td>
+                      <td>
+                        <p>boolean</p>
+                      </td>
+                      <td>
+                        <p>true</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>thumbBgColor</p>
+                      </td>
+                      <td>
+                        <p>thumb background color</p>
+                      </td>
+                      <td>
+                        <p>color</p>
+                      </td>
+                      <td>
+                        <p>#f0f0f0</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>showLoading</p>
+                      </td>
+                      <td>
+                        <p>enable / disable loading bar</p>
+                      </td>
+                      <td>
+                        <p>boolean</p>
+                      </td>
+                      <td>
+                        <p>true</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td>
+                        <p>showCloseButton</p>
+                      </td>
+                      <td>
+                        <p>show / hide close button</p>
+                      </td>
+                      <td>
+                        <p>boolean</p>
+                      </td>
+                      <td>
+                        <p>true</p>
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+
+          </div>
+        </fit-section>
+
+    </div>
+</div>
