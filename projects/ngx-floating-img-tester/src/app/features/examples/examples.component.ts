@@ -12,4 +12,8 @@ export class ExamplesComponent implements OnInit {
   ngOnInit() {
   }
 
+  public showMessage(message: string): void {
+    console.log(message);
+  }
+
 }

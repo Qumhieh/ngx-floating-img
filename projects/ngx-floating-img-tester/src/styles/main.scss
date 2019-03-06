@@ -35,15 +35,6 @@ button {
     cursor: pointer;
 }
 
-code {
-    padding: rem(10);
-    background: #e5e5e5;
-    color: #606060;
-    display: block;
-    margin-top: rem(10);
-    @include border-radius($main-radius);
-}
-
 * {
     box-sizing: border-box;
 }
@@ -63,5 +54,32 @@ code {
     width: 90%;
     max-width: $max-main-wrapper-width;
     min-width: $min-main-wrapper-width;
+}
+
+/* CODE */
+
+code {
+    padding: rem(10);
+    background: #e9e9e9;
+    color: #606060;
+    display: block;
+    margin-top: rem(10);
+    @include border-radius($main-radius);
+
+    .inner-ele {
+        padding-left: $main-padding;
+    }
+    .ele-tag {
+        color: #2179c1;
+    }
+    .ele-attr {
+        color: #569cd6;
+    }
+    .ele-attr-op {
+        color: #808080;
+    }
+    .ele-attr-val {
+        color: #c16b48;
+    }
 }
 

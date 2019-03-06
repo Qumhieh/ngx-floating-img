@@ -1,0 +1,26 @@
+<div>
+  <div>
+    <span class="ele-tag">&lt;ngx-floating-img</span>
+    <span class="ele-attr"> [imgWidth]</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{imgWidth}}"</span>
+    <span class="ele-attr"> [imgHeight]</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{imgHeight}}"</span>
+    <ng-container *ngIf="vpPadding != null"><span class="ele-attr"> [vpPadding]</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{vpPadding}}"</span></ng-container>
+    <ng-container *ngIf="overlayColor != null"><span class="ele-attr"> overlayColor</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{overlayColor}}"</span></ng-container>
+    <ng-container *ngIf="overlayAnimation != null"><span class="ele-attr"> [overlayAnimation]</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{overlayAnimation}}"</span></ng-container>
+    <ng-container *ngIf="overlayDismiss != null"><span class="ele-attr"> [overlayDismiss]</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{overlayDismiss}}"</span></ng-container>
+    <ng-container *ngIf="imgAnimationType != null"><span class="ele-attr"> imgAnimationType</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{imgAnimationType}}"</span></ng-container>
+    <ng-container *ngIf="imgAnimationSpeed != null"><span class="ele-attr"> [imgAnimationSpeed]</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{imgAnimationSpeed}}"</span></ng-container>
+    <ng-container *ngIf="thumbBgColor != null"><span class="ele-attr"> thumbBgColor</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{thumbBgColor}}"</span></ng-container>
+    <ng-container *ngIf="beforeShow != null"><span class="ele-attr"> (beforeShow)</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{beforeShow}}"</span></ng-container>
+    <ng-container *ngIf="afterShow != null"><span class="ele-attr"> (afterShow)</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{afterShow}}"</span></ng-container>
+    <ng-container *ngIf="onFullImgLoad != null"><span class="ele-attr"> (onFullImgLoad)</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{onFullImgLoad}}"</span></ng-container>
+    <ng-container *ngIf="beforeClose != null"><span class="ele-attr"> (beforeClose)</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{beforeClose}}"</span></ng-container>
+    <ng-container *ngIf="afterClose != null"><span class="ele-attr"> (afterClose)</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{afterClose}}"</span></ng-container>
+
+    <span *ngIf="imgSrc" class="ele-attr"> imgSrc</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{imgSrc}}"</span>
+    <span class="ele-tag">&gt;</span>
+  </div>
+  <div class="inner-ele">
+    <span class="ele-tag">&lt;img</span><span class="ele-attr"> src</span><span class="ele-attr-op">=</span><span class="ele-attr-val">"{{thumbSrc}}"</span><span class="ele-tag">&gt;&lt;/img&gt;</span>
+  </div>
+  <div><span class="ele-tag">&lt;/ngx-floating-img&gt;</span></div>
+</div>

@@ -1,0 +1,38 @@
+@import '../../../styles/imports';
+
+#examples-main-container {
+ 
+    .example-wrapper {
+        background: #f6f6f6;
+        padding: $main-padding;
+        border: 1px solid #f0f0f0;
+        .example-content {
+            line-height: 0px;
+            text-align: center;
+            margin-right: -#{$main-small-padding};
+            ngx-floating-img {
+                padding-right: $main-small-padding;
+            }
+        }
+
+        .example-code {
+            .hint {
+                font-size: rem(12);
+                color: #707070;
+                margin: $main-padding 0;
+            }
+            code {
+                padding: $main-padding;
+            }
+        }
+
+        .ngx-4-img {
+            ngx-floating-img {
+                width: 25%;
+            }
+        }
+    }
+
+        
+
+}

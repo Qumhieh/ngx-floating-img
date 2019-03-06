@@ -1,3 +1,174 @@
-<p>
-  examples works!
-</p>
+<div>
+  <div id="examples-main-container" fitMainWrapper>
+    <fit-section title="simple example">
+      <div class="example-wrapper">
+        <div class="example-content ngx-4-img">
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" title="img_1" imgSrc="../../../assets/examples/originals/img_18.jpeg">
+            <img src="../../../assets/examples/thumbs/img_18.jpeg" />
+          </ngx-floating-img>
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" title="img_2" imgSrc="../../../assets/examples/originals/img_8.jpeg">
+            <img src="../../../assets/examples/thumbs/img_8.jpeg" />
+          </ngx-floating-img>
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" title="img_3" imgSrc="../../../assets/examples/originals/img_21.jpeg">
+            <img src="../../../assets/examples/thumbs/img_21.jpeg" />
+          </ngx-floating-img>
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" title="img_4" imgSrc="../../../assets/examples/originals/img_3.jpeg">
+            <img src="../../../assets/examples/thumbs/img_3.jpeg" />
+          </ngx-floating-img>
+        </div>
+        <div class="example-code">
+            <code>
+              <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" imgSrc="./originals/img_1.jpeg" thumbSrc="./thumbs/img_1.jpeg"></fit-ngx-code-generator>
+              <br>
+              <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" imgSrc="./originals/img_2.jpeg" thumbSrc="./thumbs/img_2.jpeg"></fit-ngx-code-generator>
+              <br>
+              <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" imgSrc="./originals/img_3.jpeg" thumbSrc="./thumbs/img_3.jpeg"></fit-ngx-code-generator>
+              <br>
+              <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" imgSrc="./originals/img_4.jpeg" thumbSrc="./thumbs/img_4.jpeg"></fit-ngx-code-generator>
+            </code>
+        </div>
+      </div>
+    </fit-section>
+
+    <fit-section title="vpPadding example">
+        <div class="example-wrapper">
+          <div class="example-content ngx-4-img">
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" title="img_1" imgSrc="../../../assets/examples/originals/img_13.jpeg">
+              <img src="../../../assets/examples/thumbs/img_13.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="200" title="img_2" imgSrc="../../../assets/examples/originals/img_14.jpeg">
+              <img src="../../../assets/examples/thumbs/img_14.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="0" title="img_3" imgSrc="../../../assets/examples/originals/img_2.jpeg">
+              <img src="../../../assets/examples/thumbs/img_2.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100" title="img_4" imgSrc="../../../assets/examples/originals/img_9.jpeg">
+              <img src="../../../assets/examples/thumbs/img_9.jpeg" />
+            </ngx-floating-img>
+          </div>
+          <div class="example-code">
+              <code>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" imgSrc="./originals/img_1.jpeg" thumbSrc="./thumbs/img_1.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="200" imgSrc="./originals/img_2.jpeg" thumbSrc="./thumbs/img_2.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="0" imgSrc="./originals/img_3.jpeg" thumbSrc="./thumbs/img_3.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100" imgSrc="./originals/img_4.jpeg" thumbSrc="./thumbs/img_4.jpeg"></fit-ngx-code-generator>
+              </code>
+          </div>
+        </div>
+      </fit-section>
+
+      <fit-section title="overlay example">
+        <div class="example-wrapper">
+          <div class="example-content ngx-4-img">
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" overlayColor="#080e24" [overlayAnimation]="false" title="img_1" imgSrc="../../../assets/examples/originals/img_1.jpg">
+              <img src="../../../assets/examples/thumbs/img_1.jpg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" overlayColor="rgb(222, 91, 1, 0.8)" title="img_2" imgSrc="../../../assets/examples/originals/img_15.jpeg">
+              <img src="../../../assets/examples/thumbs/img_15.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" overlayColor="#87b3fe" title="img_3" imgSrc="../../../assets/examples/originals/img_16.jpeg">
+              <img src="../../../assets/examples/thumbs/img_16.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" overlayColor="#ce9a7c" [overlayDismiss]="false" title="img_4" imgSrc="../../../assets/examples/originals/img_12.jpeg">
+              <img src="../../../assets/examples/thumbs/img_12.jpeg" />
+            </ngx-floating-img>
+          </div>
+          <div class="example-code">
+              <code>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" overlayColor="#080e24" [overlayAnimation]="false" imgSrc="./originals/img_1.jpeg" thumbSrc="./thumbs/img_1.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" overlayColor="rgb(222, 91, 1, 0.8)" imgSrc="./originals/img_2.jpeg" thumbSrc="./thumbs/img_2.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" overlayColor="#87b3fe" imgSrc="./originals/img_3.jpeg" thumbSrc="./thumbs/img_3.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50"  overlayColor="#ce9a7c" [overlayDismiss]="false" imgSrc="./originals/img_4.jpeg" thumbSrc="./thumbs/img_4.jpeg"></fit-ngx-code-generator>
+              </code>
+          </div>
+        </div>
+      </fit-section>
+
+      <fit-section title="Image animation, speed example">
+        <div class="example-wrapper">
+          <div class="example-content ngx-4-img">
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" overlayColor="#000" [overlayAnimation]="false" imgAnimationType="linear" title="img_1" imgSrc="../../../assets/examples/originals/img_6.jpeg">
+              <img src="../../../assets/examples/thumbs/img_6.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100" imgAnimationType="ease-in" [imgAnimationSpeed]="500" title="img_2" imgSrc="../../../assets/examples/originals/img_10.jpeg">
+              <img src="../../../assets/examples/thumbs/img_10.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100" [imgAnimationSpeed]="1000" title="img_3" imgSrc="../../../assets/examples/originals/img_18.jpeg">
+              <img src="../../../assets/examples/thumbs/img_18.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" overlayColor="#000" [imgAnimationSpeed]="0" title="img_4" imgSrc="../../../assets/examples/originals/img_4.jpeg">
+              <img src="../../../assets/examples/thumbs/img_4.jpeg" />
+            </ngx-floating-img>
+          </div>
+          <div class="example-code">
+              <code>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" overlayColor="#000" [overlayAnimation]="false" imgAnimationType="linear" imgSrc="./originals/img_1.jpeg" thumbSrc="./thumbs/img_1.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100" imgAnimationType="ease-in" [imgAnimationSpeed]="500" imgSrc="./originals/img_2.jpeg" thumbSrc="./thumbs/img_2.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100" [imgAnimationSpeed]="1000" imgSrc="./originals/img_3.jpeg" thumbSrc="./thumbs/img_3.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="1280" overlayColor="#000" [imgAnimationSpeed]="0" imgSrc="./originals/img_4.jpeg" thumbSrc="./thumbs/img_4.jpeg"></fit-ngx-code-generator>
+              </code>
+          </div>
+        </div>
+      </fit-section>
+
+      <fit-section title="No full image src example">
+        <div class="example-wrapper">
+          <div class="example-content ngx-4-img">
+            <ngx-floating-img [imgWidth]="600" [imgHeight]="431" thumbBgColor="#10137a" overlayColor="rgba(0,0,0,0.5)" title="img_1">
+              <img src="../../../assets/examples/one_size/img_3.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="500" [imgHeight]="359" overlayColor="rgba(207, 210, 44, 0.5)" title="img_2">
+              <img src="../../../assets/examples/one_size/img_2.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="400" [imgHeight]="287" thumbBgColor="#333" title="img_3">
+              <img src="../../../assets/examples/one_size/img_1.jpeg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="700" [imgHeight]="502" overlayColor="rgba(19, 173, 0, 0.7)" title="img_4">
+              <img src="../../../assets/examples/one_size/img_4.jpeg" />
+            </ngx-floating-img>
+          </div>
+          <div class="example-code">
+              <code>
+                <fit-ngx-code-generator [imgWidth]="600" [imgHeight]="431" overlayColor="rgba(0,0,0,0.5)" thumbBgColor="#10137a" thumbSrc="./thumbs/img_1.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="500" [imgHeight]="359" overlayColor="rgba(207, 210, 44, 0.5)" thumbSrc="./thumbs/img_2.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="400" [imgHeight]="287" [imgAnimationSpeed]="600" thumbBgColor="#333" thumbSrc="./thumbs/img_3.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="700" [imgHeight]="502" overlayColor="rgba(19, 173, 0, 0.7)" thumbSrc="./thumbs/img_4.jpeg"></fit-ngx-code-generator>
+              </code>
+          </div>
+        </div>
+      </fit-section>
+
+      <fit-section title="Events example">
+        <div class="example-wrapper">
+          <div class="example-content ngx-1-img">
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="787" overlayColor="#fff" [overlayAnimation]="false" (beforeShow)="showMessage('beforeShow event')" 
+              (afterShow)="showMessage('afterShow event')" (onFullImgLoad)="showMessage('onFullImgLoad event')" (beforeClose)="showMessage('beforeClose event')" 
+              (afterClose)="showMessage('afterClose event')" title="img_1" imgSrc="../../../assets/examples/originals/img_25.jpeg">
+              <img src="../../../assets/examples/thumbs/img_25.jpeg" />
+            </ngx-floating-img>
+          </div>
+          <div class="example-code">
+              <p class="hint">* please open browser console to check event messages</p>
+              <code>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="787" overlayColor="#fff" [overlayAnimation]="false" beforeShow="showMessage('beforeShow event')" 
+                afterShow="showMessage('afterShow event')" onFullImgLoad="showMessage('onFullImgLoad event')" beforeClose="showMessage('beforeClose event')" 
+                afterClose="showMessage('afterClose event')" imgSrc="./originals/img_1.jpeg" thumbSrc="./thumbs/img_1.jpeg"></fit-ngx-code-generator>
+              </code>
+          </div>
+        </div>
+      </fit-section>
+
+  </div>
+</div>

@@ -1,7 +1,6 @@
 @import '../../../styles/imports';
 
 $header-sections-margin: rem(50);
-$header-nav-tab-border: rem(3);
 
 header {
     position: fixed;
@@ -78,6 +77,7 @@ header {
         }
     
         #main-nav-bar-container {
+            position: absolute;
             ul li {
                 position: relative;
                 display: inline-block;
@@ -127,7 +127,6 @@ header {
             }
             #main-nav-bar-container {
                 margin-left: 0px;
-                position: absolute;
                 left: 0px;
                 top: 0px;
                 z-index: 1;
