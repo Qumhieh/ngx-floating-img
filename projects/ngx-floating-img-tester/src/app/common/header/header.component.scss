@@ -69,7 +69,7 @@ header {
         #main-logo-container {
             height: 100%;
             a {
-                color: $theme-sec-color;
+                color: #fff;
                 font-size: rem(20);
                 display: block;
                 line-height: $header-height;
@@ -83,7 +83,7 @@ header {
                 display: inline-block;
                 &.active {
                     a {
-                        color: $theme-prim-color !important;
+                        color: $theme-sec-var-color !important;
                     }
                     span {
                         top: 0px;
@@ -91,7 +91,7 @@ header {
                 }
                 a {
                     font-size: rem(16);
-                    color: $theme-sec-color;
+                    color: #fff;
                     position: relative;
                     display: block;
                     text-transform: capitalize;

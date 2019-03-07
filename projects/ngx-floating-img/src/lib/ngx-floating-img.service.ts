@@ -12,7 +12,7 @@ const ESC_KEY_CODE: number = 27;
 export class NgxFloatingImgService {
 
   private _imgAnimationMinSpeed: number = 0;
-  private _imgAnimationMaxSpeed: number = 1000;
+  private _imgAnimationMaxSpeed: number = 800;
   private _minFullImgSize: number = 200;
   private _windowResizeDebounceTime: number = 200;
   private _windowScrollDebounceTime: number = 30;
