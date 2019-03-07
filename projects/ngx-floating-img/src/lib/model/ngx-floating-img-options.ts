@@ -4,6 +4,7 @@ export interface NGXFloatingImgOptions {
     platform?: NGXFloatingImgPlatforms,
     // default options
     showLoading?: boolean,
+    loadingColor?: string,
     imgAnimationType?: string,
     imgAnimationSpeed?: number,
     overlayColor?: string,

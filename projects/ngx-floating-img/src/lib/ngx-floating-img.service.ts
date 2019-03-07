@@ -11,6 +11,9 @@ const ESC_KEY_CODE: number = 27;
 @Injectable()
 export class NgxFloatingImgService {
 
+  private _imgAnimationMinSpeed: number = 0;
+  private _imgAnimationMaxSpeed: number = 1000;
+  private _minFullImgSize: number = 200;
   private _windowResizeDebounceTime: number = 200;
   private _windowScrollDebounceTime: number = 30;
   private _showFullImgTimeout = null;
@@ -37,7 +40,12 @@ export class NgxFloatingImgService {
       fromEvent(this._window, 'resize').pipe(
         debounceTime(this._windowResizeDebounceTime)
       ).subscribe(() => {
-        this.setShowImgPhaseTwoStyle();
+        // this.setShowImgPhaseTwoStyle();
+        if (this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger) {
+          this._ngZone.run(() => {
+            this.closeFullImg();
+          });
+        }
       });
     }
   }
@@ -84,6 +92,7 @@ export class NgxFloatingImgService {
 
   private setShowImgPhaseOneStyle (): void {
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'width', `${this._activeNGXFloatingImgComp.imgFigure.nativeElement.clientWidth}px`);
+    this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'height', `${this._activeNGXFloatingImgComp.imgFigure.nativeElement.clientHeight}px`);
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'left', this._activeNGXFloatingImgComp.imgFigure.nativeElement.getBoundingClientRect().left - this._activeNGXFloatingImgComp.vpPadding + 'px');
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'top', this._activeNGXFloatingImgComp.imgFigure.nativeElement.getBoundingClientRect().top - this._activeNGXFloatingImgComp.vpPadding + 'px');
   }
@@ -122,20 +131,25 @@ export class NgxFloatingImgService {
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'left', 'auto');
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'top', 'auto');
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'width', 'auto');
+    this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'height', 'auto');
     this.setElementTransform (this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'translate(0,0) scale(1,1)');
   }
 
   private calculateThumbScale (thumbWidth: number, thumbHeight: number, containerWidth: number, containerHeight: number, 
     fullImgWidth: number, fullImgHeight: number): number {
+    if (containerWidth < this._minFullImgSize) containerWidth = this._minFullImgSize;
+    if (containerHeight < this._minFullImgSize) containerWidth = this._minFullImgSize;
+    let scaleResult: number;
     let widthScale = containerWidth / thumbWidth;
     let heightScale = containerHeight / thumbHeight;
     if (fullImgWidth < containerWidth && fullImgHeight < containerHeight) {
-      return fullImgWidth > fullImgHeight ? fullImgWidth / thumbWidth : fullImgHeight / thumbHeight;
+      scaleResult = fullImgWidth > fullImgHeight ? fullImgWidth / thumbWidth : fullImgHeight / thumbHeight;
     } else if (fullImgWidth >= containerWidth && fullImgHeight >= containerHeight) {
-      return widthScale * thumbHeight <= containerHeight ? widthScale : heightScale;
+      scaleResult = widthScale * thumbHeight <= containerHeight ? widthScale : heightScale;
     } else {
-      return fullImgWidth > fullImgHeight && (widthScale * thumbHeight <= containerHeight) ? widthScale : heightScale; 
+      scaleResult = fullImgWidth > fullImgHeight && (widthScale * thumbHeight <= containerHeight) ? widthScale : heightScale; 
     } 
+    return Math.round(scaleResult * 100) / 100;
   }
 
   private setElementTransform (nativeElement, transform: string): void {
@@ -166,6 +180,9 @@ export class NgxFloatingImgService {
         throw 'image height "imgHeight" is missing'; 
       }
     } 
+    if (ngxFI.imgAnimationSpeed < 0 || ngxFI.imgAnimationSpeed > 1000) {
+      throw `image animation speed "imgAnimationSpeed" must be a valid number between ${this._imgAnimationMinSpeed} and ${this._imgAnimationMaxSpeed}`; 
+    }
     return true;
   }
 
@@ -200,6 +217,7 @@ export class NgxFloatingImgService {
     if(ngxFI.overlayColor == null) ngxFI.overlayColor = this._ngxFloatingImgOptions.overlayColor;
     if(ngxFI.overlayDismiss == null) ngxFI.overlayDismiss = this._ngxFloatingImgOptions.overlayDismiss;
     if(ngxFI.showLoading == null) ngxFI.showLoading = this._ngxFloatingImgOptions.showLoading;
+    if(ngxFI.loadingColor == null) ngxFI.loadingColor = this._ngxFloatingImgOptions.loadingColor;
     if(ngxFI.thumbBgColor == null) ngxFI.thumbBgColor = this._ngxFloatingImgOptions.thumbBgColor;
     if(ngxFI.vpPadding == null) ngxFI.vpPadding = this._ngxFloatingImgOptions.vpPadding;
     if(ngxFI.showCloseButton == null) ngxFI.showCloseButton = this._ngxFloatingImgOptions.showCloseButton;

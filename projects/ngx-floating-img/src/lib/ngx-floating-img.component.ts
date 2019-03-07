@@ -23,7 +23,6 @@ export class NgxFloatingImgComponent implements OnInit {
   @Input('imgSrc') imgSrc: string;
   @Input('imgWidth') imgWidth: number;
   @Input('imgHeight') imgHeight: number;
-  @Input('showLoading') showLoading: boolean;
   @Input('imgAnimationType') imgAnimationType: string;
   @Input('imgAnimationSpeed') imgAnimationSpeed: number;
   @Input('overlayColor') overlayColor: string;
@@ -32,6 +31,8 @@ export class NgxFloatingImgComponent implements OnInit {
   @Input('thumbBgColor') thumbBgColor: string;
   @Input('vpPadding') vpPadding: number;
   @Input('showCloseButton') showCloseButton: boolean;
+  @Input('showLoading') showLoading: boolean;
+  @Input('loadingColor') loadingColor: string;
   // TODO: @Input('disableScroll') disableScroll: boolean;
   // TODO: @Input('thumbLazyLoad') thumbLazyLoad: boolean;
   // TODO: @Input('navigation') navigation: boolean;

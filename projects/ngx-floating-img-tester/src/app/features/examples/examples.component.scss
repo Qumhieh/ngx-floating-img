@@ -31,8 +31,21 @@
                 width: 25%;
             }
         }
+    }        
+
+}
+
+@include mobile-vp {
+    #examples-main-container {
+        .example-wrapper {
+            .ngx-4-img {
+                ngx-floating-img {
+                    width: 50%;
+                    &:nth-child(-n + 2) {
+                        margin-bottom: $main-small-padding;
+                    }
+                }
+            }
+        }
     }
-
-        
-
 }

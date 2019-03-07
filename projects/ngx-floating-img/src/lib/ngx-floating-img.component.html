@@ -11,7 +11,7 @@
                     </div>
                     <div #imgActionsWrapper class="fi-img-actions-wrapper" [ngClass]="{'fi-img-actions-wrapper-visible': isImgActionsWrapperVisible}">
                         <div *ngIf="showCloseButton" class="fi-img-top-bar"><button class="fi-close-button">&#x2715;</button></div>
-                        <div *ngIf="imgSrc && showLoading && !isFullImageLoaded" class="fi-img-bottom-bar"></div>
+                        <div *ngIf="imgSrc && showLoading && !isFullImageLoaded" class="fi-img-bottom-bar" [style.background-color]="loadingColor"></div>
                     </div>
                 </div>
             </div>

@@ -30,35 +30,22 @@
 
       <fit-section id="options-container" title="options">
           <div class="desc-wrapper">
-              <table>
+              <table class="api-table">
                 <thead>
-                  <td><label>option</label></td>
-                  <td><label>description</label></td>
-                  <td><label>type</label></td>
-                  <td><label>default</label></td>
+                  <tr>
+                    <td><label>option</label></td>
+                    <td><label>description</label></td>
+                    <td><label>type</label></td>
+                    <td><label>default</label></td>
+                  </tr>
                 </thead>
                 <tbody>
                     <tr>
-                      <td>
-                        <p>id</p>
+                      <td class="option-key-td">
+                        <label>id</label>
                       </td>
                       <td>
-                        <p>component id, can be used as return value in events handling</p>
-                      </td>
-                      <td>
-                        <p>string</p>
-                      </td>
-                      <td>
-                        <p>-</p>
-                      </td>
-                    </tr>
-    
-                    <tr>
-                      <td>
-                        <p>imgSrc</p>
-                      </td>
-                      <td>
-                        <p>full image src</p>
+                        <p>Component id, can be used as return value in events handling</p>
                       </td>
                       <td>
                         <p>string</p>
@@ -69,12 +56,27 @@
                     </tr>
     
                     <tr>
-                      <td>
-                        <p>imgWidth</p>
-                        <p>( Required )</p>
+                      <td class="option-key-td">
+                        <label>imgSrc</label>
                       </td>
                       <td>
-                        <p>full image width in pixels, if full image not provided then thumb image width</p>
+                        <p>Full image src</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>-</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td class="option-key-td">
+                        <label>imgWidth</label>
+                        <p class="req-option">( Required )</p>
+                      </td>
+                      <td>
+                        <p>Full image width in pixels, if full image not provided then thumb image width</p>
                       </td>
                       <td>
                         <p>number</p>
@@ -85,12 +87,12 @@
                     </tr>
     
                     <tr>
-                      <td>
-                        <p>imgHeight</p>
-                        <p>( Required )</p>
+                      <td class="option-key-td">
+                        <label>imgHeight</label>
+                        <p class="req-option">( Required )</p>
                       </td>
                       <td>
-                        <p>full image height in pixels, if full image not provided then thumb image height</p>
+                        <p>Full image height in pixels, if full image not provided then thumb image height</p>
                       </td>
                       <td>
                         <p>number</p>
@@ -101,11 +103,11 @@
                     </tr>
     
                     <tr>
-                      <td>
-                        <p>imgAnimationType</p>
+                      <td class="option-key-td">
+                        <label>imgAnimationType</label>
                       </td>
                       <td>
-                        <p>image animation on show and hide</p>
+                        <p>Image animation on show and hide</p>
                       </td>
                       <td>
                         <p>any valid css animation (linear, ease-in ...)</p>
@@ -116,11 +118,11 @@
                     </tr>
     
                     <tr>
-                      <td>
-                        <p>imgAnimationSpeed</p>
+                      <td class="option-key-td">
+                        <label>imgAnimationSpeed</label>
                       </td>
                       <td>
-                        <p>image animation speed on show and hide</p>
+                        <p>Image animation speed on show and hide</p>
                       </td>
                       <td>
                         <p>any number between 0 (for no animation) and 1000</p>
@@ -131,11 +133,11 @@
                     </tr>
     
                     <tr>
-                      <td>
-                        <p>vpPadding</p>
+                      <td class="option-key-td">
+                        <label>vpPadding</label>
                       </td>
                       <td>
-                        <p>viewport padding in pixels on show image</p>
+                        <p>Viewport padding in pixels on show image</p>
                       </td>
                       <td>
                         <p>number</p>
@@ -146,11 +148,11 @@
                     </tr>
     
                     <tr>
-                      <td>
-                        <p>overlayColor</p>
+                      <td class="option-key-td">
+                        <label>overlayColor</label>
                       </td>
                       <td>
-                        <p>image overlay background color</p>
+                        <p>Image overlay background color</p>
                       </td>
                       <td>
                         <p>color</p>
@@ -161,26 +163,11 @@
                     </tr>
     
                     <tr>
-                      <td>
-                        <p>overlayAnimation</p>
+                      <td class="option-key-td">
+                        <label>overlayAnimation</label>
                       </td>
                       <td>
-                        <p>enable / disable fade animation for image overlay</p>
-                      </td>
-                      <td>
-                        <p>boolean</p>
-                      </td>
-                      <td>
-                        <p>true</p>
-                      </td>
-                    </tr>
-    
-                    <tr>
-                      <td>
-                        <p>overlayDismiss</p>
-                      </td>
-                      <td>
-                        <p>enable / disable close image on overlay click</p>
+                        <p>Enable / disable fade animation for image overlay</p>
                       </td>
                       <td>
                         <p>boolean</p>
@@ -191,11 +178,26 @@
                     </tr>
     
                     <tr>
-                      <td>
-                        <p>thumbBgColor</p>
+                      <td class="option-key-td">
+                        <label>overlayDismiss</label>
                       </td>
                       <td>
-                        <p>thumb background color</p>
+                        <p>Enable / disable close image on overlay click</p>
+                      </td>
+                      <td>
+                        <p>boolean</p>
+                      </td>
+                      <td>
+                        <p>true</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td class="option-key-td">
+                        <label>thumbBgColor</label>
+                      </td>
+                      <td>
+                        <p>Thumb background color</p>
                       </td>
                       <td>
                         <p>color</p>
@@ -206,11 +208,11 @@
                     </tr>
     
                     <tr>
-                      <td>
-                        <p>showLoading</p>
+                      <td class="option-key-td">
+                        <label>showLoading</label>
                       </td>
                       <td>
-                        <p>enable / disable loading bar</p>
+                        <p>Enable / disable loading bar</p>
                       </td>
                       <td>
                         <p>boolean</p>
@@ -219,13 +221,28 @@
                         <p>true</p>
                       </td>
                     </tr>
-    
+
                     <tr>
-                      <td>
-                        <p>showCloseButton</p>
+                      <td class="option-key-td">
+                        <label>loadingColor</label>
                       </td>
                       <td>
-                        <p>show / hide close button</p>
+                        <p>Change loading bar background color</p>
+                      </td>
+                      <td>
+                        <p>color</p>
+                      </td>
+                      <td>
+                        <p>transparent</p>
+                      </td>
+                    </tr>
+    
+                    <tr>
+                      <td class="option-key-td">
+                        <label>showCloseButton</label>
+                      </td>
+                      <td>
+                        <p>Show / hide close button</p>
                       </td>
                       <td>
                         <p>boolean</p>
@@ -237,6 +254,102 @@
                 </tbody>
               </table>
 
+          </div>
+        </fit-section>
+
+        <fit-section id="default-options-container" title="default options">
+          <div>
+            <p>Default options can be changed by adding a new object of type <b>NGXFloatingImgOptions</b> when importing 
+                <b>NgxFloatingImgModule</b> in your module</p>
+            <p><code>NgxFloatingImgModule.forRoot(&#123;
+                imgAnimationSpeed: 200,
+                vpPadding: 30,
+                imgAnimationType: 'linear'
+              &#125;)</code></p>
+              <code>
+                  <p class="floating-img-options"><b>NGXFloatingImgOptions default values</b></p>
+                  <p>showLoading: <span class="ele-attr">true</span></p>
+                  <p>loadingColor: <span class="ele-attr">transparent</span></p>
+                  <p>imgAnimationType: <span class="ele-attr">'ease-out'</span></p>
+                  <p>imgAnimationSpeed: <span class="ele-attr">250</span></p>
+                  <p>overlayColor: <span class="ele-attr">'transparent'</span></p>
+                  <p>overlayAnimation: <span class="ele-attr">true</span></p>
+                  <p>overlayDismiss: <span class="ele-attr">true</span></p>
+                  <p>thumbBgColor: <span class="ele-attr">'#f0f0f0'</span></p>
+                  <p>vpPadding: <span class="ele-attr">20</span></p>
+                  <p>showCloseButton: <span class="ele-attr">true</span></p>
+              </code>
+          </div>
+        </fit-section>
+
+        <fit-section id="events-container" title="events">
+          <div>
+              <table class="api-table">
+                  <thead>
+                    <tr>
+                      <td><label>event</label></td>
+                      <td><label>description</label></td>
+                      <td><label>return</label></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="option-key-td">
+                        <label>beforeShow</label>
+                      </td>
+                      <td>
+                        <p>This event fires right after thumb click and before animation starts.</p>
+                      </td>
+                      <td>
+                        <p>component id</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="option-key-td">
+                        <label>afterShow</label>
+                      </td>
+                      <td>
+                        <p>This event fires after animation is fully completed.</p>
+                      </td>
+                      <td>
+                        <p>component id</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="option-key-td">
+                        <label>onFullImgLoad</label>
+                      </td>
+                      <td>
+                        <p>This event fires after full image is fully loaded (if imgSrc attribute provided).</p>
+                      </td>
+                      <td>
+                        <p>component id</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="option-key-td">
+                        <label>beforeClose</label>
+                      </td>
+                      <td>
+                        <p>This event fires right before close full image process starts.</p>
+                      </td>
+                      <td>
+                        <p>component id</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="option-key-td">
+                        <label>afterClose</label>
+                      </td>
+                      <td>
+                        <p>This event fires after closing animation completed.</p>
+                      </td>
+                      <td>
+                        <p>component id</p>
+                      </td>
+                    </tr>
+                  </tbody>
+              </table>
           </div>
         </fit-section>
 

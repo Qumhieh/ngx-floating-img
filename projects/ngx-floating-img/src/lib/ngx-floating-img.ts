@@ -13,6 +13,7 @@ export const NGX_FLOATING_IMG_OPTIONS_TOKEN = new InjectionToken<NGXFloatingImgO
 export const NGX_FLOATING_IMG_DEFAULT_OPTIONS: NGXFloatingImgOptions = {
     platform: NGXFloatingImgPlatforms.BROWSER,
     showLoading: true,
+    loadingColor: 'transparent',
     imgAnimationType: 'ease-out',
     imgAnimationSpeed: 250,
     overlayColor: 'transparent',
