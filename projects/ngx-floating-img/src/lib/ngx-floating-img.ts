@@ -8,6 +8,8 @@ export const NGX_FI_WINDOW = new InjectionToken<Window>(
     typeof window !== 'undefined' && window.document ? { factory: () => window } : undefined
 );
 
+export const NGX_FLOATING_IMG_CLIENT_OPTIONS_TOKEN = new InjectionToken<NGXFloatingImgOptions>('ngxfloatingimg client default options');
+
 export const NGX_FLOATING_IMG_OPTIONS_TOKEN = new InjectionToken<NGXFloatingImgOptions>('ngxfloatingimg default options');
 
 export const NGX_FLOATING_IMG_DEFAULT_OPTIONS: NGXFloatingImgOptions = {
@@ -23,3 +25,4 @@ export const NGX_FLOATING_IMG_DEFAULT_OPTIONS: NGXFloatingImgOptions = {
     vpPadding: 20,
     showCloseButton: true
 }
+

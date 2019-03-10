@@ -12,14 +12,23 @@
               </li>
               <li>
                 <p>Once installed import NgxFloatingImgModule.forRoot() in your app.module.ts</p>
-                <pre><code>NgxFloatingImgModule.forRoot()</code></pre>
+                <code>
+                  <div>import {{ '{' }} NgxFloatingImgModule {{ '}' }} from "ngx-floating-img"</div>
+                  <br>
+                  <div>...</div>
+                  <br>
+                  <div>imports: [ NgxFloatingImgModule.forRoot() ]</div>
+                  <br>
+                  <div>...</div>
+                  <br>
+                </code>
                 <p class="sub-li">NgxFloatingImgModule.forChild() for lazy loaded modules</p>
                 <pre><code>NgxFloatingImgModule.forChild()</code></pre>
               </li>
               <li>
                 <p>Add ngx-floating-img in your template file</p>
                 <code>
-                  <div>&lt;ngx-floating-img ...options... &gt;</div>
+                  <div>&lt;ngx-floating-img ... options ... &gt;</div>
                   <div class="inner-ele">&lt;img src="thumbImgSrc"&gt;&lt;/img&gt;</div>
                   <div>&lt;/ngx-floating-img&gt;</div>
                 </code>

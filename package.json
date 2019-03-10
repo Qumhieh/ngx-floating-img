@@ -9,9 +9,12 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start_tester": "ng serve ngx-floating-img-tester",
+    "copy_license": "copy .\\LICENSE .\\dist\\ngx-floating-img",
+    "copy_readme": "copy .\\README.md .\\dist\\ngx-floating-img",
+    "copy_files": "npm run copy_license && npm run copy_readme",
     "build_lib": "ng build ngx-floating-img",
     "pack_lib": "cd dist/ngx-floating-img && npm pack",
-    "package_lib": "npm run build_lib && npm run pack_lib"
+    "package_lib": "npm run build_lib && npm run copy_files && npm run pack_lib"
   },
   "private": true,
   "dependencies": {
