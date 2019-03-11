@@ -7,10 +7,10 @@
   "homepage": "https://ngxfloatingimg.com",
   "repository": {
     "type" : "git",
-    "url" : ""
+    "url" : "https://github.com/qumhieh/ngx-floating-img"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/qumhieh/ngx-floating-img/issues"
   },
   "license": "MIT",
   "peerDependencies": {

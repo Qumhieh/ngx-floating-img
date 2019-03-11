@@ -4,6 +4,14 @@
           <div class="info-wrapper">
             <h1 class="sub-title">ngx-floating-img</h1>
             <p>Mobile look and feel image viewer for Angular 6+</p>
+            <div class="info-badges-wrapper">
+              <a href="https://www.npmjs.com/package/ngx-floating-img">  
+                <img src="https://img.shields.io/badge/npm%20package-1.0.0-green.svg?style=flat-square" />
+              </a>
+              <a href="https://github.com/qumhieh/ngx-floating-img">  
+                <img src="https://img.shields.io/badge/github-ngx--floating--img-blue.svg?style=flat-square" />
+              </a>
+            </div>
           </div>
           <div class="installation-wrapper">
             <h2 class="sub-title">installation</h2>
@@ -18,7 +26,7 @@
               </li>
               <li>
                 <p>Add ngx-floating-img in your template file</p>
-                <code>&lt;ngx-floating-img&gt;&lt;/ngx-floating-img&gt;</code>
+                <code>&lt;ngx-floating-img ... [options] ... &gt;&lt;/ngx-floating-img&gt;</code>
               </li>
             </ul>
           </div>
@@ -29,65 +37,65 @@
       
       <div class="img-wrapper">
         <div>
-          <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" thumbBgColor="#6be3cd" overlayColor="rgba(255, 255, 255, 0.5)" [imgSrc]="'../../../assets/examples/originals/img_11.jpeg'">
-            <img src="../../../assets/examples/thumbs/img_11.jpeg" />
+          <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" thumbBgColor="#6be3cd" overlayColor="rgba(255, 255, 255, 0.5)" [imgSrc]="'./assets/examples/originals/img_11.jpeg'">
+            <img src="./assets/examples/thumbs/img_11.jpeg" />
           </ngx-floating-img>
         </div>
         <div>
-          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" thumbBgColor="#5a6367" overlayColor="rgba(0, 0, 0, 0.6)" [imgSrc]="'../../../assets/examples/originals/img_13.jpeg'">
-            <img src="../../../assets/examples/thumbs/img_13.jpeg" />
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="70" thumbBgColor="#5a6367" overlayColor="rgba(0, 0, 0, 0.6)" [imgSrc]="'./assets/examples/originals/img_13.jpeg'">
+            <img src="./assets/examples/thumbs/img_13.jpeg" />
           </ngx-floating-img>
         </div>
       </div>
       
       <div class="img-wrapper">
         <div>
-          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" overlayColor="rgba(0, 0, 0, 0.6)" [imgSrc]="'../../../assets/examples/originals/img_8.jpeg'">
-            <img src="../../../assets/examples/thumbs/img_8.jpeg" />
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="70" overlayColor="#101010" [overlayAnimation]="false" [imgSrc]="'./assets/examples/originals/img_8.jpeg'">
+            <img src="./assets/examples/thumbs/img_8.jpeg" />
           </ngx-floating-img>
         </div> 
         <div>
-          <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" [vpPadding]="70" [imgAnimationSpeed]="170" thumbBgColor="#ff6e76" [imgSrc]="'../../../assets/examples/originals/img_24.jpeg'">
-            <img src="../../../assets/examples/thumbs/img_24.jpeg" />
+          <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" [vpPadding]="0" [imgAnimationSpeed]="170" thumbBgColor="#ff6e76" [imgSrc]="'./assets/examples/originals/img_24.jpeg'">
+            <img src="./assets/examples/thumbs/img_24.jpeg" />
           </ngx-floating-img>
         </div>
       </div>
       
       <div class="img-wrapper">
         <div>
-            <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" overlayColor="#202020" thumbBgColor="#5e5e68" [imgSrc]="'../../../assets/examples/originals/img_5.jpeg'">
-              <img src="../../../assets/examples/thumbs/img_5.jpeg" />
+            <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" overlayColor="#202020" thumbBgColor="#5e5e68" [imgSrc]="'./assets/examples/originals/img_5.jpeg'">
+              <img src="./assets/examples/thumbs/img_5.jpeg" />
             </ngx-floating-img>
         </div> 
         <div>
-          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="0" thumbBgColor="#6ba900" [imgSrc]="'../../../assets/examples/originals/img_2.jpeg'">
-            <img src="../../../assets/examples/thumbs/img_2.jpeg" />
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="0" thumbBgColor="#6ba900" [imgSrc]="'./assets/examples/originals/img_2.jpeg'">
+            <img src="./assets/examples/thumbs/img_2.jpeg" />
           </ngx-floating-img>
         </div> 
       </div>
       
       <div class="img-wrapper">
         <div>
-          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100" thumbBgColor="#fecd7e" [imgSrc]="'../../../assets/examples/originals/img_3.jpeg'">
-            <img src="../../../assets/examples/thumbs/img_3.jpeg" />
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100" thumbBgColor="#fecd7e" [imgSrc]="'./assets/examples/originals/img_3.jpeg'">
+            <img src="./assets/examples/thumbs/img_3.jpeg" />
           </ngx-floating-img>
         </div> 
         <div>
-          <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" overlayColor="#fff" thumbBgColor="#687d82" [imgSrc]="'../../../assets/examples/originals/img_19.jpeg'">
-            <img src="../../../assets/examples/thumbs/img_19.jpeg" />
+          <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" overlayColor="#fff" thumbBgColor="#687d82" [overlayAnimation]="false" [imgSrc]="'./assets/examples/originals/img_19.jpeg'">
+            <img src="./assets/examples/thumbs/img_19.jpeg" />
           </ngx-floating-img>
         </div>
       </div>
       
       <div class="img-wrapper">
         <div>
-          <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" thumbBgColor="#fede00" [imgSrc]="'../../../assets/examples/originals/img_20.jpeg'">
-            <img src="../../../assets/examples/thumbs/img_20.jpeg" />
+          <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" thumbBgColor="#fede00" [imgSrc]="'./assets/examples/originals/img_20.jpeg'">
+            <img src="./assets/examples/thumbs/img_20.jpeg" />
           </ngx-floating-img>
         </div> 
         <div>
-          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="80" overlayColor="rgb(35, 51, 86)" [overlayAnimation]="false" thumbBgColor="#ff84a7" [imgSrc]="'../../../assets/examples/originals/img_1.jpg'">
-            <img src="../../../assets/examples/thumbs/img_1.jpg" />
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100"  [overlayAnimation]="false" thumbBgColor="#ff84a7" [imgSrc]="'./assets/examples/originals/img_1.jpg'">
+            <img src="./assets/examples/thumbs/img_1.jpg" />
           </ngx-floating-img>
         </div>
       </div>
@@ -99,11 +107,11 @@
     </fit-section>
 
     <fit-section title="compatibility">
-      <p>Tested on Chrome, Firefox, Safari, IE10+, Edge</p>
+      <p>Tested on desktop versions of Chrome, Firefox, Safari, IE10+, Edge, Also tested on Android and iPhone modern browsers.</p>
     </fit-section>
 
-    <fit-section title="bugs">
-      <p>You can report any bugs as Github issues</p>
+    <fit-section id="bugs-section" title="bugs">
+      <p>You can report any bugs as <a href="https://github.com/qumhieh/ngx-floating-img/issues">Github issues</a></p>
     </fit-section>
 
     <fit-section title="license">

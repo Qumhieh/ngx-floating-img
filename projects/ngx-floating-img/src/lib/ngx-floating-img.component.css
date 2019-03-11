@@ -50,7 +50,7 @@ figure .fi-img-container.show-full-img {
     right: 0px;
     top: 0px;
     bottom: 0px;
-    z-index: 999999;
+    z-index: 999999999;
 }
 
 /* floating image wrapper */

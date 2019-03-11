@@ -14,7 +14,9 @@
     "copy_files": "npm run copy_license && npm run copy_readme",
     "build_lib": "ng build ngx-floating-img",
     "pack_lib": "cd dist/ngx-floating-img && npm pack",
-    "package_lib": "npm run build_lib && npm run copy_files && npm run pack_lib"
+
+    "package_lib": "npm run build_lib && npm run copy_files && npm run pack_lib",
+    "build_tester_app": "ng build ngx-floating-img-tester --prod --aot=true --baseHref=http://localhost:8080"
   },
   "private": true,
   "dependencies": {
