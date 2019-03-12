@@ -13,11 +13,16 @@
               <li>
                 <p>Once installed import NgxFloatingImgModule.forRoot() in your app.module.ts</p>
                 <code>
-                  <div>import {{ '{' }} NgxFloatingImgModule {{ '}' }} from "ngx-floating-img"</div>
+                  <div>import {{ '{' }} NgxFloatingImgModule {{ '}' }} from "ngx-floating-img";</div>
                   <br>
                   <div>...</div>
                   <br>
-                  <div>imports: [ NgxFloatingImgModule.forRoot() ]</div>
+                  <div>@NgModule({{ '{' }}</div>
+                  <div class="inner-ele">...</div>  
+                  <div class="inner-ele">imports: [ NgxFloatingImgModule.forRoot() ]</div>
+                  <div class="inner-ele">...</div>  
+                  <div>{{ '}' }})</div>
+                  <div>export class AppModule {{ '{' }}{{ '}' }}</div>
                   <br>
                   <div>...</div>
                   <br>
