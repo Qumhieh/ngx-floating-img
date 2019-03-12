@@ -46,5 +46,5 @@ https://ngxfloatingimg.com/api
 ## Bugs
 You can report any bugs as [Github issues](https://github.com/qumhieh/ngx-floating-img/issues)
 
-##License
+## License
 The project is licensed under the MIT license
