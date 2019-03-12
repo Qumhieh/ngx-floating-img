@@ -4,7 +4,7 @@
   "description": "Image viewer component for Angular 6+",
   "keywords" :["angular", "angular6", "angular7", "component", "img", "image", "viewer", "ng6", "ng7", "float", "floating", "ngx"],
   "author": "Mohamed Qumhieh",
-  "homepage": "https://ngxfloatingimg.com",
+  "homepage": "https://qumhieh.github.io/ngx-floating-img/",
   "repository": {
     "type" : "git",
     "url" : "https://github.com/qumhieh/ngx-floating-img"

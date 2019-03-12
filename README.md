@@ -1,7 +1,7 @@
 # NGX-FLOATING-IMG
 Mobile look and feel image viewer for Angular 6+
 
-Website: https://ngxfloatingimg.com
+Website: https://qumhieh.github.io/ngx-floating-img/
 
 ## Table of contents
 - [Installation](#installation)
@@ -95,7 +95,7 @@ NgxFloatingImgModule.forRoot({ imgAnimationSpeed: 200, vpPadding: 30, imgAnimati
 | afterClose | This event fires after closing animation completed | component id |
 
 ## Examples
-https://ngxfloatingimg.com/examples
+https://qumhieh.github.io/ngx-floating-img/examples
 
 ## Bugs
 You can report any bugs as [Github issues](https://github.com/qumhieh/ngx-floating-img/issues)

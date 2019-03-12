@@ -16,7 +16,7 @@
     "pack_lib": "cd dist/ngx-floating-img && npm pack",
 
     "package_lib": "npm run build_lib && npm run copy_files && npm run pack_lib",
-    "build_tester_app": "ng build ngx-floating-img-tester --prod --aot=true --baseHref=https://ngxfloatingimg.com"
+    "build_tester_app": "ng build ngx-floating-img-tester --prod --aot=true --baseHref=https://qumhieh.github.io/ngx-floating-img/"
   },
   "private": true,
   "dependencies": {
