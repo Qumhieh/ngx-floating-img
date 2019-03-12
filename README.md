@@ -3,6 +3,15 @@ Mobile look and feel image viewer for Angular 6+
 
 Website: https://ngxfloatingimg.com
 
+## Table of contents
+- [Installation](#installation)
+- [Options](#options)
+- [Default options](#default-options)
+- [Events](#events)
+- [Examples](#examples)
+- [Bugs](#bugs)
+- [License](#license)
+
 ## Installation
 Add ngx-floating-img to your Angular project
 ```
@@ -40,10 +49,10 @@ Add ngx-floating-img in your template file
 ## Options
 | Option | Description | Type | Default |
 | --- | --- | --- | --- |
-| id | Component id, can be used as return value in events handling  | string | - |
+| id | Component id, can be used as a return value in events handling  | string | - |
 | imgSrc | Full image src  | string | - |
-| imgWidth | Full image width in pixels, if full image not provided then thumb image width  | number | - |
-| imgHeight | Full image height in pixels, if full image not provided then thumb image height  | number | - |
+| imgWidth ( Required ) | Full image width in pixels, if full image not provided then thumb image width  | number | - |
+| imgHeight ( Required ) | Full image height in pixels, if full image not provided then thumb image height  | number | - |
 | imgAnimationType | Image animation type on show and hide | any valid css animation (linear, ease-in ...) | ease-out |
 | imgAnimationSpeed | Image animation speed on show and hide | any number between 0 (for no animation) and 800 | 250 |
 | vpPadding | Viewport padding in pixels when full image is visible | number | 20 |
@@ -55,7 +64,7 @@ Add ngx-floating-img in your template file
 | loadingColor | Change loading bar background color | color | transparent |
 | showCloseButton | Show / hide close button | boolean | true |
 
-## Options
+## Default options
 Default options can be changed by adding a new object of type **NGXFloatingImgOptions** when importing **NgxFloatingImgModule** in your module
 ```typescript
 NgxFloatingImgModule.forRoot({ imgAnimationSpeed: 200, vpPadding: 30, imgAnimationType: 'linear' })
