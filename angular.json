@@ -63,7 +63,6 @@
               ]
             },
             "assets": [
-              "projects/ngx-floating-img-tester/src/favicon.ico",
               "projects/ngx-floating-img-tester/src/assets"
             ],
             "styles": [
@@ -127,7 +126,6 @@
             ],
             "scripts": [],
             "assets": [
-              "projects/ngx-floating-img-tester/src/favicon.ico",
               "projects/ngx-floating-img-tester/src/assets"
             ]
           }

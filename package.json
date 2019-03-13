@@ -1,6 +1,6 @@
 {
   "name": "ngx-floating-img",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -14,9 +14,10 @@
     "copy_files": "npm run copy_license && npm run copy_readme",
     "build_lib": "ng build ngx-floating-img",
     "pack_lib": "cd dist/ngx-floating-img && npm pack",
-
     "package_lib": "npm run build_lib && npm run copy_files && npm run pack_lib",
-    "build_tester_app": "ng build ngx-floating-img-tester --prod --base-href 'https://qumhieh.github.io/ngx-floating-img/'"
+    "publish_lib": "npm publish ./dist/ngx-floating-img/ngx-floating-img-1.0.0.tgz",
+    "build_tester_app": "ng build ngx-floating-img-tester --prod --base-href https://qumhieh.github.io/ngx-floating-img/",
+    "publish_tester_app": "ngh --no-silent=false --dir=dist/ngx-floating-img-tester"
   },
   "private": true,
   "dependencies": {
@@ -34,23 +35,23 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.10.0",
+    "@angular-devkit/build-angular": "^0.13.5",
     "@angular-devkit/build-ng-packagr": "~0.10.0",
     "@angular/cli": "~7.0.3",
-    "@angular/compiler-cli": "~7.0.0",
+    "@angular/compiler-cli": "^7.2.9",
     "@angular/language-service": "~7.0.0",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~3.0.0",
+    "karma": "^4.0.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "ng-packagr": "^4.2.0",
+    "ng-packagr": "^4.7.1",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tsickle": ">=0.29.0",

@@ -42,7 +42,7 @@ NgxFloatingImgModule.forChild()
 Add ngx-floating-img in your template file
 ```html
 <ngx-floating-img ... [options] ... >
-    <img src="thumbImgSrc"></img>
+    <img src="thumbImgSrc" />
 </ngx-floating-img>
 ```
 
