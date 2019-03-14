@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'fit-examples',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExamplesComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private _titleService: Title) { 
+    this._titleService.setTitle('ngx-floating-img Examples');
   }
+
+  ngOnInit() { }
 
   public showMessage(message: string): void {
     console.log(message);

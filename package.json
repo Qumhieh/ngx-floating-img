@@ -15,7 +15,7 @@
     "build_lib": "ng build ngx-floating-img",
     "pack_lib": "cd dist/ngx-floating-img && npm pack",
     "package_lib": "npm run build_lib && npm run copy_files && npm run pack_lib",
-    "publish_lib": "npm publish ./dist/ngx-floating-img/ngx-floating-img-1.0.0.tgz",
+    "publish_lib": "npm publish ./dist/ngx-floating-img/ngx-floating-img-1.0.1.tgz",
     "build_tester_app": "ng build ngx-floating-img-tester --prod --base-href https://qumhieh.github.io/ngx-floating-img/",
     "publish_tester_app": "ngh --no-silent=false --dir=dist/ngx-floating-img-tester"
   },
