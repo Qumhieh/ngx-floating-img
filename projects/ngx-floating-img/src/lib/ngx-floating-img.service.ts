@@ -14,8 +14,8 @@ export class NgxFloatingImgService {
   private _imgAnimationMinSpeed: number = 0;
   private _imgAnimationMaxSpeed: number = 800;
   private _minFullImgSize: number = 200;
-  private _windowResizeDebounceTime: number = 200;
-  private _windowScrollDebounceTime: number = 30;
+  private _windowResizeDebounceTime: number = 100;
+  private _windowScrollDebounceTime: number = 0;
   private _showFullImgTimeout = null;
   private _closeFullImgTimeout = null;
   private _activeNGXFloatingImgComp: NgxFloatingImgComponent;
@@ -188,7 +188,6 @@ export class NgxFloatingImgService {
 
   public getImgRatio (imgWidth: number, imgHeight: number): number {
     return Math.floor((imgHeight / imgWidth) * 1000) / 10;
-    //return (imgHeight / imgWidth) * 100;
   }
 
   public getVpPadding (vpPadding: number): object {

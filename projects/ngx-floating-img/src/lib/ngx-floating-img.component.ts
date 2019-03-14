@@ -36,6 +36,7 @@ export class NgxFloatingImgComponent implements OnInit {
   // TODO: @Input('disableScroll') disableScroll: boolean;
   // TODO: @Input('thumbLazyLoad') thumbLazyLoad: boolean;
   // TODO: @Input('navigation') navigation: boolean;
+  // TODO: @Input('dynamicThumbBGColor') dynamicThumbBGColor: boolean;
 
   @Output('beforeShow') beforeShow = new EventEmitter<string>();
   @Output('afterShow') onShow = new EventEmitter<string>();
