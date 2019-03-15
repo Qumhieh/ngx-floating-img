@@ -1,6 +1,6 @@
 {
   "name": "ngx-floating-img",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -14,8 +14,9 @@
     "copy_files": "npm run copy_license && npm run copy_readme",
     "build_lib": "ng build ngx-floating-img",
     "pack_lib": "cd dist/ngx-floating-img && npm pack",
+    
     "package_lib": "npm run build_lib && npm run copy_files && npm run pack_lib",
-    "publish_lib": "npm publish ./dist/ngx-floating-img/ngx-floating-img-1.0.1.tgz",
+    "publish_lib": "npm publish ./dist/ngx-floating-img/ngx-floating-img-1.0.2.tgz",
     "build_tester_app": "ng build ngx-floating-img-tester --prod --base-href https://qumhieh.github.io/ngx-floating-img/",
     "publish_tester_app": "ngh --no-silent=false --dir=dist/ngx-floating-img-tester"
   },
@@ -30,6 +31,7 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "angular-cli-ghpages": "^0.5.3",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"

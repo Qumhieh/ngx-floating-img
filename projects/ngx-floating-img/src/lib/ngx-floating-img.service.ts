@@ -15,7 +15,7 @@ export class NgxFloatingImgService {
   private _imgAnimationMaxSpeed: number = 800;
   private _minFullImgSize: number = 200;
   private _windowResizeDebounceTime: number = 100;
-  private _windowScrollDebounceTime: number = 0;
+  private _windowScrollDebounceTime: number = 30;
   private _showFullImgTimeout = null;
   private _closeFullImgTimeout = null;
   private _activeNGXFloatingImgComp: NgxFloatingImgComponent;
@@ -121,10 +121,10 @@ export class NgxFloatingImgService {
 
   private setCloseImgPhaseOneStyle (): void {
     let imgFigureClientWidth = this._activeNGXFloatingImgComp.imgFigure.nativeElement.clientWidth;
+    this.setElementTransform (this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'translate(0,0) scale(1,1)');
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'width', `${imgFigureClientWidth}px`);
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'left', this._activeNGXFloatingImgComp.imgFigure.nativeElement.getBoundingClientRect().left - this._activeNGXFloatingImgComp.vpPadding + 'px');
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'top', this._activeNGXFloatingImgComp.imgFigure.nativeElement.getBoundingClientRect().top - this._activeNGXFloatingImgComp.vpPadding + 'px');
-    this.setElementTransform (this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'translate(0,0) scale(1,1)');
   }
 
   private setCloseImgPhaseTwoStyle (): void {
@@ -252,6 +252,7 @@ export class NgxFloatingImgService {
       this._activeNGXFloatingImgComp.showFullImgTrigger = false
       this.setCloseImgPhaseTwoStyle();
       this._activeNGXFloatingImgComp.onClose.emit(this._activeNGXFloatingImgComp.id);
+      this._activeNGXFloatingImgComp = null;
     }, this._activeNGXFloatingImgComp.imgAnimationSpeed);
   }
 
