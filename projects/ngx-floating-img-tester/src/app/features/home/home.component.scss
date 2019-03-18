@@ -79,6 +79,17 @@ header {
             }
         }
 
+        .img-wrapper-wide {
+            line-height: 0px;
+            clear: both;
+
+            & > div {
+                padding: $main-small-padding $main-small-padding 0 0;
+                float: left;
+                width: 50%;
+            }
+        }
+
         .more-info-wrapper {
             clear: both;
             padding-top: $main-padding;
@@ -146,6 +157,13 @@ header {
                     display: none;
                 }
                 width: 50%;
+            }
+
+            .img-wrapper-wide {
+                & > div {
+                    float: none;
+                    width: 100%;
+                }
             }
         }        
     }

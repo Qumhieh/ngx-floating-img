@@ -1,6 +1,6 @@
 import { Injectable, Inject, Renderer2, RendererFactory2, Optional, NgZone } from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { fromEvent, timer } from 'rxjs';
+import { debounceTime, filter, throttleTime, debounce } from 'rxjs/operators';
 
 import { NgxFloatingImgComponent } from './ngx-floating-img.component';
 import { NGX_FLOATING_IMG_OPTIONS_TOKEN, NGX_FI_WINDOW } from './ngx-floating-img';
@@ -15,7 +15,7 @@ export class NgxFloatingImgService {
   private _imgAnimationMaxSpeed: number = 800;
   private _minFullImgSize: number = 200;
   private _windowResizeDebounceTime: number = 100;
-  private _windowScrollDebounceTime: number = 30;
+  private _windowScrollDebounceTime: number = 20;
   private _showFullImgTimeout = null;
   private _closeFullImgTimeout = null;
   private _activeNGXFloatingImgComp: NgxFloatingImgComponent;
@@ -38,14 +38,13 @@ export class NgxFloatingImgService {
   private bindViewportResizeEvent (): void {
     if (this._window) {
       fromEvent(this._window, 'resize').pipe(
+        filter(() => this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger),
         debounceTime(this._windowResizeDebounceTime)
       ).subscribe(() => {
         // this.setShowImgPhaseTwoStyle();
-        if (this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger) {
-          this._ngZone.run(() => {
-            this.closeFullImg();
-          });
-        }
+        this._ngZone.run(() => {
+          this.closeFullImg();
+        });
       });
     }
   }
@@ -53,13 +52,13 @@ export class NgxFloatingImgService {
   private bindViewportScrollEvent (): void {
     if (this._window) {
       fromEvent(this._window, 'scroll').pipe(
-        debounceTime(this._windowScrollDebounceTime)
+        filter(() => this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger),
+        debounce(() => timer((this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.isShowFullImgInProgress) ? 50 : 0)),
+        throttleTime(this._windowScrollDebounceTime)
       ).subscribe(() => {
-        if (this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger) {
           this._ngZone.run(() => {
             this.closeFullImg();
           });
-        }
       });
     }
   }
@@ -67,13 +66,11 @@ export class NgxFloatingImgService {
   private bindEscButtonAction (): void {
     if (this._window) {
       fromEvent(this._window, 'keyup').pipe(
-        filter((e:KeyboardEvent) => e.keyCode === ESC_KEY_CODE)
+        filter((e:KeyboardEvent) => this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger && e.keyCode === ESC_KEY_CODE)
       ).subscribe(() => {
-        if (this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger) {
-          this._ngZone.run(() => {
-            this.closeFullImg();
-          });
-        }
+        this._ngZone.run(() => {
+          this.closeFullImg();
+        });
       });
     }
   }
@@ -84,7 +81,7 @@ export class NgxFloatingImgService {
     }
   }
 
-  private clearcloseFullImgTimeout (): void {
+  private clearCloseFullImgTimeout (): void {
     if (this._closeFullImgTimeout) {
       clearTimeout(this._closeFullImgTimeout);
     }
@@ -241,19 +238,44 @@ export class NgxFloatingImgService {
     });
   }
 
+  private _timeEx: boolean = false;
   public closeFullImg (): void {
-    this.clearShowFullImgTimeout();
-    this.clearcloseFullImgTimeout();
-    this._activeNGXFloatingImgComp.beforeClose.emit(this._activeNGXFloatingImgComp.id);
-    this._activeNGXFloatingImgComp.isShowFullImgInProgress = false;
-    this._activeNGXFloatingImgComp.isImgActionsWrapperVisible = false;
-    this.setCloseImgPhaseOneStyle();
-    this._closeFullImgTimeout = setTimeout(() => {
+    if (this._activeNGXFloatingImgComp) {
+      this.clearShowFullImgTimeout();
+      this.clearCloseFullImgTimeout();
+      
+      if (this._timeEx) {
+        this._closeFullImgTimeout = this.setCloseFullImgTimeout(100);
+      } else {
+        this._closeFullImgTimeout = this.setCloseFullImgTimeout(this._activeNGXFloatingImgComp.imgAnimationSpeed);
+      }
+      if (this._activeNGXFloatingImgComp.isShowFullImgInProgress) {
+        this._activeNGXFloatingImgComp.beforeClose.emit(this._activeNGXFloatingImgComp.id);
+        if (this._activeNGXFloatingImgComp.imgAnimationSpeed > 90) {
+          setTimeout(() => {
+            if (this._activeNGXFloatingImgComp) {
+              this._timeEx = true;
+              this._activeNGXFloatingImgComp.imgInnerWrapperTransition = this.getCSSTransitionObj(`all 90ms linear`);
+            }
+          }, this._activeNGXFloatingImgComp.imgAnimationSpeed);
+        }
+        this._activeNGXFloatingImgComp.isShowFullImgInProgress = false;
+      }
+      
+      this._activeNGXFloatingImgComp.isImgActionsWrapperVisible = false;
+      this.setCloseImgPhaseOneStyle();
+    }
+  }
+
+  private setCloseFullImgTimeout(timeout: number): any {
+    return setTimeout(() => {
+      this._activeNGXFloatingImgComp.imgInnerWrapperTransition = this.getCSSTransitionObj(`all ${this._activeNGXFloatingImgComp.imgAnimationSpeed}ms ${this._activeNGXFloatingImgComp.imgAnimationType}`);
       this._activeNGXFloatingImgComp.showFullImgTrigger = false
       this.setCloseImgPhaseTwoStyle();
       this._activeNGXFloatingImgComp.onClose.emit(this._activeNGXFloatingImgComp.id);
       this._activeNGXFloatingImgComp = null;
-    }, this._activeNGXFloatingImgComp.imgAnimationSpeed);
+      this._timeEx = false;
+    }, timeout);
   }
 
 }
