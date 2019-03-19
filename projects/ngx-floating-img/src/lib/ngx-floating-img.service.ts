@@ -15,7 +15,10 @@ export class NgxFloatingImgService {
   private _imgAnimationMaxSpeed: number = 800;
   private _minFullImgSize: number = 200;
   private _windowResizeDebounceTime: number = 100;
-  private _windowScrollDebounceTime: number = 20;
+  private _windowScrollDebounceTime: number = 50;
+  private _windowScrollThrottleTime: number = 30;
+  private _closeTransSpeedAfterExceed: number = 90;
+  private _isCloseTimeExceeded: boolean = false;
   private _showFullImgTimeout = null;
   private _closeFullImgTimeout = null;
   private _activeNGXFloatingImgComp: NgxFloatingImgComponent;
@@ -53,8 +56,8 @@ export class NgxFloatingImgService {
     if (this._window) {
       fromEvent(this._window, 'scroll').pipe(
         filter(() => this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger),
-        debounce(() => timer((this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.isShowFullImgInProgress) ? 50 : 0)),
-        throttleTime(this._windowScrollDebounceTime)
+        debounce(() => timer((this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.isShowFullImgInProgress) ? this._windowScrollDebounceTime : 0)),
+        throttleTime(this._windowScrollThrottleTime)
       ).subscribe(() => {
           this._ngZone.run(() => {
             this.closeFullImg();
@@ -238,30 +241,27 @@ export class NgxFloatingImgService {
     });
   }
 
-  private _timeEx: boolean = false;
   public closeFullImg (): void {
     if (this._activeNGXFloatingImgComp) {
       this.clearShowFullImgTimeout();
       this.clearCloseFullImgTimeout();
-      
-      if (this._timeEx) {
-        this._closeFullImgTimeout = this.setCloseFullImgTimeout(100);
+      if (this._isCloseTimeExceeded) {
+        this._closeFullImgTimeout = this.setCloseFullImgTimeout(this._closeTransSpeedAfterExceed + 10);
       } else {
         this._closeFullImgTimeout = this.setCloseFullImgTimeout(this._activeNGXFloatingImgComp.imgAnimationSpeed);
       }
       if (this._activeNGXFloatingImgComp.isShowFullImgInProgress) {
         this._activeNGXFloatingImgComp.beforeClose.emit(this._activeNGXFloatingImgComp.id);
-        if (this._activeNGXFloatingImgComp.imgAnimationSpeed > 90) {
+        if (this._activeNGXFloatingImgComp.imgAnimationSpeed > this._closeTransSpeedAfterExceed) {
           setTimeout(() => {
             if (this._activeNGXFloatingImgComp) {
-              this._timeEx = true;
-              this._activeNGXFloatingImgComp.imgInnerWrapperTransition = this.getCSSTransitionObj(`all 90ms linear`);
+              this._isCloseTimeExceeded = true;
+              this._activeNGXFloatingImgComp.imgInnerWrapperTransition = this.getCSSTransitionObj(`all ${this._closeTransSpeedAfterExceed}ms linear`);
             }
           }, this._activeNGXFloatingImgComp.imgAnimationSpeed);
         }
         this._activeNGXFloatingImgComp.isShowFullImgInProgress = false;
       }
-      
       this._activeNGXFloatingImgComp.isImgActionsWrapperVisible = false;
       this.setCloseImgPhaseOneStyle();
     }
@@ -274,7 +274,7 @@ export class NgxFloatingImgService {
       this.setCloseImgPhaseTwoStyle();
       this._activeNGXFloatingImgComp.onClose.emit(this._activeNGXFloatingImgComp.id);
       this._activeNGXFloatingImgComp = null;
-      this._timeEx = false;
+      this._isCloseTimeExceeded = false;
     }, timeout);
   }
 
