@@ -1,15 +1,19 @@
-import { Injectable, Inject, Renderer2, RendererFactory2, Optional, NgZone } from '@angular/core';
+import { Injectable, Inject, Renderer2, RendererFactory2, Optional, NgZone, ElementRef } from '@angular/core';
 import { fromEvent, timer } from 'rxjs';
-import { debounceTime, filter, throttleTime, debounce } from 'rxjs/operators';
+import { debounceTime, filter, throttleTime, debounce, tap, map } from 'rxjs/operators';
 
 import { NgxFloatingImgComponent } from './ngx-floating-img.component';
 import { NGX_FLOATING_IMG_OPTIONS_TOKEN, NGX_FI_WINDOW } from './ngx-floating-img';
 import { NGXFloatingImgOptions } from './model/ngx-floating-img-options';
+import { DeviceDetectorService } from './device-detector.service';
 
 const ESC_KEY_CODE: number = 27;
 
 @Injectable()
 export class NgxFloatingImgService {
+
+  private _scrollable: boolean = true;
+  private _htmlElePrevStyle: object = {};
 
   private _imgAnimationMinSpeed: number = 0;
   private _imgAnimationMaxSpeed: number = 800;
@@ -24,9 +28,11 @@ export class NgxFloatingImgService {
   private _activeNGXFloatingImgComp: NgxFloatingImgComponent;
   private _renderer2: Renderer2;
 
+
   constructor(
     @Inject(NGX_FLOATING_IMG_OPTIONS_TOKEN) private _ngxFloatingImgOptions: NGXFloatingImgOptions,
     @Optional() @Inject(NGX_FI_WINDOW) private _window: any,
+    private _deviceDetectorService: DeviceDetectorService,
     private _rend2Factory: RendererFactory2,
     private _ngZone: NgZone
   ) {
@@ -41,7 +47,7 @@ export class NgxFloatingImgService {
   private bindViewportResizeEvent (): void {
     if (this._window) {
       fromEvent(this._window, 'resize').pipe(
-        filter(() => this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger),
+        filter(() => this.isNGXFloatingImgActive()),
         debounceTime(this._windowResizeDebounceTime)
       ).subscribe(() => {
         // this.setShowImgPhaseTwoStyle();
@@ -55,7 +61,7 @@ export class NgxFloatingImgService {
   private bindViewportScrollEvent (): void {
     if (this._window) {
       fromEvent(this._window, 'scroll').pipe(
-        filter(() => this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger),
+        filter(() => this.isNGXFloatingImgActive()),
         debounce(() => timer((this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.isShowFullImgInProgress) ? this._windowScrollDebounceTime : 0)),
         throttleTime(this._windowScrollThrottleTime)
       ).subscribe(() => {
@@ -66,10 +72,14 @@ export class NgxFloatingImgService {
     }
   }
 
+  private isNGXFloatingImgActive(): boolean {
+    return this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger;
+  }
+
   private bindEscButtonAction (): void {
     if (this._window) {
       fromEvent(this._window, 'keyup').pipe(
-        filter((e:KeyboardEvent) => this._activeNGXFloatingImgComp && this._activeNGXFloatingImgComp.showFullImgTrigger && e.keyCode === ESC_KEY_CODE)
+        filter((e:KeyboardEvent) => this.isNGXFloatingImgActive() && e.keyCode === ESC_KEY_CODE)
       ).subscribe(() => {
         this._ngZone.run(() => {
           this.closeFullImg();
@@ -170,6 +180,61 @@ export class NgxFloatingImgService {
     }
   }
 
+  private setCloseFullImgTimeout(timeout: number): any {
+    return setTimeout(() => {
+      this._activeNGXFloatingImgComp.imgInnerWrapperTransition = this.getCSSTransitionObj(`all ${this._activeNGXFloatingImgComp.imgAnimationSpeed}ms ${this._activeNGXFloatingImgComp.imgAnimationType}`);
+      this._activeNGXFloatingImgComp.showFullImgTrigger = false
+      this.setCloseImgPhaseTwoStyle();
+      this._activeNGXFloatingImgComp.onClose.emit(this._activeNGXFloatingImgComp.id);
+      // this.resetScrollable(this._activeNGXFloatingImgComp.disableScroll);
+      this._activeNGXFloatingImgComp = null;
+      this._isCloseTimeExceeded = false;
+    }, timeout);
+  }
+
+  // TODO
+  // private setScrollable(disableScroll: boolean): void {
+  //   if (this._window) {
+  //     let htmlEle = this._window.document.documentElement;
+  //     this._htmlElePrevStyle['overflowY'] = htmlEle.style.overflowY;
+  //     if (this._deviceDetectorService.isDesktop()) {
+  //       if (disableScroll && this._window.innerHeight < htmlEle.scrollHeight) {
+  //         this._htmlElePrevStyle['position'] = htmlEle.style.position;
+  //         this._htmlElePrevStyle['top'] = htmlEle.style.top;
+  //         this._htmlElePrevStyle['bottom'] = htmlEle.style.bottom;
+  //         this._htmlElePrevStyle['left'] = htmlEle.style.left;
+  //         this._htmlElePrevStyle['right'] = htmlEle.style.right;
+  //         this._renderer2.setStyle(htmlEle, 'overflow-y', 'scroll');
+  //         this._renderer2.setStyle(htmlEle, 'position', 'fixed');
+  //         this._renderer2.setStyle(htmlEle, 'top', '0px');
+  //         this._renderer2.setStyle(htmlEle, 'bottom', '0px');
+  //         this._renderer2.setStyle(htmlEle, 'left', '0px');
+  //         this._renderer2.setStyle(htmlEle, 'right', '0px');
+  //       }
+  //     } else {
+  //       this._renderer2.setStyle(htmlEle, 'overflow-y', 'hidden');
+  //     }
+  //   }
+  // }
+
+  // private resetScrollable(disableScroll: boolean): void {
+  //   if (this._window) {
+  //     let htmlEle = this._window.document.documentElement;
+  //     if (this._deviceDetectorService.isDesktop()) {
+  //       if (disableScroll && this._window.innerHeight < htmlEle.scrollHeight) {
+  //         this._renderer2.setStyle(htmlEle, 'overflow-y', this._htmlElePrevStyle['overflowY']);
+  //         this._renderer2.setStyle(htmlEle, 'position', this._htmlElePrevStyle['position']);
+  //         this._renderer2.setStyle(htmlEle, 'top', this._htmlElePrevStyle['top']);
+  //         this._renderer2.setStyle(htmlEle, 'bottom', this._htmlElePrevStyle['bottom']);
+  //         this._renderer2.setStyle(htmlEle, 'left', this._htmlElePrevStyle['left']);
+  //         this._renderer2.setStyle(htmlEle, 'right', this._htmlElePrevStyle['right']);
+  //       }
+  //     } else {
+  //       this._renderer2.setStyle(htmlEle, 'overflow-y', this._htmlElePrevStyle['overflowY']);
+  //     }
+  //   } 
+  // }
+
   public validateInputs (ngxFI: NgxFloatingImgComponent): boolean {
     if (ngxFI.imgWidth == null || ngxFI.imgHeight == null) {
       if (ngxFI.imgWidth == null && ngxFI.imgHeight == null) {
@@ -220,10 +285,12 @@ export class NgxFloatingImgService {
     if(ngxFI.thumbBgColor == null) ngxFI.thumbBgColor = this._ngxFloatingImgOptions.thumbBgColor;
     if(ngxFI.vpPadding == null) ngxFI.vpPadding = this._ngxFloatingImgOptions.vpPadding;
     if(ngxFI.showCloseButton == null) ngxFI.showCloseButton = this._ngxFloatingImgOptions.showCloseButton;
+    if(ngxFI.disableScroll == null) ngxFI.disableScroll = this._ngxFloatingImgOptions.disableScroll;
   }
 
   public showFullImg (ngxFI: NgxFloatingImgComponent): void {
     ngxFI.beforeShow.emit(ngxFI.id);
+    // this.setScrollable(ngxFI.disableScroll);
     this.setFullImgSrc(ngxFI);
     this._activeNGXFloatingImgComp = ngxFI;
     this.clearShowFullImgTimeout();
@@ -265,17 +332,6 @@ export class NgxFloatingImgService {
       this._activeNGXFloatingImgComp.isImgActionsWrapperVisible = false;
       this.setCloseImgPhaseOneStyle();
     }
-  }
-
-  private setCloseFullImgTimeout(timeout: number): any {
-    return setTimeout(() => {
-      this._activeNGXFloatingImgComp.imgInnerWrapperTransition = this.getCSSTransitionObj(`all ${this._activeNGXFloatingImgComp.imgAnimationSpeed}ms ${this._activeNGXFloatingImgComp.imgAnimationType}`);
-      this._activeNGXFloatingImgComp.showFullImgTrigger = false
-      this.setCloseImgPhaseTwoStyle();
-      this._activeNGXFloatingImgComp.onClose.emit(this._activeNGXFloatingImgComp.id);
-      this._activeNGXFloatingImgComp = null;
-      this._isCloseTimeExceeded = false;
-    }, timeout);
   }
 
 }

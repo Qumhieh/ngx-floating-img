@@ -23,6 +23,7 @@ export const NGX_FLOATING_IMG_DEFAULT_OPTIONS: NGXFloatingImgOptions = {
     overlayDismiss: true,
     thumbBgColor: '#f0f0f0',
     vpPadding: 20,
-    showCloseButton: true
+    showCloseButton: true,
+    disableScroll: false
 }
 

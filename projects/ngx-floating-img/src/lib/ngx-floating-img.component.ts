@@ -33,7 +33,7 @@ export class NgxFloatingImgComponent implements OnInit {
   @Input('showCloseButton') showCloseButton: boolean;
   @Input('showLoading') showLoading: boolean;
   @Input('loadingColor') loadingColor: string;
-  // TODO: @Input('disableScroll') disableScroll: boolean;
+  @Input('disableScroll') disableScroll: boolean;
   // TODO: @Input('thumbLazyLoad') thumbLazyLoad: boolean;
   // TODO: @Input('navigation') navigation: boolean;
   // TODO: @Input('dynamicThumbBGColor') dynamicThumbBGColor: boolean;
@@ -45,6 +45,7 @@ export class NgxFloatingImgComponent implements OnInit {
   @Output('afterClose') onClose = new EventEmitter<string>();
 
   @ViewChild('imgFigure') imgFigure: ElementRef;
+  @ViewChild('imgContainer') imgContainer: ElementRef;
   @ViewChild('imgWrapper') imgWrapper: ElementRef;
   @ViewChild('imgInnerWrapper') imgInnerWrapper: ElementRef;
   @ViewChild('fullImg') fullImg: ElementRef;
