@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
 
 import { NgxFloatingImgService } from './ngx-floating-img.service';
 
@@ -16,6 +17,8 @@ export class NgxFloatingImgComponent implements OnInit {
 
   public imageRatio: number;
   public imgWrapperStyle: object = {};
+  public imgWrapperTranslateYNum: number = 0;
+  public imgWrapperTransitionDurationNum: number = 0;
   public imgInnerWrapperTransition: object = {};
   public overlayTransition: object = {};
   
@@ -51,8 +54,17 @@ export class NgxFloatingImgComponent implements OnInit {
   @ViewChild('fullImg') fullImg: ElementRef;
   @ViewChild('imgActionsWrapper') imgActionsWrapper: ElementRef;
 
+  get imgWrapperTranslateY(): SafeStyle {
+    return this._sanitizer.bypassSecurityTrustStyle(`translateY(${this.imgWrapperTranslateYNum}px)`);
+  }
+
+  // get imgWrapperTransitionDuration(): SafeStyle {
+  //   return this._sanitizer.bypassSecurityTrustStyle(`${this.imgWrapperTranslateYNum}`);
+  // }
+
   constructor(
-    private _ngxFloatingImgService: NgxFloatingImgService
+    private _ngxFloatingImgService: NgxFloatingImgService,
+    private _sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -86,8 +98,12 @@ export class NgxFloatingImgComponent implements OnInit {
 
   public closeFullImg (event): void {
     if (this.showFullImgTrigger) {
-      let eleClass = event.target.classList[0];
-      if (eleClass == 'fi-close-button' || (this.overlayDismiss && (eleClass == 'fi-img-container' || eleClass == 'fi-img-wrapper'))) {
+      if (event) {
+        let eleClass = event.target.classList[0];
+        if (eleClass == 'fi-close-button' || (this.overlayDismiss && (eleClass == 'fi-img-container' || eleClass == 'fi-img-wrapper'))) {
+          this._ngxFloatingImgService.closeFullImg();
+        }
+      } else {
         this._ngxFloatingImgService.closeFullImg();
       }
     }

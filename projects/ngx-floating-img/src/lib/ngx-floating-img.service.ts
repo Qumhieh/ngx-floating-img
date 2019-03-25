@@ -6,14 +6,15 @@ import { NgxFloatingImgComponent } from './ngx-floating-img.component';
 import { NGX_FLOATING_IMG_OPTIONS_TOKEN, NGX_FI_WINDOW } from './ngx-floating-img';
 import { NGXFloatingImgOptions } from './model/ngx-floating-img-options';
 import { DeviceDetectorService } from './device-detector.service';
+import { MobileTouchService } from './mobile-touch.service';
 
 const ESC_KEY_CODE: number = 27;
 
 @Injectable()
 export class NgxFloatingImgService {
 
-  private _scrollable: boolean = true;
-  private _htmlElePrevStyle: object = {};
+  private _disabledScroll: boolean = false;
+  private _htmlEleScrollVal: object = {};
 
   private _imgAnimationMinSpeed: number = 0;
   private _imgAnimationMaxSpeed: number = 800;
@@ -33,6 +34,7 @@ export class NgxFloatingImgService {
     @Inject(NGX_FLOATING_IMG_OPTIONS_TOKEN) private _ngxFloatingImgOptions: NGXFloatingImgOptions,
     @Optional() @Inject(NGX_FI_WINDOW) private _window: any,
     private _deviceDetectorService: DeviceDetectorService,
+    private _mobileTouchService: MobileTouchService,
     private _rend2Factory: RendererFactory2,
     private _ngZone: NgZone
   ) {
@@ -186,54 +188,63 @@ export class NgxFloatingImgService {
       this._activeNGXFloatingImgComp.showFullImgTrigger = false
       this.setCloseImgPhaseTwoStyle();
       this._activeNGXFloatingImgComp.onClose.emit(this._activeNGXFloatingImgComp.id);
-      // this.resetScrollable(this._activeNGXFloatingImgComp.disableScroll);
+      this.resetScrollable();
       this._activeNGXFloatingImgComp = null;
       this._isCloseTimeExceeded = false;
     }, timeout);
   }
 
-  // TODO
-  // private setScrollable(disableScroll: boolean): void {
-  //   if (this._window) {
-  //     let htmlEle = this._window.document.documentElement;
-  //     this._htmlElePrevStyle['overflowY'] = htmlEle.style.overflowY;
-  //     if (this._deviceDetectorService.isDesktop()) {
-  //       if (disableScroll && this._window.innerHeight < htmlEle.scrollHeight) {
-  //         this._htmlElePrevStyle['position'] = htmlEle.style.position;
-  //         this._htmlElePrevStyle['top'] = htmlEle.style.top;
-  //         this._htmlElePrevStyle['bottom'] = htmlEle.style.bottom;
-  //         this._htmlElePrevStyle['left'] = htmlEle.style.left;
-  //         this._htmlElePrevStyle['right'] = htmlEle.style.right;
-  //         this._renderer2.setStyle(htmlEle, 'overflow-y', 'scroll');
-  //         this._renderer2.setStyle(htmlEle, 'position', 'fixed');
-  //         this._renderer2.setStyle(htmlEle, 'top', '0px');
-  //         this._renderer2.setStyle(htmlEle, 'bottom', '0px');
-  //         this._renderer2.setStyle(htmlEle, 'left', '0px');
-  //         this._renderer2.setStyle(htmlEle, 'right', '0px');
-  //       }
-  //     } else {
-  //       this._renderer2.setStyle(htmlEle, 'overflow-y', 'hidden');
-  //     }
-  //   }
-  // }
+  private setScrollable(disableScroll: boolean, ngxFI: NgxFloatingImgComponent): void {
+    if (this._window) {
+      let htmlEle = this._window.document.documentElement;
+      if (this._window.innerHeight < htmlEle.scrollHeight) {
+        if (this._deviceDetectorService.isDesktop()) {
+          if (disableScroll) {
+            this.disableScrolling();
+          }
+        } else {
+          this.disableScrolling();
+          this._mobileTouchService.bindTouchEvents(this._renderer2, ngxFI);
+        }
+      }
+    }
+  }
 
-  // private resetScrollable(disableScroll: boolean): void {
-  //   if (this._window) {
-  //     let htmlEle = this._window.document.documentElement;
-  //     if (this._deviceDetectorService.isDesktop()) {
-  //       if (disableScroll && this._window.innerHeight < htmlEle.scrollHeight) {
-  //         this._renderer2.setStyle(htmlEle, 'overflow-y', this._htmlElePrevStyle['overflowY']);
-  //         this._renderer2.setStyle(htmlEle, 'position', this._htmlElePrevStyle['position']);
-  //         this._renderer2.setStyle(htmlEle, 'top', this._htmlElePrevStyle['top']);
-  //         this._renderer2.setStyle(htmlEle, 'bottom', this._htmlElePrevStyle['bottom']);
-  //         this._renderer2.setStyle(htmlEle, 'left', this._htmlElePrevStyle['left']);
-  //         this._renderer2.setStyle(htmlEle, 'right', this._htmlElePrevStyle['right']);
-  //       }
-  //     } else {
-  //       this._renderer2.setStyle(htmlEle, 'overflow-y', this._htmlElePrevStyle['overflowY']);
-  //     }
-  //   } 
-  // }
+  private resetScrollable(): void {
+    if (this._window && this._disabledScroll) {
+      let htmlEle = this._window.document.documentElement;
+      this._window.requestAnimationFrame(() => {
+        this._renderer2.setStyle(htmlEle, 'position', this._htmlEleScrollVal['position']);
+        this._window.scrollTo(0, -parseInt(htmlEle.style.top));
+        this._renderer2.setStyle(htmlEle, 'overflow-y', this._htmlEleScrollVal['overflowY']);
+        this._renderer2.setStyle(htmlEle, 'top', this._htmlEleScrollVal['top']);
+        this._renderer2.setStyle(htmlEle, 'right', this._htmlEleScrollVal['right']);
+        this._renderer2.setStyle(htmlEle, 'left', this._htmlEleScrollVal['left']);
+        this._mobileTouchService.removeTouchEvents();
+        this._disabledScroll = false;
+      });
+    }
+  }
+
+  private disableScrolling(): void {
+    if (this._window) {
+      this._disabledScroll = true;
+      let htmlEle = this._window.document.documentElement;
+      let scrollTop = this._window.pageYOffset || (this._window.document.documentElement || this._window.document.body.parentNode || this._window.document.body).scrollTop;
+      // save old styles
+      this._htmlEleScrollVal['position'] = htmlEle.style.position;
+      this._htmlEleScrollVal['overflowY'] = htmlEle.style.overflowY;
+      this._htmlEleScrollVal['top'] = htmlEle.style.top;
+      this._htmlEleScrollVal['right'] = htmlEle.style.right;
+      this._htmlEleScrollVal['left'] = htmlEle.style.left;
+      // set disable scrolling styles
+      this._renderer2.setStyle(htmlEle, 'position', 'fixed');
+      this._renderer2.setStyle(htmlEle, 'overflow-y', 'scroll');
+      this._renderer2.setStyle(htmlEle, 'top', `-${scrollTop}px`);
+      this._renderer2.setStyle(htmlEle, 'right', '0px');
+      this._renderer2.setStyle(htmlEle, 'left', '0px');
+    }
+  }
 
   public validateInputs (ngxFI: NgxFloatingImgComponent): boolean {
     if (ngxFI.imgWidth == null || ngxFI.imgHeight == null) {
@@ -290,22 +301,25 @@ export class NgxFloatingImgService {
 
   public showFullImg (ngxFI: NgxFloatingImgComponent): void {
     ngxFI.beforeShow.emit(ngxFI.id);
-    // this.setScrollable(ngxFI.disableScroll);
-    this.setFullImgSrc(ngxFI);
-    this._activeNGXFloatingImgComp = ngxFI;
-    this.clearShowFullImgTimeout();
+    this.setScrollable(ngxFI.disableScroll, ngxFI);
     this._window.requestAnimationFrame(() => {
-      this._showFullImgTimeout = setTimeout(() => {
-        ngxFI.isImgActionsWrapperVisible = true;
-        ngxFI.onShow.emit(ngxFI.id);
-      }, ngxFI.imgAnimationSpeed);
-      ngxFI.showFullImgTrigger = true;  
-      ngxFI.isShowFullImgInProgress = true;
-      this.setShowImgPhaseOneStyle();
+      this.setFullImgSrc(ngxFI);
+      this._activeNGXFloatingImgComp = ngxFI;
+      this.clearShowFullImgTimeout();
       this._window.requestAnimationFrame(() => {
-        this.setShowImgPhaseTwoStyle ()
+        this._showFullImgTimeout = setTimeout(() => {
+          ngxFI.isImgActionsWrapperVisible = true;
+          ngxFI.onShow.emit(ngxFI.id);
+        }, ngxFI.imgAnimationSpeed);
+        ngxFI.showFullImgTrigger = true;  
+        ngxFI.isShowFullImgInProgress = true;
+        this.setShowImgPhaseOneStyle();
+        this._window.requestAnimationFrame(() => {
+          this.setShowImgPhaseTwoStyle ()
+        });
       });
     });
+
   }
 
   public closeFullImg (): void {
