@@ -1,7 +1,7 @@
 <div class="fi-ele-container" [style.padding-bottom.%]="imageRatio" [style.background-color]="thumbBgColor">
     <div class="fi-ele-wrapper">
         <figure #imgFigure> 
-            <div #imgContainer class="fi-img-container" [ngClass]="{'show-full-img': showFullImgTrigger}"  
+            <div #imgContainer class="fi-img-container" [ngClass]="{'show-full-img': showFullImgTrigger}" [style.opacity]="imgContainerOpacity"  
                 [style.background-color]="isShowFullImgInProgress ? overlayColor : 'rgba(0,0,0,0)'" [ngStyle]="overlayTransition"  (click)="closeFullImg($event)">
                 <div #imgWrapper class="fi-img-wrapper" [ngStyle]="imgWrapperStyle" [style.transform]="imgWrapperTranslateY" [style.transition-duration.ms]="imgWrapperTransitionDurationNum">
                     <div #imgInnerWrapper class="fi-img-inner-wrapper" [ngClass]="{'fi-img-fully-loaded': showFullImgTrigger}" [ngStyle]="imgInnerWrapperTransition" 

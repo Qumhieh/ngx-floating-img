@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -6,12 +6,10 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   constructor(private _titleService: Title) {
     this._titleService.setTitle('ngx-floating-img Home');
   }
-
-  ngOnInit() { }
 
 }

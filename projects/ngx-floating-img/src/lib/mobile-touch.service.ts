@@ -1,31 +1,37 @@
-import { Injectable, Renderer2 } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { NgxFloatingImgComponent } from './ngx-floating-img.component';
+import { fromEvent,  Subscription } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
 
 @Injectable()
 export class MobileTouchService {
 
   private _dragResetDuration: number = 100;
-  private _dragDistTillClose: number = 80;
+  private _dragDistTillClose: number = 100;
+  private _touchMoveThrottleTime: number = 10;
   private _touchClientY: number;
 
-  private _touchStartEvent: () => void;
-  private _touchEndEvent: () => void;
-  private _touchMoveEvent: () => void;
+  private _touchStartSubEvent: Subscription;
+  private _touchEndSubEvent: Subscription;
+  private _touchMoveSubEvent: Subscription;
 
-  constructor () { }
 
-  public bindTouchEvents(rend2: Renderer2, ngxFIComp: NgxFloatingImgComponent): void {
+  constructor ( ) { }
+
+  public bindTouchEvents(ngxFIComp: NgxFloatingImgComponent): void {
     this.removeTouchEvents();
-    this._touchStartEvent = rend2.listen(ngxFIComp.imgContainer.nativeElement, 'touchstart', this.onTouchStart.bind(this, ngxFIComp));
-    this._touchEndEvent = rend2.listen(ngxFIComp.imgContainer.nativeElement, 'touchend', this.onTouchEnd.bind(this, ngxFIComp));
-    this._touchMoveEvent = rend2.listen(ngxFIComp.imgContainer.nativeElement, 'touchmove', this.onTouchMove.bind(this, ngxFIComp));
+    this._touchStartSubEvent = fromEvent(ngxFIComp.imgContainer.nativeElement, 'touchstart', {passive: true}).subscribe(this.onTouchStart.bind(this, ngxFIComp));
+    this._touchEndSubEvent = fromEvent(ngxFIComp.imgContainer.nativeElement, 'touchend').subscribe(this.onTouchEnd.bind(this, ngxFIComp));
+    this._touchMoveSubEvent = fromEvent(ngxFIComp.imgContainer.nativeElement, 'touchmove', {passive: true}).pipe(
+      throttleTime(this._touchMoveThrottleTime)
+    ).subscribe(this.onTouchMove.bind(this, ngxFIComp));
   }
   
   public removeTouchEvents(): void {
-    if (this._touchStartEvent || this._touchEndEvent || this._touchMoveEvent) {
-      this._touchStartEvent();
-      this._touchEndEvent();
-      this._touchMoveEvent();
+    if (this._touchStartSubEvent || this._touchEndSubEvent || this._touchMoveSubEvent) {
+      this._touchStartSubEvent.unsubscribe();
+      this._touchEndSubEvent.unsubscribe();
+      this._touchMoveSubEvent.unsubscribe();
     } 
   }
 
@@ -39,6 +45,7 @@ export class MobileTouchService {
     } else {
       ngxFIComp.imgWrapperTransitionDurationNum = this._dragResetDuration;
       ngxFIComp.imgWrapperTranslateYNum = 0;
+      ngxFIComp.imgContainerOpacity = 1;
     }
     this._touchClientY = null;
   }
@@ -47,6 +54,11 @@ export class MobileTouchService {
     if (ngxFIComp.isShowFullImgInProgress) {
       if (this._touchClientY != null) {
         ngxFIComp.imgWrapperTranslateYNum += (<TouchEvent>event).touches[0].clientY - this._touchClientY;
+        if (Math.abs(ngxFIComp.imgWrapperTranslateYNum) <= 100) {
+          ngxFIComp.imgContainerOpacity = 1 - (Math.abs(ngxFIComp.imgWrapperTranslateYNum) / 1000);
+        } else {
+          ngxFIComp.imgContainerOpacity = 0.9;
+        }
       } 
       this._touchClientY = (<TouchEvent>event).touches[0].clientY;
     }

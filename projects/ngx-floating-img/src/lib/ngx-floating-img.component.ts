@@ -16,6 +16,7 @@ export class NgxFloatingImgComponent implements OnInit {
   public isImgActionsWrapperVisible: boolean = false;
 
   public imageRatio: number;
+  public imgContainerOpacity: number = 1;
   public imgWrapperStyle: object = {};
   public imgWrapperTranslateYNum: number = 0;
   public imgWrapperTransitionDurationNum: number = 0;
@@ -57,10 +58,6 @@ export class NgxFloatingImgComponent implements OnInit {
   get imgWrapperTranslateY(): SafeStyle {
     return this._sanitizer.bypassSecurityTrustStyle(`translateY(${this.imgWrapperTranslateYNum}px)`);
   }
-
-  // get imgWrapperTransitionDuration(): SafeStyle {
-  //   return this._sanitizer.bypassSecurityTrustStyle(`${this.imgWrapperTranslateYNum}`);
-  // }
 
   constructor(
     private _ngxFloatingImgService: NgxFloatingImgService,

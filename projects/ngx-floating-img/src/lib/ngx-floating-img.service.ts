@@ -1,6 +1,6 @@
-import { Injectable, Inject, Renderer2, RendererFactory2, Optional, NgZone, ElementRef } from '@angular/core';
+import { Injectable, Inject, Renderer2, RendererFactory2, Optional, NgZone } from '@angular/core';
 import { fromEvent, timer } from 'rxjs';
-import { debounceTime, filter, throttleTime, debounce, tap, map } from 'rxjs/operators';
+import { debounceTime, filter, throttleTime, debounce } from 'rxjs/operators';
 
 import { NgxFloatingImgComponent } from './ngx-floating-img.component';
 import { NGX_FLOATING_IMG_OPTIONS_TOKEN, NGX_FI_WINDOW } from './ngx-floating-img';
@@ -146,6 +146,7 @@ export class NgxFloatingImgService {
     this._renderer2.setStyle(this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'height', 'auto');
     this.setElementTransform (this._activeNGXFloatingImgComp.imgInnerWrapper.nativeElement, 'translate(0,0) scale(1,1)');
     this._activeNGXFloatingImgComp.imgWrapperTranslateYNum = 0;
+    this._activeNGXFloatingImgComp.imgContainerOpacity = 1;
   }
 
   private calculateThumbScale (thumbWidth: number, thumbHeight: number, containerWidth: number, containerHeight: number, 
@@ -205,7 +206,7 @@ export class NgxFloatingImgService {
           }
         } else {
           this.disableScrolling();
-          this._mobileTouchService.bindTouchEvents(this._renderer2, ngxFI);
+          this._mobileTouchService.bindTouchEvents(ngxFI);
         }
       }
     }
