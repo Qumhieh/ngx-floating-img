@@ -90,6 +90,26 @@
         </div>
       </fit-section>
 
+      <fit-section title="disable scrolling example">
+        <div class="example-wrapper">
+          <div class="example-content ngx-2-img">
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="720" overlayColor="rgb(255, 192, 105)" [vpPadding]="0" [overlayAnimation]="false" [disableScroll]="true" imgSrc="./assets/examples/full/img_31.jpg">
+              <img src="./assets/examples/thumbs/img_31.jpg" />
+            </ngx-floating-img>
+            <ngx-floating-img [imgWidth]="1920" [imgHeight]="720" overlayColor="#fff" [vpPadding]="0" [overlayAnimation]="false" [disableScroll]="true" imgSrc="./assets/examples/full/img_30.jpg">
+              <img src="./assets/examples/thumbs/img_30.jpg" />
+            </ngx-floating-img>
+          </div>
+          <div class="example-code">
+              <code>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="720" [vpPadding]="0" overlayColor="rgb(255, 192, 105)" [overlayAnimation]="false" [disableScroll]="true" imgSrc="./full/img_1.jpg" thumbSrc="./thumbs/img_1.jpeg"></fit-ngx-code-generator>
+                <br>
+                <fit-ngx-code-generator [imgWidth]="1920" [imgHeight]="720" [vpPadding]="0" overlayColor="#ffffff" [overlayAnimation]="false" [disableScroll]="true" imgSrc="./full/img_2.jpg" thumbSrc="./thumbs/img_2.jpeg"></fit-ngx-code-generator>
+              </code>
+          </div>
+        </div>
+      </fit-section>
+
       <fit-section title="Image animation, speed example">
         <div class="example-wrapper">
           <div class="example-content ngx-4-img">

@@ -199,15 +199,15 @@ export class NgxFloatingImgService {
   private setScrollable(disableScroll: boolean, ngxFI: NgxFloatingImgComponent): void {
     if (this._window) {
       let htmlEle = this._window.document.documentElement;
-      if (this._window.innerHeight < htmlEle.scrollHeight) {
-        if (this._deviceDetectorService.isDesktop()) {
+      if (this._deviceDetectorService.isDesktop()) {
+        if (this._window.innerHeight < htmlEle.scrollHeight) {
           if (disableScroll) {
             this.disableScrolling();
           }
-        } else {
-          this.disableScrolling();
-          this._mobileTouchService.bindTouchEvents(ngxFI);
         }
+      } else {
+        this.disableScrolling();
+        this._mobileTouchService.bindTouchEvents(ngxFI);
       }
     }
   }

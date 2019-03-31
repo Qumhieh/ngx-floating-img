@@ -100,9 +100,36 @@ header {
         }
     }
 
+    #compatibility-section {
+        ul li {
+            &:before {
+                content: '-';
+                padding-right: $main-small-padding;
+            }
+        }
+    }
+
     #bugs-section {
         a {
             color:#2e83c7;
+        }
+    }
+
+    #change-log-section {
+        div:not(:first-child) {
+            margin-top: $main-padding;
+        }
+
+        h4 {
+            font-weight: bold;
+            margin-bottom: $main-small-padding;
+        }
+
+        ul li {
+            &:before {
+                content: '-';
+                padding-right: $main-small-padding;
+            }
         }
     }
 }

@@ -2,11 +2,11 @@
     <header>
       <div fitMainWrapper>
           <div class="info-wrapper">
-            <h1 class="sub-title">ngx-floating-img</h1>
+            <h1 class="sub-title">Floating image viewer</h1>
             <p>Mobile look and feel image viewer for Angular 6+</p>
             <div class="info-badges-wrapper">
               <a href="https://www.npmjs.com/package/ngx-floating-img">  
-                <img src="https://img.shields.io/badge/npm%20package-1.0.2-green.svg?style=flat-square" />
+                <img src="https://img.shields.io/badge/npm%20package-1.1.0-green.svg?style=flat-square" />
               </a>
               <a href="https://github.com/qumhieh/ngx-floating-img">  
                 <img src="https://img.shields.io/badge/github-ngx--floating--img-blue.svg?style=flat-square" />
@@ -42,7 +42,7 @@
           </ngx-floating-img>
         </div>
         <div>
-          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="70" thumbBgColor="#5a6367" overlayColor="rgba(0, 0, 0, 0.6)" [imgSrc]="'./assets/examples/full/img_13.jpg'">
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="40" thumbBgColor="#5a6367" overlayColor="rgba(0, 0, 0, 0.6)" [imgSrc]="'./assets/examples/full/img_13.jpg'">
             <img src="./assets/examples/thumbs/img_13.jpeg" />
           </ngx-floating-img>
         </div>
@@ -50,7 +50,7 @@
       
       <div class="img-wrapper">
         <div>
-          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="70" overlayColor="#101010" [overlayAnimation]="false" loadingColor="#0d140d" [imgSrc]="'./assets/examples/full/img_8.jpg'">
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="40" overlayColor="#101010" [overlayAnimation]="false" loadingColor="#0d140d" [imgSrc]="'./assets/examples/full/img_8.jpg'">
             <img src="./assets/examples/thumbs/img_8.jpeg" />
           </ngx-floating-img>
         </div> 
@@ -76,7 +76,7 @@
       
       <div class="img-wrapper">
         <div>
-          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100" thumbBgColor="#fecd7e" [imgSrc]="'./assets/examples/full/img_3.jpg'">
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" thumbBgColor="#fecd7e" [imgSrc]="'./assets/examples/full/img_3.jpg'">
             <img src="./assets/examples/thumbs/img_3.jpeg" />
           </ngx-floating-img>
         </div> 
@@ -94,24 +94,11 @@
           </ngx-floating-img>
         </div> 
         <div>
-          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="100" [overlayAnimation]="false" thumbBgColor="#ff84a7" loadingColor="#182443" [imgSrc]="'./assets/examples/full/img_1.jpg'">
+          <ngx-floating-img [imgWidth]="1920" [imgHeight]="1280" [vpPadding]="50" [overlayAnimation]="false" thumbBgColor="#ff84a7" loadingColor="#182443" [imgSrc]="'./assets/examples/full/img_1.jpg'">
             <img src="./assets/examples/thumbs/img_1.jpg" />
           </ngx-floating-img>
         </div>
       </div>
-
-      <!-- <div class="img-wrapper-wide">
-        <div>
-          <ngx-floating-img [imgWidth]="2340" [imgHeight]="585" overlayColor="#fff" [vpPadding]="0" [overlayAnimation]="false" imgSrc="./assets/examples/full/img_30.jpg">
-            <img src="./assets/examples/thumbs/img_30.jpg" />
-          </ngx-floating-img>
-        </div> 
-        <div>
-          <ngx-floating-img [imgWidth]="2340" [imgHeight]="780" overlayColor="#fff" [vpPadding]="0" [overlayAnimation]="false" imgSrc="./assets/examples/full/img_31.jpg">
-            <img src="./assets/examples/thumbs/img_31.jpg" />
-          </ngx-floating-img>
-        </div>
-      </div> -->
 
       <div class="more-info-wrapper">
         <p>This example shows multiple options can be applied to ngx-floating-img component, <a routerLink="/examples">see all examples</a>
@@ -119,12 +106,26 @@
       </div>
     </fit-section>
 
-    <fit-section title="compatibility">
-      <p>Tested on desktop versions of Chrome, Firefox, Safari, IE10+, Edge, Also tested on Android and iPhone modern browsers.</p>
+    <fit-section id="compatibility-section" title="compatibility">
+      <ul>
+        <li>Tested on desktop versions of Chrome, Firefox, Safari, IE10+, Edge.</li>
+        <li>Tested on Android and iPhone modern browsers.</li>
+        <li>Tested on Ionic 3+.</li>
+      </ul>
     </fit-section>
 
     <fit-section id="bugs-section" title="bugs">
       <p>You can report any bugs as <a href="https://github.com/qumhieh/ngx-floating-img/issues">Github issues</a></p>
+    </fit-section>
+
+    <fit-section id="change-log-section"  title="change log">
+      <div>
+        <h4>1.1.0</h4>
+        <ul>
+          <li>Added disableScroll option.</li>
+          <li>Improve the user experience on mobile devices.</li>
+        </ul>
+      </div>
     </fit-section>
 
     <fit-section title="license">

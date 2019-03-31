@@ -21,6 +21,7 @@ export class NgxCodeGeneratorComponent implements OnInit {
   @Input('thumbBgColor') thumbBgColor: string;
   @Input('vpPadding') vpPadding: string;
   @Input('showCloseButton') showCloseButton: string;
+  @Input('disableScroll') disableScroll: boolean;
 
   @Input('beforeShow') beforeShow: string;
   @Input('afterShow') afterShow: string;
