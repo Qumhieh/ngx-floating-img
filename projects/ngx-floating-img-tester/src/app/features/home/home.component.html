@@ -81,7 +81,7 @@
           </ngx-floating-img>
         </div> 
         <div>
-          <ngx-floating-img [imgWidth]="1280" [imgHeight]="1920" overlayColor="#fff" thumbBgColor="#687d82" [overlayAnimation]="false" [imgSrc]="'./assets/examples/full/img_19.jpg'">
+          <ngx-floating-img [disableScroll]="true" [imgWidth]="1280" [imgHeight]="1920" overlayColor="#fff" thumbBgColor="#687d82" [overlayAnimation]="false" [imgSrc]="'./assets/examples/full/img_19.jpg'">
             <img src="./assets/examples/thumbs/img_19.jpeg" />
           </ngx-floating-img>
         </div>
@@ -110,12 +110,8 @@
       <ul>
         <li>Tested on desktop versions of Chrome, Firefox, Safari, IE10+, Edge.</li>
         <li>Tested on Android and iPhone modern browsers.</li>
-        <li>Tested on Ionic 3+.</li>
+        <li>Tested on Ionic 4.</li>
       </ul>
-    </fit-section>
-
-    <fit-section id="bugs-section" title="bugs">
-      <p>You can report any bugs as <a href="https://github.com/qumhieh/ngx-floating-img/issues">Github issues</a></p>
     </fit-section>
 
     <fit-section id="change-log-section"  title="change log">
@@ -123,9 +119,13 @@
         <h4>1.1.0</h4>
         <ul>
           <li>Added disableScroll option.</li>
-          <li>Improve the user experience on mobile devices.</li>
+          <li>Improved the user experience on mobile devices.</li>
         </ul>
       </div>
+    </fit-section>
+
+    <fit-section id="bugs-section" title="bugs">
+      <p>You can report any bugs as <a href="https://github.com/qumhieh/ngx-floating-img/issues">Github issues</a></p>
     </fit-section>
 
     <fit-section title="license">

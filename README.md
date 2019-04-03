@@ -1,7 +1,9 @@
-# NGX-FLOATING-IMG
+# Floating Image Viewer
 Mobile look and feel image viewer for Angular 6+
 
 Website: https://qumhieh.github.io/ngx-floating-img/
+
+![NGXFloatingImg Demo GIF](https://qumhieh.github.io/ngx-floating-img/assets/ngx-floating-img-gif.gif)
 
 ## Table of contents
 - [Installation](#installation)
@@ -9,6 +11,8 @@ Website: https://qumhieh.github.io/ngx-floating-img/
 - [Default options](#default-options)
 - [Events](#events)
 - [Examples](#examples)
+- [Compatibility](#Compatibility)
+- [Change log](#change-log)
 - [Bugs](#bugs)
 - [License](#license)
 
@@ -63,6 +67,7 @@ Add ngx-floating-img in your template file
 | showLoading | Enable / disable loading bar | boolean | true |
 | loadingColor | Change loading bar background color | color | transparent |
 | showCloseButton | Show / hide close button | boolean | true |
+| disableScroll | Enable / Disable page scrolling for desktop browsers only, as it's always disabled for mobile platform to meet the mobile experience | boolean | false |
 
 ## Default options
 Default options can be changed by adding a new object of type **NGXFloatingImgOptions** when importing **NgxFloatingImgModule** in your module
@@ -82,6 +87,7 @@ NgxFloatingImgModule.forRoot({ imgAnimationSpeed: 200, vpPadding: 30, imgAnimati
     thumbBgColor: '#f0f0f0'
     vpPadding: 20
     showCloseButton: true
+    disableScroll: false
 }
 ```
 
@@ -96,6 +102,16 @@ NgxFloatingImgModule.forRoot({ imgAnimationSpeed: 200, vpPadding: 30, imgAnimati
 
 ## Examples
 https://qumhieh.github.io/ngx-floating-img/examples
+
+## Compatibility
+    - Tested on desktop versions of Chrome, Firefox, Safari, IE10+, Edge.
+    - Tested on Android and iPhone modern browsers.
+    - Tested on Ionic 4.
+
+## Change log
+***1.1.0***
+    - Added disableScroll option.
+    - Improved the user experience on mobile devices.
 
 ## Bugs
 You can report any bugs as [Github issues](https://github.com/qumhieh/ngx-floating-img/issues)
