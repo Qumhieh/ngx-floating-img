@@ -109,9 +109,9 @@ https://qumhieh.github.io/ngx-floating-img/examples
     - Tested on Ionic 4.
 
 ## Change log
-***1.1.0***
-    - Added disableScroll option.
-    - Improved the user experience on mobile devices.
+***1.1.0***__  
+    - Added disableScroll option.__  
+    - Improved the user experience on mobile devices.  
 
 ## Bugs
 You can report any bugs as [Github issues](https://github.com/qumhieh/ngx-floating-img/issues)
