@@ -1,7 +1,7 @@
 # Floating Image Viewer
 Mobile look and feel image viewer for Angular 6+
 
-Website: https://qumhieh.github.io/ngx-floating-img/
+***Website:*** https://qumhieh.github.io/ngx-floating-img/
 
 ![NGXFloatingImg Demo GIF](https://qumhieh.github.io/ngx-floating-img/assets/ngx-floating-img-gif.gif)
 
@@ -11,7 +11,7 @@ Website: https://qumhieh.github.io/ngx-floating-img/
 - [Default options](#default-options)
 - [Events](#events)
 - [Examples](#examples)
-- [Compatibility](#Compatibility)
+- [Compatibility](#compatibility)
 - [Change log](#change-log)
 - [Bugs](#bugs)
 - [License](#license)
@@ -103,7 +103,7 @@ NgxFloatingImgModule.forRoot({ imgAnimationSpeed: 200, vpPadding: 30, imgAnimati
 ## Examples
 https://qumhieh.github.io/ngx-floating-img/examples
 
-## Compatibility
+## Compatibility    
     - Tested on desktop versions of Chrome, Firefox, Safari, IE10+, Edge.
     - Tested on Android and iPhone modern browsers.
     - Tested on Ionic 4.
